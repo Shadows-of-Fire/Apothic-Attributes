@@ -1,0 +1,5 @@
+{
+  "exhaustion": 0.3,
+  "message_id": "attributeslib:current_hp_damage",
+  "scaling": "never"
+}

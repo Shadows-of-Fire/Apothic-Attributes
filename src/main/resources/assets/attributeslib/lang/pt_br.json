@@ -1,0 +1,129 @@
+{
+    "item.modifiers.both_hands": "Quando segurado:",
+
+    "attributeslib.adv.addition": "[Add: %s]",
+    "attributeslib.adv.multiply_base": "[MulB: %s]",
+    "attributeslib.adv.multiply_total": "[MulT: %s]",
+    "attributeslib.adv.base": "[EBase: %s | IBase: %s]",
+    "attributeslib.adv.sharpness_bonus": "[Sharp: +%s]",
+
+	"attributeslib.value.flat": "%s",
+	"attributeslib.value.percent": "%s%%",
+
+    "attributeslib.modifier.plus": "+%s %s",
+    "attributeslib.modifier.take": "-%s %s",
+
+	"attributeslib.gui.attributes": "Atributos",
+	"attributeslib.gui.base": "Base: %s",
+	"attributeslib.gui.min": "Mín.: %s",
+	"attributeslib.gui.max": "Máx.: %s",
+	"attributeslib.gui.modifiers": "Modificadores",
+	"attributeslib.gui.addition": "Adição: %s",
+	"attributeslib.gui.multiply_base": "Multiplicador base: %s",
+	"attributeslib.gui.multiply_total": "Multiplicador total: %s",
+	"attributeslib.gui.press_shift": "Segure shift para mais informações.",
+	"attributeslib.gui.current": "Atual: %s",
+	"attributeslib.gui.show_attributes": "Mostrar atributos",
+
+    "minecraft:generic.armor.desc": "Aumenta a redução de dano físico.",
+	"minecraft:generic.armor_toughness.desc": "Reduz a efetivide da redução de armadura do inimigo.",
+	"minecraft:generic.attack_damage.desc": "Dano físico causado com um ataque totalmente carregado.",
+	"minecraft:generic.attack_knockback.desc": "Quão longe seus ataques corpo a corpo repelem os inimigos, em meio bloco.",
+	"minecraft:generic.attack_speed.desc": "Quantos ataques totalmente carregados você consegue executar por segundo.",
+	"minecraft:generic.knockback_resistance.desc": "Quanto de repulsão você ignora.",
+	"minecraft:generic.luck.desc": "Aumenta a probabilidade de coisas boas acontecerem.",
+	"minecraft:generic.max_health.desc": "Quantos pontos de vida você pode ter.",
+	"minecraft:generic.movement_speed.desc": "Velocidade de movimento ao caminhar.",
+
+	"forge:attack_range.desc": "Até onde seus ataques corpo a corpo alcançam, em blocos.",
+	"forge:entity_gravity.desc": "Aceleração em direção ao solo, em blocos/s²",
+	"forge:nametag_distance.desc": "Quão longe outro jogador deve estar para ver seu nome.",
+	"forge:reach_distance.desc": "Até onde suas interações alcançam, em blocos.",
+	"forge:step_height_addition.desc": "Quantos blocos você pode subir sem pular.",
+	"forge:swim_speed.desc": "Quão rápido você nada, em relação ao normal.",
+
+    "attributeslib:draw_speed": "Velocidade da puxada",
+	"attributeslib:draw_speed.desc": "Quão rápido você puxa armas a distância, como arcos, bestas, ou tridentes.",
+
+	"attributeslib:crit_chance": "Chance de crítico",
+	"attributeslib:crit_chance.desc": "A chance de qualquer dano causado por você causar um acerto crítico, causando dano extra com base no seu dano crítico.",
+
+	"attributeslib:crit_damage": "Dano crítico",
+	"attributeslib:crit_damage.desc": "Multiplicador de dano para acertos críticos, incluindo críticos de salto de vanilla.",
+
+	"attributeslib:cold_damage": "Dano de gelo",
+	"attributeslib:cold_damage.desc": "Bônus de dano mágico aplicado em ataques corpo a corpo e reduz a velocidade dos inimigos atingidos.",
+
+	"attributeslib:fire_damage": "Dano de fogo",
+	"attributeslib:fire_damage.desc": "Bônus de dano mágico aplicado em ataques corpo a corpo e queima os inimigos atingidos.",
+
+	"attributeslib:life_steal": "Roubo de vida",
+	"attributeslib:life_steal.desc": "Porcentagem de dano pós-mitigação que irá curá-lo.",
+
+	"attributeslib:current_hp_damage": "Dano pelo PV atual",
+	"attributeslib:current_hp_damage.desc": "Bônus de dano físico aplicado em ataques corpo a corpo, com base na vida do alvo.",
+
+	"attributeslib:overheal": "Sobrecura",
+	"attributeslib:overheal.desc": "Porcentagem de dano pós-mitigação que concederá a você um escudo de absorção.",
+
+	"attributeslib:ghost_health": "Vida fantasma",
+	"attributeslib:ghost_health.desc": "Ainda não implementado",
+
+	"attributeslib:mining_speed": "Velocidade de mineração",
+	"attributeslib:mining_speed.desc": "Quão rápido você minera blocos, em comparação com o normal.",
+
+	"attributeslib:arrow_damage": "Dano de flecha",
+	"attributeslib:arrow_damage.desc": "Multiplicador de dano para flechas. Os tridentes são flechas.",
+
+	"attributeslib:arrow_velocity": "Velocidade da flecha",
+	"attributeslib:arrow_velocity.desc": "Multiplicador de velocidade para flechas. O dano da flecha aumenta com a velocidade.",
+
+    "attributeslib:experience_gained": "Experiência adquirida",
+	"attributeslib:experience_gained.desc": "Multiplicador de quanta experiência você ganha quebrando blocos e matando criaturas.",
+
+    "attributeslib:healing_received": "Cura recebida",
+	"attributeslib:healing_received.desc": "Multiplicador em todas as curas recebidas.",
+
+	"attributeslib:armor_pierce": "Perfuração de armadura",
+	"attributeslib:armor_pierce.desc": "Redução absoluta ao valor da armadura do alvo.",
+
+	"attributeslib:armor_shred": "Fragmentação de armadura",
+	"attributeslib:armor_shred.desc": "Porcentagem de redução ao valor da armadura do alvo.",
+
+	"attributeslib:prot_pierce": "Perfuração de proteção",
+	"attributeslib:prot_pierce.desc": "Redução absoluta ao total de pontos de proteção do alvo.",
+
+	"attributeslib:prot_shred": "Fragmentação de proteção",
+	"attributeslib:prot_shred.desc": "Porcentagem de redução ao total de pontos de proteção do alvo.",
+
+	"attributeslib:dodge_chance": "Chance de esquiva",
+	"attributeslib:dodge_chance.desc": "Chance de desviar de um ataque corpo a corpo ou de um projétil.",
+
+    "comment_id": "MobFx - descriptions are duplicated for JEED support.",
+
+    "effect.attributeslib.knowledge": "Conhecimento das eras",
+    "effect.attributeslib.knowledge.desc": "Aumenta a experiência adquirida com abates e blocos",
+    "effect.attributeslib.knowledge.description": "Aumenta a experiência adquirida com abates e blocos.",
+
+    "effect.attributeslib.sundering": "Ruptura",
+    "effect.attributeslib.sundering.desc": "Aumenta o dano recebido",
+    "effect.attributeslib.sundering.description": "Aumenta o dano recebido.",
+
+    "effect.attributeslib.vitality": "Estouro de vitalidade",
+    "effect.attributeslib.vitality.desc": "Aumenta a cura recebida",
+    "effect.attributeslib.vitality.description": "Aumenta a cura recebida.",
+
+    "effect.attributeslib.grievous": "Feridas dolorosas",
+    "effect.attributeslib.grievous.desc": "Diminui a cura recebida",
+    "effect.attributeslib.grievous.description": "Diminui a cura recebida.",
+
+    "effect.attributeslib.bleeding": "Sangramento",
+    "effect.attributeslib.bleeding.desc": "Inflige danos a cada dois segundos.",
+    "effect.attributeslib.bleeding.description": "Inflige danos a cada dois segundos.",
+    "death.attack.attributeslib.bleeding": "%s sangrou até a morte.",
+
+    "effect.attributeslib.detonation": "Detonação flamejante",
+    "effect.attributeslib.detonation.desc": "Ao expirar, inflige danos com base nos ticks de fogo restantes.",
+    "effect.attributeslib.detonation.description": "Ao expirar, inflige danos com base nos ticks de fogo restantes.",
+    "death.attack.attributeslib.detonation": "%s foi detonado por uma chama."
+}

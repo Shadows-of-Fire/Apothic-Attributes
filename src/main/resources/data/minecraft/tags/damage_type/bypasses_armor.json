@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "attributeslib:bleeding",
+    "attributeslib:detonation",
+    "attributeslib:fire_damage",
+    "attributeslib:cold_damage"
+  ]
+}
