@@ -15,7 +15,7 @@ public class KnowledgeEffect extends MobEffect {
     }
 
     public double getAttributeModifierValue(int amp, AttributeModifier modifier) {
-        return (amp + 1) * AttributesLib.knowledgeMult;
+        return (++amp * amp) * AttributesLib.knowledgeMult;
     }
 
 }

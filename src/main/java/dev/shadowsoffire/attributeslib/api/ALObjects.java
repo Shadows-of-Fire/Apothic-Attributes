@@ -85,7 +85,7 @@ public class ALObjects {
         /**
          * Experience mulitplier, from killing mobs or breaking ores. Base value = (1.0) = 100% xp gained.
          */
-        public static final RegistryObject<Attribute> EXPERIENCE_GAINED = R.attribute("experience_gained", () -> new PercentBasedAttribute("attributeslib:experience_gained", 1.0D, 0.0D, 10.0D).setSyncable(true));
+        public static final RegistryObject<Attribute> EXPERIENCE_GAINED = R.attribute("experience_gained", () -> new PercentBasedAttribute("attributeslib:experience_gained", 1.0D, 0.0D, 1000.0D).setSyncable(true));
 
         /**
          * Bonus magic damage that burns enemies hit. Base value = (0.0) = 0 damage
@@ -100,7 +100,7 @@ public class ALObjects {
         /**
          * Adjusts all healing received. Base value = (1.0) = 100% xp gained.
          */
-        public static final RegistryObject<Attribute> HEALING_RECEIVED = R.attribute("healing_received", () -> new PercentBasedAttribute("attributeslib:healing_received", 1.0D, 0.0D, 10.0D).setSyncable(true));
+        public static final RegistryObject<Attribute> HEALING_RECEIVED = R.attribute("healing_received", () -> new PercentBasedAttribute("attributeslib:healing_received", 1.0D, 0.0D, 1000.0D).setSyncable(true));
 
         /**
          * Percent of physical damage converted to health. Base value = (0.0) = 0%

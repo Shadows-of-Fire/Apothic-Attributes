@@ -122,6 +122,16 @@
     "effect.attributeslib.detonation.desc": "On expiry, inflicts damage based on remaining fire ticks.",
     "effect.attributeslib.detonation.description": "On expiry, inflicts damage based on remaining fire ticks.",
 
+    "effect.minecraft.night_vision.desc": "Allows you to see in the dark.",
+    "effect.minecraft.invisibility.desc": "Makes you invisible, excluding equipment.",
+    "effect.minecraft.jump_boost.desc": "Increases jump height.",
+    "effect.minecraft.fire_resistance.desc": "Makes you immune to fire damage.",
+    "effect.minecraft.water_breathing.desc": "Causes you to be unable to drown.",
+    "effect.minecraft.instant_health.desc": "Instantly restores a bit of your health.",
+    "effect.minecraft.instant_damage.desc": "Instantly causes a bit of magic damage.",
+    "effect.minecraft.poison.desc": "Periodically inflicts non-lethal damage.",
+    "effect.minecraft.regeneration.desc": "Causes you to regenerate health over time.",
+
     "comment_id": "Damage Sources",
 
     "death.attack.attributeslib:bleeding": "%1$s bled out",
