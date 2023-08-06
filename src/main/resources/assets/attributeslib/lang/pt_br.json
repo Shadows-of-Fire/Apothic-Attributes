@@ -1,12 +1,6 @@
 {
     "item.modifiers.both_hands": "Quando segurado:",
 
-    "attributeslib.adv.addition": "[Add: %s]",
-    "attributeslib.adv.multiply_base": "[MulB: %s]",
-    "attributeslib.adv.multiply_total": "[MulT: %s]",
-    "attributeslib.adv.base": "[EBase: %s | IBase: %s]",
-    "attributeslib.adv.sharpness_bonus": "[Sharp: +%s]",
-
 	"attributeslib.value.flat": "%s",
 	"attributeslib.value.percent": "%s%%",
 

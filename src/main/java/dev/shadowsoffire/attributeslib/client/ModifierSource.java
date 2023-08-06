@@ -65,13 +65,13 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
 
         @Override
         public void render(GuiGraphics gfx, Font font, int x, int y) {
-            PoseStack mvStack = RenderSystem.getModelViewStack();
-            mvStack.pushPose();
+            PoseStack pose = gfx.pose();
+            pose.pushPose();
             float scale = 0.5F;
-            mvStack.scale(scale, scale, 1);
-            mvStack.translate(1 + x / scale, 1 + y / scale, 0);
+            pose.scale(scale, scale, 1);
+            pose.translate(1 + x / scale, 1 + y / scale, 0);
             gfx.renderFakeItem(this.data, 0, 0);
-            mvStack.popPose();
+            pose.popPose();
             RenderSystem.applyModelViewMatrix();
         }
 

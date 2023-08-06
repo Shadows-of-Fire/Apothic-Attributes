@@ -14,17 +14,19 @@ import dev.shadowsoffire.placebo.network.MessageHelper;
 import dev.shadowsoffire.placebo.registry.DeferredHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -43,6 +45,14 @@ public class AttributesLib {
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final DeferredHelper R = DeferredHelper.create(MODID);
 
+    /**
+     * Static record of {@link Player#getAttackStrengthScale(float)} for use in damage events.<br>
+     * Recorded in the {@link PlayerAttackEvent} and valid for the entire chain, when a player attacks.
+     */
+    public static float localAtkStrength = 1;
+
+    public static int knowledgeMult = 4;
+
     public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder
         .named(new ResourceLocation(MODID, MODID))
         .clientAcceptedVersions(s -> true)
@@ -51,6 +61,7 @@ public class AttributesLib {
         .simpleChannel();
 
     public AttributesLib() {
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new AttributeEvents());
         if (FMLEnvironment.dist.isClient()) {
             MinecraftForge.EVENT_BUS.register(new AttributesLibClient());
@@ -61,19 +72,12 @@ public class AttributesLib {
         ALObjects.bootstrap();
     }
 
-    public static int knowledgeMult = 4;
-
     @SubscribeEvent
     public void init(FMLCommonSetupEvent e) {
         MinecraftForge.EVENT_BUS.register(ALObjects.MobEffects.KNOWLEDGE.get());
-    }
-
-    public static float localAtkStrength = 1;
-
-    @SubscribeEvent
-    public void trackCooldown(AttackEntityEvent e) {
-        Player p = e.getEntity();
-        localAtkStrength = p.getAttackStrengthScale(0.5F);
+        e.enqueueWork(() -> {
+            MobEffects.BLINDNESS.addAttributeModifier(Attributes.FOLLOW_RANGE, "f8c3de3d-1fea-4d7c-a8b0-22f63c4c3454", -0.75, Operation.MULTIPLY_TOTAL);
+        });
     }
 
     // TODO - Update impls to reflect new default values.

@@ -182,17 +182,21 @@ public class AttributesGui implements Renderable, GuiEventListener {
             List<Component> list = new ArrayList<>();
             MutableComponent name = Component.translatable(attr.getDescriptionId()).withStyle(Style.EMPTY.withColor(ChatFormatting.GOLD).withUnderlined(true));
             ResourceLocation id = BuiltInRegistries.ATTRIBUTE.getKey(attr);
+
             if (AttributesLib.getTooltipFlag().isAdvanced()) {
                 Style style = Style.EMPTY.withColor(ChatFormatting.GRAY).withUnderlined(false);
                 name.append(Component.literal(" [" + id.toString() + "]").withStyle(style));
             }
             list.add(name);
-            if (I18n.exists(id + ".desc")) {
-                Component txt = Component.translatable(id + ".desc").withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC);
+
+            String key = id + ".desc";
+
+            if (I18n.exists(key)) {
+                Component txt = Component.translatable(key).withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC);
                 list.add(txt);
             }
             else if (AttributesLib.getTooltipFlag().isAdvanced()) {
-                Component txt = Component.literal(id + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC);
+                Component txt = Component.literal(key).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC);
                 list.add(txt);
             }
 
@@ -229,7 +233,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
                 this.addComp(txt, finalTooltip);
             }
 
-            if (!inst.getModifiers().isEmpty()) {
+            if (inst.getModifiers().stream().anyMatch(modif -> modif.getAmount() != 0)) {
                 this.addComp(CommonComponents.EMPTY, finalTooltip);
                 this.addComp(Component.translatable("attributeslib.gui.modifiers").withStyle(ChatFormatting.GOLD), finalTooltip);
 

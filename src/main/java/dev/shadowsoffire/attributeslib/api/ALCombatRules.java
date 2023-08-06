@@ -1,6 +1,5 @@
-package dev.shadowsoffire.attributeslib.asm;
+package dev.shadowsoffire.attributeslib.api;
 
-import dev.shadowsoffire.attributeslib.api.ALObjects;
 import dev.shadowsoffire.attributeslib.api.ALObjects.Attributes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;

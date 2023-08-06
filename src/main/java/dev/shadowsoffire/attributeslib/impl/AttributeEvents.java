@@ -42,6 +42,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.level.BlockEvent.BreakEvent;
@@ -333,5 +334,11 @@ public class AttributeEvents {
                 e.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(AttributeHelper.BASE_ENTITY_REACH, () -> "attributeslib:fake_base_range", 0, Operation.ADDITION));
             }
         }
+    }
+
+    @SubscribeEvent
+    public void trackCooldown(AttackEntityEvent e) {
+        Player p = e.getEntity();
+        AttributesLib.localAtkStrength = p.getAttackStrengthScale(0.5F);
     }
 }

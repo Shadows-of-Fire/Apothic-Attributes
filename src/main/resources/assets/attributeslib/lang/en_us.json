@@ -1,10 +1,7 @@
 {
     "item.modifiers.both_hands": "When Held:",
 
-    "attributeslib.adv.addition": "[Add: %s]",
-    "attributeslib.adv.multiply_base": "[MulB: %s]",
-    "attributeslib.adv.multiply_total": "[MulT: %s]",
-    "attributeslib.adv.base": "[EBase: %s | IBase: %s]",
+    "attributeslib.adv.base": "[Entity: %s | Item: %s]",
     "attributeslib.adv.sharpness_bonus": "[Sharp: +%s]",
 
 	"attributeslib.value.flat": "%s",
@@ -35,10 +32,10 @@
 	"minecraft:generic.max_health.desc": "How many hit points you can have.",
 	"minecraft:generic.movement_speed.desc": "Movement speed while walking.",
 
-	"forge:attack_range.desc": "How far your melee attacks reach, in blocks.",
+	"forge:entity_reach.desc": "How far you can interact with entities, in blocks.",
 	"forge:entity_gravity.desc": "Acceleration towrds the ground, in blocks/s²",
 	"forge:nametag_distance.desc": "How far away another player must be to see your name.",
-	"forge:reach_distance.desc": "How far your interactions reach, in blocks.",
+	"forge:block_reach.desc": "How far you can interact with blocks, in blocks.",
 	"forge:step_height_addition.desc": "How many blocks you may step up without jumping.",
 	"forge:swim_speed.desc": "How fast you swim, relative to normal.",
 

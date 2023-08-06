@@ -1,12 +1,6 @@
 {
     "item.modifiers.both_hands": "在任意手时：",
 
-    "attributeslib.adv.addition": "[增加：%s]",
-    "attributeslib.adv.multiply_base": "[基础乘数：%s]",
-    "attributeslib.adv.multiply_total": "[总乘数：%s]",
-    "attributeslib.adv.base": "[实体基础值：%s|物品基础值：%s]",
-    "attributeslib.adv.sharpness_bonus": "[锋利：+%s]",
-
     "attributeslib.value.flat": "%s",
     "attributeslib.value.percent": "%s%%",
 
