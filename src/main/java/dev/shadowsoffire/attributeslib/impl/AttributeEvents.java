@@ -22,6 +22,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -45,11 +46,18 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.level.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class AttributeEvents {
+
+    @SubscribeEvent
+    public void fixChangedAttributes(PlayerLoggedInEvent e) {
+        AttributeMap map = e.getEntity().getAttributes();
+        map.getInstance(ForgeMod.STEP_HEIGHT_ADDITION.get()).setBaseValue(0.6);
+    }
 
     private boolean canBenefitFromDrawSpeed(ItemStack stack) {
         return stack.getItem() instanceof ProjectileWeaponItem || stack.getItem() instanceof TridentItem;
