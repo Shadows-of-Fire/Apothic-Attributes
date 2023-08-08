@@ -88,6 +88,8 @@ dependencies {
     if(project.hasProperty('topVersion'))       implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:${topVersion}") {
             transitive = false
     })
+    implementation fg.deobf("curse.maven:mmmmmmmmmmmm-225738:4602101")
+    implementation fg.deobf("curse.maven:selene-499980:4656567")
 }
 
 mixin {
