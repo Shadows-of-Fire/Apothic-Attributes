@@ -181,15 +181,14 @@ public class AttributesGui implements Renderable, GuiEventListener {
             IFormattableAttribute fAttr = (IFormattableAttribute) attr;
             List<Component> list = new ArrayList<>();
             MutableComponent name = Component.translatable(attr.getDescriptionId()).withStyle(Style.EMPTY.withColor(ChatFormatting.GOLD).withUnderlined(true));
-            ResourceLocation id = BuiltInRegistries.ATTRIBUTE.getKey(attr);
 
             if (AttributesLib.getTooltipFlag().isAdvanced()) {
                 Style style = Style.EMPTY.withColor(ChatFormatting.GRAY).withUnderlined(false);
-                name.append(Component.literal(" [" + id.toString() + "]").withStyle(style));
+                name.append(Component.literal(" [" + BuiltInRegistries.ATTRIBUTE.getKey(attr) + "]").withStyle(style));
             }
             list.add(name);
 
-            String key = id + ".desc";
+            String key = attr.getDescriptionId() + ".desc";
 
             if (I18n.exists(key)) {
                 Component txt = Component.translatable(key).withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC);
