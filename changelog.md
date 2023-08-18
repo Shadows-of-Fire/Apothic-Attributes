@@ -1,3 +1,7 @@
+## 1.0.4
+* Removed forge dependency line from the mods.toml and marked as Forge and NeoForge for CF.
+  * The dependency will be added back and the Forge marker will be removed once CF supports Neo correctly.
+
 ## 1.0.3
 * Made description convention use `Attribute#getDescriptionId` as the base instead of the registry name.
   * Description keys will now be equal to the normal key with `.desc` appended in all cases.

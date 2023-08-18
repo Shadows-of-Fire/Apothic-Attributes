@@ -17,13 +17,6 @@ displayName="${modName}" #mandatory
 description='''${desc}'''
 
 [[dependencies.${modid}]]
-    modId="forge"
-    mandatory=true
-    versionRange="[${forgeVersion},)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.${modid}]]
     modId="minecraft"
     mandatory=true
     versionRange="[${mcVersion},)"
