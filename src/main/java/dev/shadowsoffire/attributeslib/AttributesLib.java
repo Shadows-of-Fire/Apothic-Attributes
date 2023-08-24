@@ -106,7 +106,9 @@ public class AttributesLib {
                 ALObjects.Attributes.ARMOR_SHRED,
                 ALObjects.Attributes.PROT_PIERCE,
                 ALObjects.Attributes.PROT_SHRED,
-                ALObjects.Attributes.DODGE_CHANCE);
+                ALObjects.Attributes.DODGE_CHANCE,
+                ALObjects.Attributes.ELYTRA_FLIGHT,
+                ALObjects.Attributes.CREATIVE_FLIGHT);
         });
         // Change the base value of Step Height to reflect the real base value of a Player.
         // The alternative is a bunch of special casing in the display.
@@ -115,8 +117,8 @@ public class AttributesLib {
     }
 
     @SafeVarargs
-    private static void addAll(EntityType<? extends LivingEntity> type, BiConsumer<EntityType<? extends LivingEntity>, Attribute> add, RegistryObject<Attribute>... attribs) {
-        for (RegistryObject<Attribute> a : attribs)
+    private static void addAll(EntityType<? extends LivingEntity> type, BiConsumer<EntityType<? extends LivingEntity>, Attribute> add, RegistryObject<? extends Attribute>... attribs) {
+        for (RegistryObject<? extends Attribute> a : attribs)
             add.accept(type, a.get());
     }
 

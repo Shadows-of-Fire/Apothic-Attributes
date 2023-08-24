@@ -38,6 +38,16 @@ public class AttributeHelper {
     public static final UUID BASE_ENTITY_REACH = UUID.fromString("89689aa7-c577-4d97-a03e-791fde1798d4");
 
     /**
+     * UUID of the modifier Elytras use for {@link ALObjects.Attributes#ELYTRA_FLIGHT}.
+     */
+    public static final UUID ELYTRA_FLIGHT_UUID = UUID.fromString("72aae561-99a9-4a48-9b14-589a255cb077");
+
+    /**
+     * UUID of the modifier given to creative players to enable {@link ALObjects.Attributes#CREATIVE_FLIGHT}.
+     */
+    public static final UUID CREATIVE_FLIGHT_UUID = UUID.fromString("3f54312c-0b60-44ff-bf1e-219091553964");
+
+    /**
      * A brief explanation of {@link Operation} and Attribute calculations:
      * <p>
      * Each Attribute Modifier for a specific attribute provides an Operation and a value.<br>

@@ -5,9 +5,11 @@ import static dev.shadowsoffire.attributeslib.AttributesLib.R;
 import org.jetbrains.annotations.ApiStatus;
 
 import dev.shadowsoffire.attributeslib.AttributesLib;
+import dev.shadowsoffire.attributeslib.impl.BooleanAttribute;
 import dev.shadowsoffire.attributeslib.impl.PercentBasedAttribute;
 import dev.shadowsoffire.attributeslib.mobfx.BleedingEffect;
 import dev.shadowsoffire.attributeslib.mobfx.DetonationEffect;
+import dev.shadowsoffire.attributeslib.mobfx.FlyingEffect;
 import dev.shadowsoffire.attributeslib.mobfx.GrievousEffect;
 import dev.shadowsoffire.attributeslib.mobfx.KnowledgeEffect;
 import dev.shadowsoffire.attributeslib.mobfx.SunderingEffect;
@@ -127,6 +129,16 @@ public class ALObjects {
          */
         public static final RegistryObject<Attribute> PROT_SHRED = R.attribute("prot_shred", () -> new PercentBasedAttribute("attributeslib:prot_shred", 0.0D, 0.0D, 1.0D).setSyncable(true));
 
+        /**
+         * Boolean attribute for if elytra flight is enabled. Default value = false.
+         */
+        public static final RegistryObject<Attribute> ELYTRA_FLIGHT = R.attribute("elytra_flight", () -> new BooleanAttribute("attributeslib:elytra_flight", false).setSyncable(true));
+
+        /**
+         * Boolean attribute for if creative flight is enabled. Default value = false.
+         */
+        public static final RegistryObject<Attribute> CREATIVE_FLIGHT = R.attribute("creative_flight", () -> new BooleanAttribute("attributeslib:creative_flight", false).setSyncable(true));
+
         @ApiStatus.Internal
         public static void bootstrap() {}
     }
@@ -164,6 +176,11 @@ public class ALObjects {
          * Bursting Vitality increases healing received by 20%/level.
          */
         public static final RegistryObject<VitalityEffect> VITALITY = R.effect("vitality", VitalityEffect::new);
+
+        /**
+         * Grants Creative Flight
+         */
+        public static final RegistryObject<FlyingEffect> FLYING = R.effect("flying", FlyingEffect::new);
 
         @ApiStatus.Internal
         public static void bootstrap() {}

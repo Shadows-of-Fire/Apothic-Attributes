@@ -32,12 +32,12 @@ public interface IFormattableAttribute {
      * For multiplication modifiers, this method is responsible for converting the value to percentage form.<br>
      * The only vanilla attribute which performs value formatting is Knockback Resistance.<br>
      *
-     * @param op    The operation of the modifier.
+     * @param op    The operation of the modifier. Null if we are just displaying the raw value and not a modifier.
      * @param value The value of the modifier.
      * @param flag  The tooltip flag.
      * @return The component form of the formatted value.
      */
-    default MutableComponent toValueComponent(Operation op, double value, TooltipFlag flag) {
+    default MutableComponent toValueComponent(@Nullable Operation op, double value, TooltipFlag flag) {
         // Knockback Resistance and Swim Speed are percent-based attributes, but we can't registry replace attributes, so we do this here.
         // For Knockback Resistance, vanilla hardcodes a multiplier of 10 for addition values to hide numbers lower than 1,
         // but percent-based is the real desire.
@@ -47,11 +47,11 @@ public interface IFormattableAttribute {
         }
         // Speed has no metric, so displaying everything as percent works better for the user.
         // However, Speed also operates in that the default is 0.1, not 1, so we have to special-case it instead of including it above.
-        if (this == Attributes.MOVEMENT_SPEED && op == Operation.ADDITION) {
+        if (this == Attributes.MOVEMENT_SPEED && isNullOrAddition(op)) {
             return Component.translatable("attributeslib.value.percent", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value * 1000));
         }
-        String key = op == Operation.ADDITION ? "attributeslib.value.flat" : "attributeslib.value.percent";
-        return Component.translatable(key, ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(op == Operation.ADDITION ? value : value * 100));
+        String key = isNullOrAddition(op) ? "attributeslib.value.flat" : "attributeslib.value.percent";
+        return Component.translatable(key, ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(isNullOrAddition(op) ? value : value * 100));
     }
 
     /**
@@ -62,12 +62,34 @@ public interface IFormattableAttribute {
      *
      * @param modif The attribute modifier being converted to a component.
      * @param flag  The tooltip flag.
-     * @return The component representation of the passed attribute modifier.
+     * @return The component representation of the passed attribute modifier, with debug info appended if enabled.
      */
     default MutableComponent toComponent(AttributeModifier modif, TooltipFlag flag) {
         Attribute attr = this.ths();
         double value = modif.getAmount();
 
+        MutableComponent comp;
+
+        if (value > 0.0D) {
+            comp = Component.translatable("attributeslib.modifier.plus", this.toValueComponent(modif.getOperation(), value, flag), Component.translatable(attr.getDescriptionId())).withStyle(ChatFormatting.BLUE);
+        }
+        else {
+            value *= -1.0D;
+            comp = Component.translatable("attributeslib.modifier.take", this.toValueComponent(modif.getOperation(), value, flag), Component.translatable(attr.getDescriptionId())).withStyle(ChatFormatting.RED);
+        }
+
+        return comp.append(this.getDebugInfo(modif, flag));
+    }
+
+    /**
+     * Computes the additional debug information for a given attribute modifier, if the flag {@linkplain TooltipFlag#isAdvanced() is advanced}.
+     * 
+     * @param modif The attribute modifier being converted to a component.
+     * @param flag  The tooltip flag.
+     * @return The debug component, or {@link CommonComponents#EMPTY} if disabled.
+     * @apiNote This information is automatically appended to {@link #toComponent(AttributeModifier, TooltipFlag)}.
+     */
+    default Component getDebugInfo(AttributeModifier modif, TooltipFlag flag) {
         Component debugInfo = CommonComponents.EMPTY;
 
         if (flag.isAdvanced()) {
@@ -82,18 +104,7 @@ public interface IFormattableAttribute {
             debugInfo = Component.literal(" ")
                 .append(Component.literal(txt).withStyle(ChatFormatting.GRAY));
         }
-
-        MutableComponent comp;
-
-        if (value > 0.0D) {
-            comp = Component.translatable("attributeslib.modifier.plus", this.toValueComponent(modif.getOperation(), value, flag), Component.translatable(attr.getDescriptionId())).withStyle(ChatFormatting.BLUE);
-        }
-        else {
-            value *= -1.0D;
-            comp = Component.translatable("attributeslib.modifier.take", this.toValueComponent(modif.getOperation(), value, flag), Component.translatable(attr.getDescriptionId())).withStyle(ChatFormatting.RED);
-        }
-
-        return comp.append(debugInfo);
+        return debugInfo;
     }
 
     /**
@@ -195,6 +206,10 @@ public interface IFormattableAttribute {
      */
     public static MutableComponent toBaseComponent(Attribute attr, double value, double entityBase, boolean merged, TooltipFlag flag) {
         return ((IFormattableAttribute) attr).toBaseComponent(value, entityBase, merged, flag);
+    }
+
+    static boolean isNullOrAddition(@Nullable Operation op) {
+        return op == null || op == Operation.ADDITION;
     }
 
 }

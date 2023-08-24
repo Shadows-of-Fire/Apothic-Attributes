@@ -3,6 +3,7 @@
     "package": "${modGroup}.${modid}.mixin",
     "compatibilityLevel": "JAVA_${javaVersion}",
     "refmap": "${modid}.refmap.json",
+    "maxShiftBy": 5,
     "mixins": [
 ${mixins}
     ],

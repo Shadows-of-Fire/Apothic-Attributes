@@ -16,6 +16,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.shadowsoffire.attributeslib.AttributesLib;
 import dev.shadowsoffire.attributeslib.api.IFormattableAttribute;
+import dev.shadowsoffire.attributeslib.impl.BooleanAttribute;
 import dev.shadowsoffire.placebo.PlaceboClient;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -210,16 +211,16 @@ public class AttributesGui implements Renderable, GuiEventListener {
                     color = ChatFormatting.RED;
                 }
             }
-            MutableComponent valueComp = fAttr.toValueComponent(Operation.ADDITION, inst.getValue(), AttributesLib.getTooltipFlag());
+            MutableComponent valueComp = fAttr.toValueComponent(null, inst.getValue(), AttributesLib.getTooltipFlag());
             list.add(Component.translatable("Current: %s", valueComp.withStyle(color)).withStyle(ChatFormatting.GRAY));
 
-            MutableComponent baseVal = fAttr.toValueComponent(Operation.ADDITION, inst.getBaseValue(), AttributesLib.getTooltipFlag());
+            MutableComponent baseVal = fAttr.toValueComponent(null, inst.getBaseValue(), AttributesLib.getTooltipFlag());
 
             baseVal = Component.translatable("attributeslib.gui.base", baseVal);
             if (attr instanceof RangedAttribute ra) {
-                Component min = fAttr.toValueComponent(Operation.ADDITION, ra.getMinValue(), AttributesLib.getTooltipFlag());
+                Component min = fAttr.toValueComponent(null, ra.getMinValue(), AttributesLib.getTooltipFlag());
                 min = Component.translatable("attributeslib.gui.min", min);
-                Component max = fAttr.toValueComponent(Operation.ADDITION, ra.getMaxValue(), AttributesLib.getTooltipFlag());
+                Component max = fAttr.toValueComponent(null, ra.getMaxValue(), AttributesLib.getTooltipFlag());
                 max = Component.translatable("attributeslib.gui.max", max);
                 list.add(Component.translatable("%s \u2507 %s \u2507 %s", baseVal, min, max).withStyle(ChatFormatting.GRAY));
             }
@@ -327,7 +328,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
         stack.pushPose();
 
         var attr = (IFormattableAttribute) inst.getAttribute();
-        MutableComponent value = attr.toValueComponent(Operation.ADDITION, inst.getValue(), TooltipFlag.Default.NORMAL);
+        MutableComponent value = attr.toValueComponent(null, inst.getValue(), TooltipFlag.Default.NORMAL);
 
         scale = 1;
         if (this.font.width(value) > 27) {
@@ -343,6 +344,9 @@ public class AttributesGui implements Renderable, GuiEventListener {
             else if (inst.getValue() < inst.getBaseValue()) {
                 color = 0xFF6060;
             }
+        }
+        else if (attr instanceof BooleanAttribute ba && inst.getValue() > 0) {
+            color = 0x55DD55;
         }
         gfx.drawString(font, value, (int) ((x + 72 + (27 - this.font.width(value) * scale) / 2) / scale), (int) ((y + 7) / scale), color, true);
         stack.popPose();
