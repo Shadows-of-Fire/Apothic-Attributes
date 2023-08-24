@@ -1,3 +1,15 @@
+## 1.1.0
+* Added support for Boolean attributes, which only have an Enabled or Disabled state.
+  * A boolean attribute is enabled if the current value is > 0, and disabled if the value == 0.
+  * Only two modifiers will display properly for boolean attributes:
+    * An Addition +1 modifier will display as "Enables X"
+    * A Multiply Total -1 modifier will display as "Forcibly Disables X"
+    * Other modifiers will display as "Invalid X", and should not be used for Boolean attributes.
+* Added the Elytra Flight attribute.
+* Added the Creative Flight attribute.
+* Added the Flying mob effect, which grants Creative Flight.
+* Made Fall Damage scale with Gravity. If your Gravity is below 0.01 (the amount slow falling reduces it to), fall damage is prevented entirely.
+
 ## 1.0.4
 * Removed forge dependency line from the mods.toml and marked as Forge and NeoForge for CF.
   * The dependency will be added back and the Forge marker will be removed once CF supports Neo correctly.
