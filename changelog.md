@@ -1,3 +1,6 @@
+## 1.1.1
+* No longer modifies the flying state when the player is in spectator mode.
+
 ## 1.1.0
 * Added support for Boolean attributes, which only have an Enabled or Disabled state.
   * A boolean attribute is enabled if the current value is > 0, and disabled if the value == 0.

@@ -362,8 +362,9 @@ public class AttributeEvents {
 
     @SubscribeEvent
     public void valueChanged(AttributeChangedValueEvent e) {
-        // AttributesLib.LOGGER.info("Attribute {} changed value from {} to {}!", e.getAttributeInstance().getAttribute().getDescriptionId(), e.getOldValue(), e.getNewValue());
-        if (e.getAttributeInstance().getAttribute() == ALObjects.Attributes.CREATIVE_FLIGHT.get() && e.getEntity() instanceof ServerPlayer player) {
+        // AttributesLib.LOGGER.info("Attribute {} changed value from {} to {}!", e.getAttributeInstance().getAttribute().getDescriptionId(), e.getOldValue(),
+        // e.getNewValue());
+        if (e.getAttributeInstance().getAttribute() == ALObjects.Attributes.CREATIVE_FLIGHT.get() && e.getEntity() instanceof ServerPlayer player && !player.isSpectator()) {
 
             boolean changed = false;
 

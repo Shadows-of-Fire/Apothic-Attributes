@@ -2,7 +2,6 @@ package dev.shadowsoffire.attributeslib.client;
 
 import java.util.Comparator;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.shadowsoffire.attributeslib.util.Comparators;
@@ -72,7 +71,6 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
             pose.translate(1 + x / scale, 1 + y / scale, 0);
             gfx.renderFakeItem(this.data, 0, 0);
             pose.popPose();
-            RenderSystem.applyModelViewMatrix();
         }
 
     }
