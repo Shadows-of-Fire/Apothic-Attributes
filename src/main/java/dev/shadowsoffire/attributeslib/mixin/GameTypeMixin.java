@@ -19,7 +19,7 @@ public class GameTypeMixin {
 
     private boolean apoth_flying;
 
-    @Inject(at = @At("TAIL"), method = "updatePlayerAbilities(Lnet/minecraft/world/entity/player/Abilities;)V")
+    @Inject(at = @At("HEAD"), method = "updatePlayerAbilities(Lnet/minecraft/world/entity/player/Abilities;)V")
     public void apoth_recordOldFlyingAttribs(Abilities abilities, CallbackInfo ci) {
         this.apoth_flying = abilities.flying;
     }
