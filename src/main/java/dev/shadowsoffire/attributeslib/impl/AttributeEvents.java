@@ -364,7 +364,7 @@ public class AttributeEvents {
     public void valueChanged(AttributeChangedValueEvent e) {
         // AttributesLib.LOGGER.info("Attribute {} changed value from {} to {}!", e.getAttributeInstance().getAttribute().getDescriptionId(), e.getOldValue(),
         // e.getNewValue());
-        if (e.getAttributeInstance().getAttribute() == ALObjects.Attributes.CREATIVE_FLIGHT.get() && e.getEntity() instanceof ServerPlayer player && !player.isSpectator()) {
+        if (e.getAttributeInstance().getAttribute() == ALObjects.Attributes.CREATIVE_FLIGHT.get() && e.getEntity() instanceof ServerPlayer player) {
 
             boolean changed = false;
 
@@ -389,7 +389,7 @@ public class AttributeEvents {
 
     public static void applyCreativeFlightModifier(Player player, GameType newType) {
         AttributeInstance inst = player.getAttribute(ALObjects.Attributes.CREATIVE_FLIGHT.get());
-        if (newType == GameType.CREATIVE && inst.getModifier(AttributeHelper.CREATIVE_FLIGHT_UUID) == null) {
+        if ((newType == GameType.CREATIVE || newType == GameType.SPECTATOR) && inst.getModifier(AttributeHelper.CREATIVE_FLIGHT_UUID) == null) {
             inst.addTransientModifier(new AttributeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID, () -> "attributeslib:creative_flight", 1, Operation.ADDITION));
         }
         else {
