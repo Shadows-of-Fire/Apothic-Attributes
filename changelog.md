@@ -1,3 +1,6 @@
+## 1.1.2
+* Fixed the Flight effect not working on relog or when switching game modes.
+
 ## 1.1.1
 * No longer modifies the flying state when the player is in spectator mode.
 
