@@ -1,3 +1,6 @@
+## 1.1.3
+* Fixed typo in `GameTypeMixin` causing players to still lose attribute-provided flight when switching back from Creative to Survival.
+
 ## 1.1.2
 * Fixed the Flight effect not working on relog or when switching game modes.
 
