@@ -1,3 +1,6 @@
+## 1.1.4
+* Fixed players losing the ability to fly when switching between Creative mode and Spectator mode.
+
 ## 1.1.3
 * Fixed typo in `GameTypeMixin` causing players to still lose attribute-provided flight when switching back from Creative to Survival.
 
