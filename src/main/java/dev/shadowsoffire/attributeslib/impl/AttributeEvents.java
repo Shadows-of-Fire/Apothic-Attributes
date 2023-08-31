@@ -389,8 +389,10 @@ public class AttributeEvents {
 
     public static void applyCreativeFlightModifier(Player player, GameType newType) {
         AttributeInstance inst = player.getAttribute(ALObjects.Attributes.CREATIVE_FLIGHT.get());
-        if ((newType == GameType.CREATIVE || newType == GameType.SPECTATOR) && inst.getModifier(AttributeHelper.CREATIVE_FLIGHT_UUID) == null) {
-            inst.addTransientModifier(new AttributeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID, () -> "attributeslib:creative_flight", 1, Operation.ADDITION));
+        if (newType == GameType.CREATIVE || newType == GameType.SPECTATOR) {
+            if (inst.getModifier(AttributeHelper.CREATIVE_FLIGHT_UUID) == null) {
+                inst.addTransientModifier(new AttributeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID, () -> "attributeslib:creative_flight", 1, Operation.ADDITION));
+            }
         }
         else {
             inst.removeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID);
