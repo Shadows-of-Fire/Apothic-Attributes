@@ -1,3 +1,10 @@
+## 1.2.0
+* ChampionAsh: Removed the entity gravity modifier from Slow Fall
+  * This was causing high levels of slow fall to make people skyrocket into the air, and was also increasing jump height.
+  * This means the gravity modifier from slow fall will no longer be tracked in the attributes gui.
+* ChampionAsh: Made `AttributeChangedValueEvent` only execute once for batched attribute updates (such as bulk removals + reapplications).
+* Fixed the lang key `attributeslib.gui.current` being unused.
+
 ## 1.1.4
 * Fixed players losing the ability to fly when switching between Creative mode and Spectator mode.
 
