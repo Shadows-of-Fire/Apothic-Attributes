@@ -79,7 +79,7 @@ public class AttributesLib {
             MobEffects.BLINDNESS.addAttributeModifier(Attributes.FOLLOW_RANGE, "f8c3de3d-1fea-4d7c-a8b0-22f63c4c3454", -0.75, Operation.MULTIPLY_TOTAL);
             // TODO: Update to show in GUI without applying attribute to entity
             // if (MobEffects.SLOW_FALLING.getAttributeModifiers().isEmpty()) {
-            //     MobEffects.SLOW_FALLING.addAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), "A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA", -0.07, Operation.ADDITION);
+            // MobEffects.SLOW_FALLING.addAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), "A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA", -0.07, Operation.ADDITION);
             // }
         });
     }
@@ -136,7 +136,7 @@ public class AttributesLib {
 
     public static TooltipFlag getTooltipFlag() {
         if (FMLEnvironment.dist.isClient()) return ClientAccess.getTooltipFlag();
-        return TooltipFlag.Default.NORMAL;
+        return TooltipFlag.NORMAL;
     }
 
     public static ResourceLocation loc(String path) {
@@ -145,7 +145,7 @@ public class AttributesLib {
 
     private static class ClientAccess {
         static TooltipFlag getTooltipFlag() {
-            return Minecraft.getInstance().options.advancedItemTooltips ? TooltipFlag.Default.ADVANCED : TooltipFlag.Default.NORMAL;
+            return Minecraft.getInstance().options.advancedItemTooltips ? TooltipFlag.ADVANCED : TooltipFlag.NORMAL;
         }
     }
 }

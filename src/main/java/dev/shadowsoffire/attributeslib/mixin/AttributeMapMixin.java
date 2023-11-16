@@ -55,7 +55,8 @@ public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
         // If the attributes are being updated, clear the updating list
         if (this.areAttributesUpdating()) {
             this.updatingAttributes.clear();
-        } else {
+        }
+        else {
             // Otherwise, cycle through each instance and get the new values, post the results
             if (!this.getOwner().level().isClientSide) {
                 this.updatingAttributes.forEach((attr, pair) -> MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent(this.getOwner(), pair.getFirst(), pair.getSecond(), pair.getFirst().getValue())));
@@ -74,6 +75,8 @@ public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
      */
     @Inject(at = @At(value = "HEAD"), method = "onAttributeModified(Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;)V", require = 1)
     public void apoth_attrModifiedEvent(AttributeInstance inst, CallbackInfo ci) {
+        if (owner == null) throw new RuntimeException("An AttributeMap object was modified without a set owner!");
+
         if (!this.areAttributesUpdating() && !owner.level().isClientSide) {
             // This call site is only valid on the server, because the client nukes and reapplies all attribute modifiers when received.
             double oldValue = ((AttributeInstanceAccessor) inst).getCachedValue();
@@ -81,7 +84,8 @@ public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
             if (oldValue != newValue) {
                 MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent(getOwner(), inst, oldValue, newValue));
             }
-        } else if (this.areAttributesUpdating()) {
+        }
+        else if (this.areAttributesUpdating()) {
             // If attributes are being updated, store the instance and previous value for exectuion after update
             this.updatingAttributes.putIfAbsent(inst.getAttribute(), Pair.of(inst, ((AttributeInstanceAccessor) inst).getCachedValue()));
         }
