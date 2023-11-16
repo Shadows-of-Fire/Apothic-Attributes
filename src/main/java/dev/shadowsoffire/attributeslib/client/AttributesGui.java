@@ -212,7 +212,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
                 }
             }
             MutableComponent valueComp = fAttr.toValueComponent(null, inst.getValue(), AttributesLib.getTooltipFlag());
-            list.add(Component.translatable("Current: %s", valueComp.withStyle(color)).withStyle(ChatFormatting.GRAY));
+            list.add(Component.translatable("attributeslib.gui.current", valueComp.withStyle(color)).withStyle(ChatFormatting.GRAY));
 
             MutableComponent baseVal = fAttr.toValueComponent(null, inst.getBaseValue(), AttributesLib.getTooltipFlag());
 
