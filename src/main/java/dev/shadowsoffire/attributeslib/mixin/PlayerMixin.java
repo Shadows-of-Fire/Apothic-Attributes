@@ -46,7 +46,9 @@ public class PlayerMixin implements IFlying {
      */
     @Inject(at = @At(value = "TAIL"), method = "readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", require = 1)
     public void apoth_cacheFlying(CompoundTag tag, CallbackInfo ci) {
-        apoth_flying = abilities.flying;
+        if (abilities.flying) {
+            markFlying();
+        }
     }
 
     @Override
@@ -54,6 +56,11 @@ public class PlayerMixin implements IFlying {
         boolean value = this.apoth_flying;
         this.apoth_flying = false;
         return value;
+    }
+
+    @Override
+    public void markFlying() {
+        this.apoth_flying = true;
     }
 
 }

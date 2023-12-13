@@ -25,6 +25,7 @@ import dev.shadowsoffire.attributeslib.api.IFormattableAttribute;
 import dev.shadowsoffire.attributeslib.api.client.AddAttributeTooltipsEvent;
 import dev.shadowsoffire.attributeslib.api.client.GatherEffectScreenTooltipsEvent;
 import dev.shadowsoffire.attributeslib.api.client.GatherSkippedAttributeTooltipsEvent;
+import dev.shadowsoffire.attributeslib.util.IFlying;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -52,6 +53,7 @@ import net.minecraft.world.item.ItemStack.TooltipPart;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -60,6 +62,15 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class AttributesLibClient {
+
+    @SubscribeEvent
+    public void updateClientFlyStateOnRespawn(ClientPlayerNetworkEvent.Clone e) {
+        // Teleporting to another dimension constitutes a respawn - the other checks we have ensure the mayFly state returns, but not the flying state.
+        // For this one we have to ensure that the state is marked to be restored before MultiPlayerGameMode#adjustPlayer is called in ClientPacketListener#handleRespawn.
+        if (e.getOldPlayer().getAbilities().flying) {
+            ((IFlying) e.getNewPlayer()).markFlying();
+        }
+    }
 
     @SubscribeEvent
     public static void particleFactories(RegisterParticleProvidersEvent e) {
