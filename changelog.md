@@ -1,3 +1,6 @@
+## 1.2.1
+* Fixed the flying state being reset when changing dimensions.
+
 ## 1.2.0
 * ChampionAsh: Removed the entity gravity modifier from Slow Fall
   * This was causing high levels of slow fall to make people skyrocket into the air, and was also increasing jump height.
