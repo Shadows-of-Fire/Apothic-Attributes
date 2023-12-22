@@ -1,11 +1,21 @@
 {
     "item.modifiers.both_hands": "在任意手时：",
 
+    "attributeslib.adv.base": "[实体：%s | 物品：%s]",
+    "attributeslib.adv.sharpness_bonus": "[锋利：+%s]",
+
     "attributeslib.value.flat": "%s",
     "attributeslib.value.percent": "%s%%",
 
+    "attributeslib.value.boolean.enabled": "已启用",
+    "attributeslib.value.boolean.disabled": "已禁用",
+    "attributeslib.value.boolean.enable": "启用",
+    "attributeslib.value.boolean.force_disable": "强制禁用",
+    "attributeslib.value.boolean.invalid": "无效",
+
     "attributeslib.modifier.plus": "+%s %s",
     "attributeslib.modifier.take": "-%s %s",
+    "attributeslib.modifier.bool": "%s %s",
 
     "attributeslib.gui.attributes": "属性",
     "attributeslib.gui.base": "基础值：%s",
@@ -29,11 +39,11 @@
     "attribute.name.generic.max_health.desc": "你拥有的生命值点数。",
     "attribute.name.generic.movement_speed.desc": "行走时的移动速度。",
 
-    "forge.attack_range.desc": "你的近战攻击能打到敌人的距离，以格为单位。",
+    "forge.entity_reach.desc": "你能与实体互动的距离，以格为单位。",
     "forge.entity_gravity.desc": "落向地面的加速度，以格/平方秒为单位。",
     "forge.name_tag_distance.desc": "其他玩家必须距离多远才能看到你的名字。",
-    "forge.reach_distance.desc": "你能与方块互动的距离，以格为单位。",
-    "forge.step_height_addition.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
+    "forge.block_reach.desc": "你能与方块互动的距离，以格为单位。",
+    "forge.step_height.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
     "forge.swim_speed.desc": "相对于正常情况，你的游泳速度。",
 
     "attributeslib:draw_speed": "蓄力速度",
@@ -93,6 +103,12 @@
     "attributeslib:dodge_chance": "闪避率",
     "attributeslib:dodge_chance.desc": "有概率闪避近战攻击或弹射物。",
 
+    "attributeslib:elytra_flight": "鞘翅飞行",
+    "attributeslib:elytra_flight.desc": "你能像穿戴鞘翅一样飞行。",
+
+    "attributeslib:creative_flight": "创造模式飞行",
+    "attributeslib:creative_flight.desc": "你能像创造模式一样飞行。",
+
     "comment_id": "/MobFx - 为了支持JEED，描述是重复的。",
 
     "effect.attributeslib.knowledge": "古代知识",
@@ -114,10 +130,44 @@
     "effect.attributeslib.bleeding": "流血",
     "effect.attributeslib.bleeding.desc": "每两秒造成一次伤害。",
     "effect.attributeslib.bleeding.description": "每两秒造成一次伤害。",
-    "death.attack.attributeslib.bleeding": "%s失血过多了。",
 
     "effect.attributeslib.detonation": "火焰引爆",
     "effect.attributeslib.detonation.desc": "该效果结束后，根据剩余着火时间造成伤害。",
     "effect.attributeslib.detonation.description": "该效果结束后，根据剩余着火时间造成伤害。",
-    "death.attack.attributeslib.detonation": "%s被火焰引爆了。"
+
+    "effect.attributeslib.flying": "飞行",
+    "effect.attributeslib.flying.desc": "给予创造模式飞行能力。",
+    "effect.attributeslib.flying.description": "给予创造模式飞行能力。",
+
+    "effect.minecraft.night_vision.desc": "允许你在黑暗中也能看清东西。",
+    "effect.minecraft.invisibility.desc": "使你隐身，不包括装备。",
+    "effect.minecraft.jump_boost.desc": "增加跳跃高度。",
+    "effect.minecraft.fire_resistance.desc": "使你免疫火焰伤害。",
+    "effect.minecraft.water_breathing.desc": "使你不会溺水。",
+    "effect.minecraft.instant_health.desc": "立即恢复少量生命值。",
+    "effect.minecraft.instant_damage.desc": "立即造成少量魔法伤害。",
+    "effect.minecraft.poison.desc": "定期造成非致命伤害。",
+    "effect.minecraft.regeneration.desc": "使你随着时间的推移恢复生命值。",
+
+    "comment_id": "Damage Sources",
+
+    "death.attack.attributeslib:bleeding": "%1$s失血过多了",
+    "death.attack.attributeslib:bleeding.item": "%1$s因%2$s的%3$s而失血过多",
+    "death.attack.attributeslib:bleeding.player": "%1$s在试图逃离%2$s时失血过多了",
+
+    "death.attack.attributeslib:detonation": "%1$s被火焰引爆了",
+    "death.attack.attributeslib:detonation.item": "%1$s被火焰引爆了",
+    "death.attack.attributeslib:detonation.player": "%1$s被火焰引爆了",
+
+    "death.attack.attributeslib:current_hp_damage": "%1$s被击败了",
+    "death.attack.attributeslib:current_hp_damage.item": "%1$s被%2$s用%3$s击败了",
+    "death.attack.attributeslib:current_hp_damage.player": "%1$s在与%2$s战斗时被击败了",
+
+    "death.attack.attributeslib:fire_damage": "%1$s被烧焦至死",
+    "death.attack.attributeslib:fire_damage.item": "%1$s被%2$s用%3$s烧焦至死",
+    "death.attack.attributeslib:fire_damage.player": "%1$s在与%2$s战斗时被烧焦至死",
+
+    "death.attack.attributeslib:cold_damage": "%1$s被冰冻至死",
+    "death.attack.attributeslib:cold_damage.item": "%1$s被%2$s用%3$s冰冻至死",
+    "death.attack.attributeslib:cold_damage.player": "%1$s在与%2$s战斗时被冰冻至死"
 }
