@@ -43,7 +43,7 @@
     "forge.entity_gravity.desc": "落向地面的加速度，以格/平方秒为单位。",
     "forge.name_tag_distance.desc": "其他玩家必须距离多远才能看到你的名字。",
     "forge.block_reach.desc": "你能与方块互动的距离，以格为单位。",
-    "forge.step_height_addition.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
+    "forge.step_height.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
     "forge.swim_speed.desc": "相对于正常情况，你的游泳速度。",
 
     "attributeslib:draw_speed": "蓄力速度",
