@@ -1,11 +1,21 @@
 {
     "item.modifiers.both_hands": "Quando segurado:",
 
+	"attributeslib.adv.base": "[Entidade: %s | Item: %s]",
+    "attributeslib.adv.sharpness_bonus": "[Afiação: +%s]",
+
 	"attributeslib.value.flat": "%s",
 	"attributeslib.value.percent": "%s%%",
 
+	"attributeslib.value.boolean.enabled": "Habilitado",
+    "attributeslib.value.boolean.disabled": "Desabilitado",
+    "attributeslib.value.boolean.enable": "Habilita",
+    "attributeslib.value.boolean.force_disable": "Desabilitado à força",
+    "attributeslib.value.boolean.invalid": "Inválido",
+
     "attributeslib.modifier.plus": "+%s %s",
     "attributeslib.modifier.take": "-%s %s",
+	"attributeslib.modifier.bool": "%s %s",
 
 	"attributeslib.gui.attributes": "Atributos",
 	"attributeslib.gui.base": "Base: %s",
@@ -29,10 +39,10 @@
 	"attribute.name.generic.max_health.desc": "Quantos pontos de vida você pode ter.",
 	"attribute.name.generic.movement_speed.desc": "Velocidade de movimento ao caminhar.",
 
-	"forge.attack_range.desc": "Até onde seus ataques corpo a corpo alcançam, em blocos.",
+	"forge.entity_reach.desc": "Até onde seus ataques corpo a corpo alcançam, em blocos.",
 	"forge.entity_gravity.desc": "Aceleração em direção ao solo, em blocos/s²",
 	"forge.name_tag_distance.desc": "Quão longe outro jogador deve estar para ver seu nome.",
-	"forge.reach_distance.desc": "Até onde suas interações alcançam, em blocos.",
+	"forge.block_reach.desc": "Até onde suas interações alcançam, em blocos.",
 	"forge.step_height_addition.desc": "Quantos blocos você pode subir sem pular.",
 	"forge.swim_speed.desc": "Quão rápido você nada, em relação ao normal.",
 
@@ -93,6 +103,12 @@
 	"attributeslib:dodge_chance": "Chance de esquiva",
 	"attributeslib:dodge_chance.desc": "Chance de desviar de um ataque corpo a corpo ou de um projétil.",
 
+	"attributeslib:elytra_flight": "Voo de élitro",
+    "attributeslib:elytra_flight.desc": "Se você puder, voa como se estivesse usando um élitro.",
+
+    "attributeslib:creative_flight": "Voo criativo",
+    "attributeslib:creative_flight.desc": "Se você puder, voa como se estivesse no modo criativo.",
+
     "comment_id": "MobFx - descriptions are duplicated for JEED support.",
 
     "effect.attributeslib.knowledge": "Conhecimento das eras",
@@ -114,10 +130,44 @@
     "effect.attributeslib.bleeding": "Sangramento",
     "effect.attributeslib.bleeding.desc": "Inflige danos a cada dois segundos.",
     "effect.attributeslib.bleeding.description": "Inflige danos a cada dois segundos.",
-    "death.attack.attributeslib.bleeding": "%s sangrou até a morte.",
 
-    "effect.attributeslib.detonation": "Detonação flamejante",
-    "effect.attributeslib.detonation.desc": "Ao expirar, inflige danos com base nos ticks de fogo restantes.",
-    "effect.attributeslib.detonation.description": "Ao expirar, inflige danos com base nos ticks de fogo restantes.",
-    "death.attack.attributeslib.detonation": "%s foi detonado por uma chama."
+	"effect.attributeslib.detonation": "Detonação flamejante",
+    "effect.attributeslib.detonation.desc": "Ao expirar, inflige dano com base nos ticks de fogo restantes.",
+    "effect.attributeslib.detonation.description": "Ao expirar, inflige dano com base nos ticks de fogo restantes.",
+
+    "effect.attributeslib.flying": "Voando",
+    "effect.attributeslib.flying.desc": "Concede voo do criativo.",
+    "effect.attributeslib.flying.description": "Conceder voo do criativo.",
+
+    "effect.minecraft.night_vision.desc": "Permite que você veja no escuro.",
+    "effect.minecraft.invisibility.desc": "Torna você invisível, exceto os equipamentos.",
+    "effect.minecraft.jump_boost.desc": "Aumenta a altura do salto.",
+    "effect.minecraft.fire_resistance.desc": "Torna você imune a dano de fogo.",
+    "effect.minecraft.water_breathing.desc": "Faz com que você não possa se afogar.",
+    "effect.minecraft.instant_health.desc": "Restaura instantaneamente um pouco da sua saúde.",
+    "effect.minecraft.instant_damage.desc": "Causa instantaneamente um pouco de dano mágico.",
+    "effect.minecraft.poison.desc": "Periodicamente inflige dano não letal.",
+    "effect.minecraft.regeneration.desc": "Faz com que você regenere a saúde ao longo do tempo.",
+
+    "comment_id": "Damage Sources",
+
+    "death.attack.attributeslib:bleeding": "%s sangrou até a morte.",
+	"death.attack.attributeslib:bleeding.item": "%1$s sangrou por %2$s de %3$s",
+    "death.attack.attributeslib:bleeding.player": "%1$s sangrou enquanto tentava escapar de %2$s",
+    
+    "death.attack.attributeslib:detonation": "%1$s foi detonado pelas chamas",
+    "death.attack.attributeslib:detonation.item": "%1$s foi detonado pelas chamas",
+    "death.attack.attributeslib:detonation.player": "%1$s foi detonado pelas chamas",
+
+    "death.attack.attributeslib:current_hp_damage": "%1$s foi abatido",
+    "death.attack.attributeslib:current_hp_damage.item": "%1$s foi abatido por %2$s com %3$s",
+    "death.attack.attributeslib:current_hp_damage.player": "%1$s foi abatido enquanto lutava com %2$s",
+
+    "death.attack.attributeslib:fire_damage": "%1$sfoi queimado até a morte",
+    "death.attack.attributeslib:fire_damage.item": "%1$s foi queimado até a morte por %2$s com %3$s",
+    "death.attack.attributeslib:fire_damage.player": "%1$s foi queimado até a morte enquanto lutava com %2$s",
+
+    "death.attack.attributeslib:cold_damage": "%1$s foi congelado até a morte",
+    "death.attack.attributeslib:cold_damage.item": "%1$s foi congelado até a morte por %2$s com %3$s",
+    "death.attack.attributeslib:cold_damage.player": "%1$s foi congelado até a morte enquanto lutava com %2$s"
 }
