@@ -64,6 +64,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
     protected static float scrollOffset = 0;
     // Ditto.
     protected static boolean hideUnchanged = false;
+    protected static boolean swappedFromCurios = false;
 
     protected final InventoryScreen parent;
     protected final Player player;
