@@ -2,6 +2,7 @@ package dev.shadowsoffire.attributeslib;
 
 import java.util.function.BiConsumer;
 
+import dev.shadowsoffire.attributeslib.client.CuriosClientCompat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -65,6 +66,7 @@ public class AttributesLib {
         MinecraftForge.EVENT_BUS.register(new AttributeEvents());
         if (FMLEnvironment.dist.isClient()) {
             MinecraftForge.EVENT_BUS.register(new AttributesLibClient());
+            MinecraftForge.EVENT_BUS.register(new CuriosClientCompat());
             FMLJavaModLoadingContext.get().getModEventBus().register(AttributesLibClient.class);
         }
 

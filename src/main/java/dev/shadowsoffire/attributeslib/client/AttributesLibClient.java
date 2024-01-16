@@ -113,7 +113,8 @@ public class AttributesLibClient {
             e.addListener(atrComp);
             e.addListener(atrComp.toggleBtn);
             e.addListener(atrComp.hideUnchangedBtn);
-            if (AttributesGui.wasOpen) atrComp.toggleVisibility();
+            if (AttributesGui.wasOpen || AttributesGui.swappedFromCurios) atrComp.toggleVisibility();
+            AttributesGui.swappedFromCurios = false;
         }
     }
 
