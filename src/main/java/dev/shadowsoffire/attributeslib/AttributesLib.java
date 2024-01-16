@@ -3,6 +3,7 @@ package dev.shadowsoffire.attributeslib;
 import java.util.function.BiConsumer;
 
 import dev.shadowsoffire.attributeslib.client.CuriosClientCompat;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -132,6 +133,12 @@ public class AttributesLib {
         }
         if (ModList.get().isLoaded("curios")) {
             e.enqueueWork(CuriosCompat::init);
+        }
+    }
+
+    @SubscribeEvent
+    public void clientSetup(FMLClientSetupEvent e) {
+        if (ModList.get().isLoaded("curios")) {
             MinecraftForge.EVENT_BUS.register(new CuriosClientCompat());
         }
     }
