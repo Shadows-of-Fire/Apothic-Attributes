@@ -10,5 +10,6 @@ ${mixins}
     "client": [
 ${clientMixins}
     ],
-    "minVersion": "0.8"
+    "minVersion": "0.8",
+    "maxShiftBy": 5
 }

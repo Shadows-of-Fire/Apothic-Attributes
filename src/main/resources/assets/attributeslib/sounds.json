@@ -1,0 +1,7 @@
+{
+	"dodge": {
+		"category": "neutral",
+		"subtitle": "attributeslib.subtitle.dodge",
+		"sounds": ["attributeslib:dodge"]
+	}
+}

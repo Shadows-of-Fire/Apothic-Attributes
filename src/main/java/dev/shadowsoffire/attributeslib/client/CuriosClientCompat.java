@@ -22,7 +22,11 @@ public class CuriosClientCompat {
                 InventoryScreen invScn = new InventoryScreen(Minecraft.getInstance().player);
                 AttributesGui.swappedFromCurios = true;
                 scn.getMinecraft().setScreen(invScn);
-            }, Component.translatable("attributeslib.gui.show_attributes"));
+                btn.setFocused(false);
+            }, Component.translatable("attributeslib.gui.show_attributes")){
+                @Override
+                public void setFocused(boolean pFocused) {}
+            };
             e.addListener(button);
         }
     }

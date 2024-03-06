@@ -90,7 +90,10 @@ public class AttributesGui implements Renderable, GuiEventListener {
         this.topPos = parent.getGuiTop();
         this.toggleBtn = new ImageButton(parent.getGuiLeft() + 63, parent.getGuiTop() + 10, 10, 10, WIDTH, 0, 10, TEXTURES, 256, 256, btn -> {
             this.toggleVisibility();
-        }, Component.translatable("attributeslib.gui.show_attributes"));
+        }, Component.translatable("attributeslib.gui.show_attributes")){
+            @Override
+            public void setFocused(boolean pFocused) {}
+        };
         if (this.parent.children().size() > 1) {
             GuiEventListener btn = this.parent.children().get(0);
             this.recipeBookButton = btn instanceof ImageButton imgBtn ? imgBtn : null;
