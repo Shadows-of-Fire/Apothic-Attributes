@@ -60,15 +60,25 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class AttributesLibClient {
 
     @SubscribeEvent
     public void updateClientFlyStateOnRespawn(ClientPlayerNetworkEvent.Clone e) {
         // Teleporting to another dimension constitutes a respawn - the other checks we have ensure the mayFly state returns, but not the flying state.
-        // For this one we have to ensure that the state is marked to be restored before MultiPlayerGameMode#adjustPlayer is called in ClientPacketListener#handleRespawn.
+        // For this one we have to ensure that the state is marked to be restored before MultiPlayerGameMode#adjustPlayer is called in
+        // ClientPacketListener#handleRespawn.
         if (e.getOldPlayer().getAbilities().flying) {
             ((IFlying) e.getNewPlayer()).markFlying();
+        }
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent e) {
+        if (ModList.get().isLoaded("curios")) {
+            MinecraftForge.EVENT_BUS.register(new CuriosClientCompat());
         }
     }
 
@@ -113,7 +123,8 @@ public class AttributesLibClient {
             e.addListener(atrComp);
             e.addListener(atrComp.toggleBtn);
             e.addListener(atrComp.hideUnchangedBtn);
-            if (AttributesGui.wasOpen) atrComp.toggleVisibility();
+            if (AttributesGui.wasOpen || AttributesGui.swappedFromCurios) atrComp.toggleVisibility();
+            AttributesGui.swappedFromCurios = false;
         }
     }
 
