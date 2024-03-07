@@ -1,3 +1,15 @@
+## 1.3.0
+* Added a config file.
+  * Added an option to disable the Attributes GUI.
+  * Added an option to disable potion item tooltips.
+  * Added an option to hide specific attributes from the GUI.
+* Fixed a bug causing sweep attacks to not trigger if auxiliary damage (fire/cold/%hp) killed the target.
+* Fixed the dodge sound not being registered.
+* Fixed an issue where the GUI button could become stuck in the focused state.
+* BookerCatch: Made the Attributes GUI accessible from the Curios menu.
+* mc-kaishixiaxue: Updated Chinese translation.
+* t0piy: Updated Brazilian translation.
+
 ## 1.2.1
 * Fixed the flying state being reset when changing dimensions.
 
