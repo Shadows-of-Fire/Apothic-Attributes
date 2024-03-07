@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 
+import dev.shadowsoffire.attributeslib.ALConfig;
 import dev.shadowsoffire.attributeslib.AttributesLib;
 import dev.shadowsoffire.attributeslib.api.ALObjects;
 import dev.shadowsoffire.attributeslib.api.AttributeHelper;
@@ -54,6 +55,7 @@ import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -73,6 +75,11 @@ public class AttributesLibClient {
         if (e.getOldPlayer().getAbilities().flying) {
             ((IFlying) e.getNewPlayer()).markFlying();
         }
+    }
+
+    @SubscribeEvent
+    public static void clientReload(RegisterClientReloadListenersEvent e) {
+        e.registerReloadListener(ALConfig.makeReloader());
     }
 
     @SubscribeEvent
@@ -118,7 +125,7 @@ public class AttributesLibClient {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void addAttribComponent(ScreenEvent.Init.Post e) {
-        if (e.getScreen() instanceof InventoryScreen scn) {
+        if (ALConfig.enableAttributesGui && e.getScreen() instanceof InventoryScreen scn) {
             var atrComp = new AttributesGui(scn);
             e.addListener(atrComp);
             e.addListener(atrComp.toggleBtn);
@@ -173,6 +180,8 @@ public class AttributesLibClient {
 
     @SubscribeEvent
     public void potionTooltips(ItemTooltipEvent e) {
+        if (!ALConfig.enablePotionTooltips) return;
+
         ItemStack stack = e.getItemStack();
         List<Component> tooltips = e.getToolTip();
 

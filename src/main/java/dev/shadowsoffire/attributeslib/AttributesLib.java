@@ -70,6 +70,7 @@ public class AttributesLib {
 
         MessageHelper.registerMessage(CHANNEL, 0, new CritParticleMessage.Provider());
         ALObjects.bootstrap();
+        ALConfig.load();
     }
 
     @SubscribeEvent
