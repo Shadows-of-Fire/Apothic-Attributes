@@ -2,6 +2,7 @@ package dev.shadowsoffire.attributeslib.mixin.client;
 
 import java.util.Iterator;
 
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,10 +41,12 @@ public class ClientPacketListenerMixin {
      * This is required due to how attributes are synced, since all modifiers are cleared and reapplied instead of only adding/removing modifiers.
      */
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;addTransientModifier(Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V", shift = At.Shift.BY, by = 5), method = "handleUpdateAttributes(Lnet/minecraft/network/protocol/game/ClientboundUpdateAttributesPacket;)V", require = 1, locals = LocalCapture.CAPTURE_FAILHARD)
-    public void apoth_postAttrChangedEvent(ClientboundUpdateAttributesPacket packet, CallbackInfo ci, Entity entity, AttributeMap map, Iterator<AttributeSnapshot> it, AttributeSnapshot snapshot, AttributeInstance inst) {
-        double newValue = inst.getValue();
-        if (newValue != apoth_lastValue) {
-            MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent((LivingEntity) entity, inst, apoth_lastValue, newValue));
+    public void apoth_postAttrChangedEvent(ClientboundUpdateAttributesPacket packet, CallbackInfo ci, Entity entity, AttributeMap map, Iterator<AttributeSnapshot> it, AttributeSnapshot snapshot, @Nullable AttributeInstance inst) {
+        if (inst != null) { // Due to the loop semantics, the injection point is also the point where the nullcheck will jump to, so we can receive null.
+            double newValue = inst.getValue();
+            if (newValue != apoth_lastValue) {
+                MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent((LivingEntity) entity, inst, apoth_lastValue, newValue));
+            }
         }
     }
 }
