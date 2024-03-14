@@ -1,3 +1,6 @@
+## 1.3.1
+* Added a null check to the code that fires the attribute changed event.
+
 ## 1.3.0
 * Added a config file.
   * Added an option to disable the Attributes GUI.
