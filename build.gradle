@@ -107,6 +107,10 @@ dependencies {
     if(project.hasProperty('twilightFileId'))       implementation fg.deobf("curse.maven:the-twilight-forest-227639:${twilightFileId}")
     if(project.hasProperty('gatewaysVersion'))      implementation fg.deobf("dev.shadowsoffire:GatewaysToEternity:${mcVersion}-${gatewaysVersion}")
     if(project.hasProperty('attributeslibVersion')) implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${mcVersion}-${attributeslibVersion}")
+    
+    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:0.3.5")) {
+        jarJar.ranged(it, "[0.3.5,)")
+    }
 }
 
 mixin {
