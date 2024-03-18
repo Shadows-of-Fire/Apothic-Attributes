@@ -1,5 +1,6 @@
 package dev.shadowsoffire.attributeslib.api;
 
+import dev.shadowsoffire.attributeslib.ALConfig;
 import dev.shadowsoffire.attributeslib.api.ALObjects.Attributes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +47,7 @@ public class ALCombatRules {
      * @see #getDamageAfterProtection(LivingEntity, DamageSource, float, float)
      */
     public static float getProtDamageReduction(float protPoints) {
-        return 1 - Math.min(0.025F * protPoints, 0.85F);
+        return ALConfig.getProtDamageReduction(protPoints);
     }
 
     /**
@@ -95,8 +96,7 @@ public class ALCombatRules {
      * @return The A value, for use in {@link #getArmorDamageReduction(float, float)}
      */
     public static float getAValue(float damage) {
-        if (damage < 20) return 10;
-        return 10 + (damage - 20) / 2;
+        return ALConfig.getAValue(damage);
     }
 
     /**
@@ -113,7 +113,6 @@ public class ALCombatRules {
      * @see #getDamageAfterArmor(LivingEntity, DamageSource, float, float, float)
      */
     public static float getArmorDamageReduction(float damage, float armor) {
-        float a = getAValue(damage);
-        return a / (a + armor);
+        return ALConfig.getArmorDamageReduction(damage, armor);
     }
 }
