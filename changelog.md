@@ -1,3 +1,8 @@
+## 2.0.0
+* Updated to 1.20.4 (NeoForge).
+* Pulled all Potions that were previously in the Potion Module of Apotheosis.
+  * The recipes are also present, but can now be edited via datapack without external tools.
+
 ## 1.3.1
 * Added a null check to the code that fires the attribute changed event.
 
