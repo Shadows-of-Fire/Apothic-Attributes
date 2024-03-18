@@ -1,3 +1,7 @@
+## 1.3.3
+* Made configurable formulas fallback to java code if they are unchanged.
+  * Execution of configured formulas is considerably slower than real code, which might become an issue for people not using the feature.
+
 ## 1.3.2
 * Made the armor and protection damage reduction formulas configurable.
   * Relevant details are in the `attributeslib.cfg` file.
