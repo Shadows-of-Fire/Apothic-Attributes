@@ -40,7 +40,8 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.contents.PlainTextContents.LiteralContents;
+import net.minecraft.world.effect.AttributeModifierTemplate;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -54,18 +55,20 @@ import net.minecraft.world.item.ItemStack.TooltipPart;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class AttributesLibClient {
+
+    private static final UUID FAKE_MERGED_UUID = UUID.fromString("a6b0ac71-e435-416e-a991-7623eaa129a4");
 
     @SubscribeEvent
     public void updateClientFlyStateOnRespawn(ClientPlayerNetworkEvent.Clone e) {
@@ -75,23 +78,6 @@ public class AttributesLibClient {
         if (e.getOldPlayer().getAbilities().flying) {
             ((IFlying) e.getNewPlayer()).markFlying();
         }
-    }
-
-    @SubscribeEvent
-    public static void clientReload(RegisterClientReloadListenersEvent e) {
-        e.registerReloadListener(ALConfig.makeReloader());
-    }
-
-    @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent e) {
-        if (ModList.get().isLoaded("curios")) {
-            MinecraftForge.EVENT_BUS.register(new CuriosClientCompat());
-        }
-    }
-
-    @SubscribeEvent
-    public static void particleFactories(RegisterParticleProvidersEvent e) {
-        e.registerSprite(ALObjects.Particles.APOTH_CRIT.get(), ApothCritParticle::new);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -120,7 +106,7 @@ public class AttributesLibClient {
         if (shouldShowInTooltip(flags, TooltipPart.MODIFIERS)) {
             applyModifierTooltips(e.getEntity(), stack, it::add, e.getFlags());
         }
-        MinecraftForge.EVENT_BUS.post(new AddAttributeTooltipsEvent(stack, e.getEntity(), list, it, e.getFlags()));
+        NeoForge.EVENT_BUS.post(new AddAttributeTooltipsEvent(stack, e.getEntity(), list, it, e.getFlags()));
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -161,12 +147,11 @@ public class AttributesLibClient {
         }
 
         List<Pair<Attribute, AttributeModifier>> list = Lists.newArrayList();
-        Map<Attribute, AttributeModifier> map = effect.getAttributeModifiers();
+        Map<Attribute, AttributeModifierTemplate> map = effect.getAttributeModifiers();
         if (!map.isEmpty()) {
-            for (Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
-                AttributeModifier attributemodifier = entry.getValue();
-                AttributeModifier attributemodifier1 = new AttributeModifier(attributemodifier.getName(), effect.getAttributeModifierValue(effectInst.getAmplifier(), attributemodifier), attributemodifier.getOperation());
-                list.add(new Pair<>(entry.getKey(), attributemodifier1));
+            for (Map.Entry<Attribute, AttributeModifierTemplate> entry : map.entrySet()) {
+                AttributeModifierTemplate template = entry.getValue();
+                list.add(new Pair<>(entry.getKey(), template.create(effectInst.getAmplifier())));
             }
         }
 
@@ -243,7 +228,7 @@ public class AttributesLibClient {
         });
 
         Set<UUID> skips = new HashSet<>();
-        MinecraftForge.EVENT_BUS.post(new GatherSkippedAttributeTooltipsEvent(stack, player, skips, flag));
+        NeoForge.EVENT_BUS.post(new GatherSkippedAttributeTooltipsEvent(stack, player, skips, flag));
 
         applyTextFor(player, stack, tooltip, dualHand, "both_hands", skips, flag);
         applyTextFor(player, stack, tooltip, mainhand, EquipmentSlot.MAINHAND.getName(), skips, flag);
@@ -264,9 +249,26 @@ public class AttributesLibClient {
         return AttributeHelper.list();
     }
 
-    private static record BaseModifier(AttributeModifier base, List<AttributeModifier> children) {}
+    public static class ModBusSub {
+        @SubscribeEvent
+        public static void clientReload(RegisterClientReloadListenersEvent e) {
+            e.registerReloadListener(ALConfig.makeReloader());
+        }
 
-    private static final UUID FAKE_MERGED_UUID = UUID.fromString("a6b0ac71-e435-416e-a991-7623eaa129a4");
+        @SubscribeEvent
+        public static void clientSetup(FMLClientSetupEvent e) {
+            if (ModList.get().isLoaded("curios")) {
+                NeoForge.EVENT_BUS.register(new CuriosClientCompat());
+            }
+        }
+
+        @SubscribeEvent
+        public static void particleFactories(RegisterParticleProvidersEvent e) {
+            e.registerSprite(ALObjects.Particles.APOTH_CRIT.get(), ApothCritParticle::new);
+        }
+    }
+
+    private static record BaseModifier(AttributeModifier base, List<AttributeModifier> children) {}
 
     private static void applyTextFor(@Nullable Player player, ItemStack stack, Consumer<Component> tooltip, Multimap<Attribute, AttributeModifier> modifierMap, String group, Set<UUID> skips, TooltipFlag flag) {
         if (!modifierMap.isEmpty()) {
@@ -342,7 +344,7 @@ public class AttributesLibClient {
                         if (merged[i]) {
                             TextColor color = sums[i] < 0 ? TextColor.fromRgb(0xF93131) : TextColor.fromRgb(0x7A7AF9);
                             if (sums[i] < 0) sums[i] *= -1;
-                            var fakeModif = new AttributeModifier(FAKE_MERGED_UUID, () -> AttributesLib.MODID + ":merged", sums[i], op);
+                            var fakeModif = new AttributeModifier(FAKE_MERGED_UUID, AttributesLib.MODID + ":merged", sums[i], op);
                             MutableComponent comp = IFormattableAttribute.toComponent(attr, fakeModif, flag);
                             tooltip.accept(comp.withStyle(comp.getStyle().withColor(color)));
                             if (merged[i] && Screen.hasShiftDown()) {
@@ -350,7 +352,7 @@ public class AttributesLibClient {
                             }
                         }
                         else {
-                            var fakeModif = new AttributeModifier(FAKE_MERGED_UUID, () -> AttributesLib.MODID + ":merged", sums[i], op);
+                            var fakeModif = new AttributeModifier(FAKE_MERGED_UUID, AttributesLib.MODID + ":merged", sums[i], op);
                             tooltip.accept(IFormattableAttribute.toComponent(attr, fakeModif, flag));
                         }
                     }

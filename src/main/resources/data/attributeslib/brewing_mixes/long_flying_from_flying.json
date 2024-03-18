@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:flying",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "to": "attributeslib:long_flying",
+    "mix_type": "potion"
+}

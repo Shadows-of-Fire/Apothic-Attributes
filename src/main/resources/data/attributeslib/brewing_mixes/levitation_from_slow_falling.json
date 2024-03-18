@@ -1,0 +1,8 @@
+{
+    "from": "minecraft:slow_falling",
+    "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+    },
+    "to": "attributeslib:levitation",
+    "mix_type": "potion"
+}

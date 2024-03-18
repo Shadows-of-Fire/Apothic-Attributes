@@ -23,9 +23,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
@@ -49,11 +52,11 @@ import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class AttributesGui implements Renderable, GuiEventListener {
 
     public static final ResourceLocation TEXTURES = AttributesLib.loc("textures/gui/attributes_gui.png");
+    public static final WidgetSprites SWORD_BUTTON_SPRITES = new WidgetSprites(AttributesLib.loc("sword"), AttributesLib.loc("sword_highlighted"));
     public static final int ENTRY_HEIGHT = 22;
     public static final int MAX_ENTRIES = 6;
     public static final int WIDTH = 131;
@@ -89,7 +92,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
         this.refreshData();
         this.leftPos = parent.getGuiLeft() - WIDTH;
         this.topPos = parent.getGuiTop();
-        this.toggleBtn = new ImageButton(parent.getGuiLeft() + 63, parent.getGuiTop() + 10, 10, 10, WIDTH, 0, 10, TEXTURES, 256, 256, btn -> {
+        this.toggleBtn = new ImageButton(parent.getGuiLeft() + 63, parent.getGuiTop() + 10, 10, 10, SWORD_BUTTON_SPRITES, btn -> {
             this.toggleVisibility();
         }, Component.translatable("attributeslib.gui.show_attributes")){
             @Override
@@ -106,7 +109,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
     @SuppressWarnings("deprecation")
     public void refreshData() {
         this.data.clear();
-        ForgeRegistries.ATTRIBUTES.getValues().stream()
+        BuiltInRegistries.ATTRIBUTE.stream()
             .map(this.player::getAttribute)
             .filter(Objects::nonNull)
             .filter(ai -> !ALConfig.hiddenAttributes.contains(BuiltInRegistries.ATTRIBUTE.getKey(ai.getAttribute())))
@@ -395,11 +398,11 @@ public class AttributesGui implements Renderable, GuiEventListener {
     }
 
     @Override
-    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pScrollX, double pScrollY) {
         if (!this.open) return false;
         if (this.isScrollBarActive()) {
             int i = this.getOffScreenRows();
-            scrollOffset = (float) (scrollOffset - pDelta / i);
+            scrollOffset = (float) (scrollOffset - pScrollY / i);
             scrollOffset = Mth.clamp(scrollOffset, 0.0F, 1.0F);
             this.startIndex = (int) (scrollOffset * i + 0.5D);
             return true;
@@ -443,10 +446,10 @@ public class AttributesGui implements Renderable, GuiEventListener {
         else return f.format(n / 1000000000D) + "B";
     }
 
-    public class HideUnchangedButton extends ImageButton {
+    public class HideUnchangedButton extends AbstractButton {
 
         public HideUnchangedButton(int pX, int pY) {
-            super(pX, pY, 10, 10, 131, 20, 10, TEXTURES, 256, 256, null, Component.literal("Hide Unchanged Attributes"));
+            super(pX, pY, 10, 10, Component.literal("Hide Unchanged Attributes"));
             this.visible = false;
         }
 
@@ -469,6 +472,11 @@ public class AttributesGui implements Renderable, GuiEventListener {
             pose.translate(0, 0, 100);
             gfx.blit(TEXTURES, this.getX(), this.getY(), u, v + vOffset, 10, 10, 256, 256);
             pose.popPose();
+        }
+
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+            this.defaultButtonNarrationText(pNarrationElementOutput);
         }
 
     }

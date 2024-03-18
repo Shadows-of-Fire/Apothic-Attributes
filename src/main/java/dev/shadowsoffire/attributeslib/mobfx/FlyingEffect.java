@@ -4,7 +4,7 @@ import dev.shadowsoffire.attributeslib.api.ALObjects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 
 public class FlyingEffect extends MobEffect {
@@ -15,8 +15,8 @@ public class FlyingEffect extends MobEffect {
     }
 
     @Override
-    public double getAttributeModifierValue(int pAmplifier, AttributeModifier pModifier) {
-        return 1;
+    public void addAttributeModifiers(AttributeMap pAttributeMap, int pAmplifier) {
+        super.addAttributeModifiers(pAttributeMap, 0);
     }
 
 }

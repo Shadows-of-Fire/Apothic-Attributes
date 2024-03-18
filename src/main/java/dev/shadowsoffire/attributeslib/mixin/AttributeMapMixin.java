@@ -1,22 +1,23 @@
 package dev.shadowsoffire.attributeslib.mixin;
 
-import com.mojang.datafixers.util.Pair;
-import dev.shadowsoffire.attributeslib.util.IAttributeManager;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.mojang.datafixers.util.Pair;
+
 import dev.shadowsoffire.attributeslib.api.AttributeChangedValueEvent;
+import dev.shadowsoffire.attributeslib.util.IAttributeManager;
 import dev.shadowsoffire.attributeslib.util.IEntityOwned;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraftforge.common.MinecraftForge;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * For the {@link AttributeChangedValueEvent} to have the necessary entity context, the attribute map must be aware of the owning entity.<br>
@@ -24,7 +25,7 @@ import java.util.Map;
  * <p>
  * The client event is posted from the client packet listener as this method is unreliable on the client due to how attribute sync is done.
  */
-@Mixin(AttributeMap.class)
+@Mixin(value = AttributeMap.class, remap = false)
 public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
 
     protected LivingEntity owner;
@@ -59,7 +60,7 @@ public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
         else {
             // Otherwise, cycle through each instance and get the new values, post the results
             if (!this.getOwner().level().isClientSide) {
-                this.updatingAttributes.forEach((attr, pair) -> MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent(this.getOwner(), pair.getFirst(), pair.getSecond(), pair.getFirst().getValue())));
+                this.updatingAttributes.forEach((attr, pair) -> NeoForge.EVENT_BUS.post(new AttributeChangedValueEvent(this.getOwner(), pair.getFirst(), pair.getSecond(), pair.getFirst().getValue())));
             }
 
             // Extra clear in case of weird behavior
@@ -82,7 +83,7 @@ public class AttributeMapMixin implements IEntityOwned, IAttributeManager {
             double oldValue = ((AttributeInstanceAccessor) inst).getCachedValue();
             double newValue = inst.getValue(); // Calling getValue will compute the value once marked dirty.
             if (oldValue != newValue) {
-                MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent(getOwner(), inst, oldValue, newValue));
+                NeoForge.EVENT_BUS.post(new AttributeChangedValueEvent(getOwner(), inst, oldValue, newValue));
             }
         }
         else if (this.areAttributesUpdating()) {

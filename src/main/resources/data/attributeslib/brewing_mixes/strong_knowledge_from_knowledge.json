@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:knowledge",
+    "ingredient": {
+        "item": "minecraft:experience_bottle"
+    },
+    "to": "attributeslib:strong_knowledge",
+    "mix_type": "potion"
+}

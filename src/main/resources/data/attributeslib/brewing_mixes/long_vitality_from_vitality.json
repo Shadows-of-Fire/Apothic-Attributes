@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:vitality",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "to": "attributeslib:long_vitality",
+    "mix_type": "potion"
+}

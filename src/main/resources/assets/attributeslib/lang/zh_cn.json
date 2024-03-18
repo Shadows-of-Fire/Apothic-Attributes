@@ -39,12 +39,12 @@
     "attribute.name.generic.max_health.desc": "你拥有的生命值点数。",
     "attribute.name.generic.movement_speed.desc": "行走时的移动速度。",
 
-    "forge.entity_reach.desc": "你能与实体互动的距离，以格为单位。",
-    "forge.entity_gravity.desc": "落向地面的加速度，以格/平方秒为单位。",
-    "forge.name_tag_distance.desc": "其他玩家必须距离多远才能看到你的名字。",
-    "forge.block_reach.desc": "你能与方块互动的距离，以格为单位。",
-    "forge.step_height.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
-    "forge.swim_speed.desc": "相对于正常情况，你的游泳速度。",
+    "neoforge.entity_reach.desc": "你能与实体互动的距离，以格为单位。",
+    "neoforge.entity_gravity.desc": "落向地面的加速度，以格/平方秒为单位。",
+    "neoforge.name_tag_distance.desc": "其他玩家必须距离多远才能看到你的名字。",
+    "neoforge.block_reach.desc": "你能与方块互动的距离，以格为单位。",
+    "neoforge.step_height.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
+    "neoforge.swim_speed.desc": "相对于正常情况，你的游泳速度。",
 
     "attributeslib:draw_speed": "蓄力速度",
     "attributeslib:draw_speed.desc": "你蓄力远程武器（例如弓、弩或三叉戟）的速度。",
@@ -112,20 +112,13 @@
     "comment_id": "/MobFx - 为了支持JEED，描述是重复的。",
 
     "effect.attributeslib.knowledge": "古代知识",
-    "effect.attributeslib.knowledge.desc": "增加杀死生物和挖掘方块获得的经验。",
-    "effect.attributeslib.knowledge.description": "增加杀死生物和挖掘方块获得的经验。",
+    "effect.attributeslib.vitality": "活力迸发",
+    "effect.attributeslib.grievous": "重伤",
+    "effect.attributeslib.flying": "飞行",
 
     "effect.attributeslib.sundering": "破甲",
     "effect.attributeslib.sundering.desc": "增加受到的伤害。",
     "effect.attributeslib.sundering.description": "增加受到的伤害。",
-
-    "effect.attributeslib.vitality": "活力迸发",
-    "effect.attributeslib.vitality.desc": "增加受到的治疗效果。",
-    "effect.attributeslib.vitality.description": "增加受到的治疗效果。",
-
-    "effect.attributeslib.grievous": "重伤",
-    "effect.attributeslib.grievous.desc": "减少受到的治疗效果。",
-    "effect.attributeslib.grievous.description": "减少受到的治疗效果。",
 
     "effect.attributeslib.bleeding": "流血",
     "effect.attributeslib.bleeding.desc": "每两秒造成一次伤害。",
@@ -134,10 +127,6 @@
     "effect.attributeslib.detonation": "火焰引爆",
     "effect.attributeslib.detonation.desc": "该效果结束后，根据剩余着火时间造成伤害。",
     "effect.attributeslib.detonation.description": "该效果结束后，根据剩余着火时间造成伤害。",
-
-    "effect.attributeslib.flying": "飞行",
-    "effect.attributeslib.flying.desc": "给予创造模式飞行能力。",
-    "effect.attributeslib.flying.description": "给予创造模式飞行能力。",
 
     "effect.minecraft.night_vision.desc": "允许你在黑暗中也能看清东西。",
     "effect.minecraft.invisibility.desc": "使你隐身，不包括装备。",
@@ -169,5 +158,55 @@
 
     "death.attack.attributeslib:cold_damage": "%1$s被冰冻至死",
     "death.attack.attributeslib:cold_damage.item": "%1$s被%2$s用%3$s冰冻至死",
-    "death.attack.attributeslib:cold_damage.player": "%1$s在与%2$s战斗时被冰冻至死"
+    "death.attack.attributeslib:cold_damage.player": "%1$s在与%2$s战斗时被冰冻至死",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "抗性药水",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "喷溅型抗性药水",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "滞留型抗性药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "抗性之箭",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "伤害吸收药水",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "喷溅型伤害吸收药水",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "滞留型伤害吸收药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "伤害吸收之箭",
+
+    "item.minecraft.potion.effect.minecraft.haste": "急迫药水",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "喷溅型急迫药水",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "滞留型急迫药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "急迫之箭",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "挖掘疲劳药水",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "喷溅型挖掘疲劳药水",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "滞留型挖掘疲劳药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "挖掘疲劳之箭",
+
+    "item.minecraft.potion.effect.minecraft.wither": "凋零药水",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "喷溅型凋零药水",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "滞留型凋零药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "凋零之箭",
+
+    "item.minecraft.potion.effect.attributeslib.sundering": "破甲药水",
+    "item.minecraft.splash_potion.effect.attributeslib.sundering": "喷溅型破甲药水",
+    "item.minecraft.lingering_potion.effect.attributeslib.sundering": "滞留型破甲药水",
+    "item.minecraft.tipped_arrow.effect.attributeslib.sundering": "破甲之箭",
+
+    "item.minecraft.potion.effect.attributeslib.knowledge": "古代知识药水",
+    "item.minecraft.splash_potion.effect.attributeslib.knowledge": "喷溅型古代知识药水",
+    "item.minecraft.lingering_potion.effect.attributeslib.knowledge": "滞留型古代知识药水",
+    "item.minecraft.tipped_arrow.effect.attributeslib.knowledge": "古代知识之箭",
+
+    "item.minecraft.potion.effect.attributeslib.vitality": "治疗提升药水",
+    "item.minecraft.splash_potion.effect.attributeslib.vitality": "喷溅型治疗提升药水",
+    "item.minecraft.lingering_potion.effect.attributeslib.vitality": "滞留型治疗提升药水",
+    "item.minecraft.tipped_arrow.effect.attributeslib.vitality": "治疗提升之箭",
+
+    "item.minecraft.potion.effect.attributeslib.grievous": "治疗减少药水",
+    "item.minecraft.splash_potion.effect.attributeslib.grievous": "喷溅型治疗减少药水",
+    "item.minecraft.lingering_potion.effect.attributeslib.grievous": "滞留型治疗减少药水",
+    "item.minecraft.tipped_arrow.effect.attributeslib.grievous": "治疗减少之箭",
+
+    "item.minecraft.potion.effect.attributeslib.flying": "飞行药水",
+    "item.minecraft.splash_potion.effect.attributeslib.flying": "喷溅型飞行药水",
+    "item.minecraft.lingering_potion.effect.attributeslib.flying": "滞留型飞行药水",
+    "item.minecraft.tipped_arrow.effect.attributeslib.flying": "飞行之箭"
 }

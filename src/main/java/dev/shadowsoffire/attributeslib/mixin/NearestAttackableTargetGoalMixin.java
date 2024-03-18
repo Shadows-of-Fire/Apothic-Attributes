@@ -16,7 +16,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 
-@Mixin(NearestAttackableTargetGoal.class)
+@Mixin(value = NearestAttackableTargetGoal.class, remap = false)
 public abstract class NearestAttackableTargetGoalMixin extends TargetGoal {
 
     public NearestAttackableTargetGoalMixin(Mob pMob, boolean pMustSee) {

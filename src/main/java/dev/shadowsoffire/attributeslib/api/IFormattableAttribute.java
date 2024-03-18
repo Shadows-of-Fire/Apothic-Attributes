@@ -18,7 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.common.ForgeMod;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 /**
  * A Formattable Attribute is one which elects to have control over its tooltip representation.<br>
@@ -42,7 +42,7 @@ public interface IFormattableAttribute {
         // For Knockback Resistance, vanilla hardcodes a multiplier of 10 for addition values to hide numbers lower than 1,
         // but percent-based is the real desire.
         // For Swim Speed, the implementation is percent-based, but no additional tricks are performed.
-        if (this == Attributes.KNOCKBACK_RESISTANCE || this == ForgeMod.SWIM_SPEED.get()) {
+        if (this == Attributes.KNOCKBACK_RESISTANCE || this == NeoForgeMod.SWIM_SPEED.value()) {
             return Component.translatable("attributeslib.value.percent", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value * 100));
         }
         // Speed has no metric, so displaying everything as percent works better for the user.
@@ -118,7 +118,7 @@ public interface IFormattableAttribute {
     default UUID getBaseUUID() {
         if (this == Attributes.ATTACK_DAMAGE) return AttributeHelper.BASE_ATTACK_DAMAGE;
         else if (this == Attributes.ATTACK_SPEED) return AttributeHelper.BASE_ATTACK_SPEED;
-        else if (this == ForgeMod.ENTITY_REACH.get()) return AttributeHelper.BASE_ENTITY_REACH;
+        else if (this == NeoForgeMod.ENTITY_REACH.value()) return AttributeHelper.BASE_ENTITY_REACH;
         return null;
     }
 

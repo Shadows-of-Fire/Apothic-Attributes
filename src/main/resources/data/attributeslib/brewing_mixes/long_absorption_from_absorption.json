@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:absorption",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "to": "attributeslib:long_absorption",
+    "mix_type": "potion"
+}

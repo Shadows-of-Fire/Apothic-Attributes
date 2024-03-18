@@ -6,13 +6,13 @@ import org.spongepowered.asm.mixin.Overwrite;
 import dev.shadowsoffire.attributeslib.api.ALObjects.Attributes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.extensions.IForgeItem;
+import net.neoforged.neoforge.common.extensions.IItemExtension;
 
-@Mixin(IForgeItem.class)
-public interface IForgeItemMixin {
+@Mixin(value = IItemExtension.class, remap = false)
+public interface IItemExtensionMixin {
 
     /**
-     * This mixin overwrites {@link IForgeItem#canElytraFly(ItemStack, LivingEntity)} to read the value of {@link Attributes#ELYTRA_FLIGHT}.
+     * This mixin overwrites {@link IItemExtension#canElytraFly(ItemStack, LivingEntity)} to read the value of {@link Attributes#ELYTRA_FLIGHT}.
      *
      * @author Shadows
      * @reason Enables usage of {@link Attributes#ELYTRA_FLIGHT}.
@@ -24,7 +24,7 @@ public interface IForgeItemMixin {
     }
 
     /**
-     * This mixin overwrites {@link IForgeItem#elytraFlightTick(ItemStack, LivingEntity, int)} to read the value of {@link Attributes#ELYTRA_FLIGHT}.
+     * This mixin overwrites {@link IItemExtension#elytraFlightTick(ItemStack, LivingEntity, int)} to read the value of {@link Attributes#ELYTRA_FLIGHT}.
      *
      * @author Shadows
      * @reason Enables usage of {@link Attributes#ELYTRA_FLIGHT}.

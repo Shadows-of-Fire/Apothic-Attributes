@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
-@Mixin(ItemStack.class)
+@Mixin(value = ItemStack.class, remap = false)
 public class ItemStackMixin {
 
     // Injects just before ItemStack.TooltipPart.MODIFIERS is written to the tooltip to remember where to rewind to.

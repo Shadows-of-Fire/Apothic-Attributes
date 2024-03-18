@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:fatigue",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "to": "attributeslib:long_fatigue",
+    "mix_type": "potion"
+}

@@ -39,12 +39,12 @@
 	"attribute.name.generic.max_health.desc": "Quantos pontos de vida você pode ter.",
 	"attribute.name.generic.movement_speed.desc": "Velocidade de movimento ao caminhar.",
 
-	"forge.entity_reach.desc": "Até onde seus ataques corpo a corpo alcançam, em blocos.",
-	"forge.entity_gravity.desc": "Aceleração em direção ao solo, em blocos/s²",
-	"forge.name_tag_distance.desc": "Quão longe outro jogador deve estar para ver seu nome.",
-	"forge.block_reach.desc": "Até onde suas interações alcançam, em blocos.",
-	"forge.step_height.desc": "Quantos blocos você pode subir sem pular.",
-	"forge.swim_speed.desc": "Quão rápido você nada, em relação ao normal.",
+	"neoforge.entity_reach.desc": "Até onde seus ataques corpo a corpo alcançam, em blocos.",
+	"neoforge.entity_gravity.desc": "Aceleração em direção ao solo, em blocos/s²",
+	"neoforge.name_tag_distance.desc": "Quão longe outro jogador deve estar para ver seu nome.",
+	"neoforge.block_reach.desc": "Até onde suas interações alcançam, em blocos.",
+	"neoforge.step_height.desc": "Quantos blocos você pode subir sem pular.",
+	"neoforge.swim_speed.desc": "Quão rápido você nada, em relação ao normal.",
 
     "attributeslib:draw_speed": "Velocidade da puxada",
 	"attributeslib:draw_speed.desc": "Quão rápido você puxa armas a distância, como arcos, bestas, ou tridentes.",
@@ -112,20 +112,13 @@
     "comment_id": "MobFx - descriptions are duplicated for JEED support.",
 
     "effect.attributeslib.knowledge": "Conhecimento das eras",
-    "effect.attributeslib.knowledge.desc": "Aumenta a experiência adquirida com abates e blocos",
-    "effect.attributeslib.knowledge.description": "Aumenta a experiência adquirida com abates e blocos.",
+    "effect.attributeslib.vitality": "Estouro de vitalidade",
+    "effect.attributeslib.grievous": "Feridas dolorosas",
+    "effect.attributeslib.flying": "Voando",
 
     "effect.attributeslib.sundering": "Ruptura",
     "effect.attributeslib.sundering.desc": "Aumenta o dano recebido",
     "effect.attributeslib.sundering.description": "Aumenta o dano recebido.",
-
-    "effect.attributeslib.vitality": "Estouro de vitalidade",
-    "effect.attributeslib.vitality.desc": "Aumenta a cura recebida",
-    "effect.attributeslib.vitality.description": "Aumenta a cura recebida.",
-
-    "effect.attributeslib.grievous": "Feridas dolorosas",
-    "effect.attributeslib.grievous.desc": "Diminui a cura recebida",
-    "effect.attributeslib.grievous.description": "Diminui a cura recebida.",
 
     "effect.attributeslib.bleeding": "Sangramento",
     "effect.attributeslib.bleeding.desc": "Inflige danos a cada dois segundos.",
@@ -134,10 +127,6 @@
 	"effect.attributeslib.detonation": "Detonação flamejante",
     "effect.attributeslib.detonation.desc": "Ao expirar, inflige dano com base nos ticks de fogo restantes.",
     "effect.attributeslib.detonation.description": "Ao expirar, inflige dano com base nos ticks de fogo restantes.",
-
-    "effect.attributeslib.flying": "Voando",
-    "effect.attributeslib.flying.desc": "Concede voo do criativo.",
-    "effect.attributeslib.flying.description": "Conceder voo do criativo.",
 
     "effect.minecraft.night_vision.desc": "Permite que você veja no escuro.",
     "effect.minecraft.invisibility.desc": "Torna você invisível, exceto os equipamentos.",
@@ -169,5 +158,55 @@
 
     "death.attack.attributeslib:cold_damage": "%1$s foi congelado até a morte",
     "death.attack.attributeslib:cold_damage.item": "%1$s foi congelado até a morte por %2$s com %3$s",
-    "death.attack.attributeslib:cold_damage.player": "%1$s foi congelado até a morte enquanto lutava com %2$s"
+    "death.attack.attributeslib:cold_damage.player": "%1$s foi congelado até a morte enquanto lutava com %2$s",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "Poção de resistência",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "Poção arremessável de resistência",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "Poção prolongada de resistência",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "Flecha de resistência",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "Poção de absorção",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "Poção arremessável de absorção",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "Poção prolongada de absorção",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "Flecha de absorção",
+
+    "item.minecraft.potion.effect.minecraft.haste": "Poção de pressa",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "Poção arremessável de pressa",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "Poção prolongada de pressa",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "Flecha de pressa",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "Poção de exaustão",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "Poção arremessável de exaustão",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "Poção prolongada de exaustão",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "Flecha de exaustão",
+
+    "item.minecraft.potion.effect.minecraft.wither": "Poção do Wither",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "Poção arremessável do Wither",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "Poção prolongada do Wither",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "Flecha do Wither",
+
+    "item.minecraft.potion.effect.attributeslib.sundering": "Poção de ruptura",
+    "item.minecraft.splash_potion.effect.attributeslib.sundering": "Poção arremessável de ruptura",
+    "item.minecraft.lingering_potion.effect.attributeslib.sundering": "Poção prolongada de ruptura",
+    "item.minecraft.tipped_arrow.effect.attributeslib.sundering": "Flecha de ruptura",
+
+    "item.minecraft.potion.effect.attributeslib.knowledge": "Poção de conhecimento das eras",
+    "item.minecraft.splash_potion.effect.attributeslib.knowledge": "Poção arremessável de conhecimento das eras",
+    "item.minecraft.lingering_potion.effect.attributeslib.knowledge": "Poção prolongada de conhecimento das eras",
+    "item.minecraft.tipped_arrow.effect.attributeslib.knowledge": "Flecha de conhecimento das eras",
+
+    "item.minecraft.potion.effect.attributeslib.vitality": "Poção de estouro de vitalidade",
+    "item.minecraft.splash_potion.effect.attributeslib.vitality": "Poção arremessável de estouro de vitalidade",
+    "item.minecraft.lingering_potion.effect.attributeslib.vitality": "Poção prolongada de estouro de vitalidade",
+    "item.minecraft.tipped_arrow.effect.attributeslib.vitality": "Flecha de estouro de vitalidade",
+
+    "item.minecraft.potion.effect.attributeslib.grievous": "Poção de redução de cura",
+    "item.minecraft.splash_potion.effect.attributeslib.grievous": "Poção arremessável de redução de cura",
+    "item.minecraft.lingering_potion.effect.attributeslib.grievous": "Poção prolongada de redução de cura",
+    "item.minecraft.tipped_arrow.effect.attributeslib.grievous": "Flecha de redução de cura",
+
+    "item.minecraft.potion.effect.attributeslib.flying": "Poçäo de voo",
+    "item.minecraft.splash_potion.effect.attributeslib.flying": "Poçäo arremessável de voo",
+    "item.minecraft.lingering_potion.effect.attributeslib.flying": "Poçäo prolongada de voo",
+    "item.minecraft.tipped_arrow.effect.attributeslib.flying": "Flecha de voo"
 }

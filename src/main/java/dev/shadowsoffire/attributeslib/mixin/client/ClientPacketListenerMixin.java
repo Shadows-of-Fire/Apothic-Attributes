@@ -17,9 +17,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 
-@Mixin(ClientPacketListener.class)
+@Mixin(value = ClientPacketListener.class, remap = false)
 public class ClientPacketListenerMixin {
 
     /**
@@ -45,7 +45,7 @@ public class ClientPacketListenerMixin {
         if (inst != null) { // Due to the loop semantics, the injection point is also the point where the nullcheck will jump to, so we can receive null.
             double newValue = inst.getValue();
             if (newValue != apoth_lastValue) {
-                MinecraftForge.EVENT_BUS.post(new AttributeChangedValueEvent((LivingEntity) entity, inst, apoth_lastValue, newValue));
+                NeoForge.EVENT_BUS.post(new AttributeChangedValueEvent((LivingEntity) entity, inst, apoth_lastValue, newValue));
             }
         }
     }

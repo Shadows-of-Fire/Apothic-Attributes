@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:resistance",
+    "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+    },
+    "to": "attributeslib:sundering",
+    "mix_type": "potion"
+}

@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:resistance",
+    "ingredient": {
+        "item": "minecraft:glowstone_dust"
+    },
+    "to": "attributeslib:strong_resistance",
+    "mix_type": "potion"
+}

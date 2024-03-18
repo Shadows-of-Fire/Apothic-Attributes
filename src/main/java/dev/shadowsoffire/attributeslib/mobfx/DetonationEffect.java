@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.phys.AABB;
 
 public class DetonationEffect extends MobEffect {
@@ -17,9 +16,10 @@ public class DetonationEffect extends MobEffect {
         super(MobEffectCategory.HARMFUL, 0xFFD800);
     }
 
+    // TODO: Figure out how to trigger this on removal instead of on last tick, since it should always go off.
+    
     @Override
-    public void removeAttributeModifiers(LivingEntity entity, AttributeMap map, int amp) {
-        super.removeAttributeModifiers(entity, map, amp);
+    public void applyEffectTick(LivingEntity entity, int amp) {
         int ticks = entity.getRemainingFireTicks();
         if (ticks > 0) {
             entity.setRemainingFireTicks(0);
@@ -29,6 +29,11 @@ public class DetonationEffect extends MobEffect {
             level.sendParticles(ParticleTypes.FLAME, entity.getX(), entity.getY(), entity.getZ(), 100, bb.getXsize(), bb.getYsize(), bb.getZsize(), 0.25);
             level.playSound(null, entity, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.HOSTILE, 1, 1.2F);
         }
+    }
+
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int duration, int amp) {
+        return duration == 1;
     }
 
 }

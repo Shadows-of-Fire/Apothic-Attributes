@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 
-@Mixin(AbstractContainerScreen.class)
+@Mixin(value = AbstractContainerScreen.class, remap = false)
 public class AbstractContainerScreenMixin extends Screen {
 
     protected AbstractContainerScreenMixin(Component pTitle) {

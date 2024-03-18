@@ -6,15 +6,13 @@ import java.util.List;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Event;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.Event;
 
 /**
  * This event is called when a {@link EffectRenderingInventoryScreen} draws the tooltip lines for a hovered {@link MobEffectInstance}.<br>
  * It can be used to modify the tooltip.
  * <p>
- * This event is fired on {@linkplain MinecraftForge#EVENT_BUS the main event bus}.<br>
  * This event is only fired on the {@linkplain Dist#CLIENT physical client}.
  */
 public class GatherEffectScreenTooltipsEvent extends Event {

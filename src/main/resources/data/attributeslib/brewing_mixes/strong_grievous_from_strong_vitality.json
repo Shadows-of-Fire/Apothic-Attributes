@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:strong_vitality",
+    "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+    },
+    "to": "attributeslib:strong_grievous",
+    "mix_type": "potion"
+}

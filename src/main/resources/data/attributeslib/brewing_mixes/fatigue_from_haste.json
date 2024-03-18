@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:haste",
+    "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+    },
+    "to": "attributeslib:fatigue",
+    "mix_type": "potion"
+}

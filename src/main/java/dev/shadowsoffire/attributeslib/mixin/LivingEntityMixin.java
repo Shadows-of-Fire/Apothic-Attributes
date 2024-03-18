@@ -2,7 +2,6 @@ package dev.shadowsoffire.attributeslib.mixin;
 
 import javax.annotation.Nullable;
 
-import dev.shadowsoffire.attributeslib.util.IAttributeManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import dev.shadowsoffire.attributeslib.api.ALCombatRules;
 import dev.shadowsoffire.attributeslib.api.ALObjects;
 import dev.shadowsoffire.attributeslib.api.AttributeChangedValueEvent;
+import dev.shadowsoffire.attributeslib.util.IAttributeManager;
 import dev.shadowsoffire.attributeslib.util.IEntityOwned;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,7 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.level.Level;
 
-@Mixin(LivingEntity.class)
+@Mixin(value = LivingEntity.class, remap = false)
 public abstract class LivingEntityMixin extends Entity {
 
     @Shadow
@@ -98,7 +98,7 @@ public abstract class LivingEntityMixin extends Entity {
      * @author ChampionAsh5357
      * @reason Lock attribute updates for event until after new modifiers are added
      */
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffect;removeAttributeModifiers(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/AttributeMap;I)V"), method = "onEffectUpdated", require = 1)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffect;removeAttributeModifiers(Lnet/minecraft/world/entity/ai/attributes/AttributeMap;)V"), method = "onEffectUpdated", require = 1)
     public void apoth_onEffectUpdateRemoveAttribute(MobEffectInstance pEffectInstance, boolean pForced, Entity pEntity, CallbackInfo ci) {
         ((IAttributeManager) attributes).setAttributesUpdating(true);
     }
@@ -107,7 +107,7 @@ public abstract class LivingEntityMixin extends Entity {
      * @author ChampionAsh5357
      * @reason Unlock attribute updates for event until after new modifiers are added
      */
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffect;addAttributeModifiers(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/AttributeMap;I)V", shift = At.Shift.AFTER), method = "onEffectUpdated", require = 1)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffect;addAttributeModifiers(Lnet/minecraft/world/entity/ai/attributes/AttributeMap;I)V", shift = At.Shift.AFTER), method = "onEffectUpdated", require = 1)
     public void apoth_onEffectUpdateAddAttribute(MobEffectInstance pEffectInstance, boolean pForced, Entity pEntity, CallbackInfo ci) {
         ((IAttributeManager) attributes).setAttributesUpdating(false);
     }

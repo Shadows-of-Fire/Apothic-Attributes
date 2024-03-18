@@ -1,0 +1,8 @@
+{
+    "from": "minecraft:awkward",
+    "ingredient": {
+        "item": "minecraft:mushroom_stew"
+    },
+    "to": "attributeslib:haste",
+    "mix_type": "potion"
+}

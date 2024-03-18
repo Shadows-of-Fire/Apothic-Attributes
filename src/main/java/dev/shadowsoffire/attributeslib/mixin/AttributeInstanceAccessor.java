@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import dev.shadowsoffire.attributeslib.api.AttributeChangedValueEvent;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 
-@Mixin(AttributeInstance.class)
+@Mixin(value = AttributeInstance.class, remap = false)
 public interface AttributeInstanceAccessor {
 
     /**

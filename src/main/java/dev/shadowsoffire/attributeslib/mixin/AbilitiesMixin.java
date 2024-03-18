@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Abilities;
 /**
  * For the Creative Flight Attribute, the Abilities must be aware of the owning Player so that the fields can be updated to reflect the attribute value.
  */
-@Mixin(Abilities.class)
+@Mixin(value = Abilities.class, remap = false)
 public class AbilitiesMixin implements IEntityOwned {
 
     protected LivingEntity owner;

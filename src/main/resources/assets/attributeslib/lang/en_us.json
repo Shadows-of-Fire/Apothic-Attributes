@@ -39,12 +39,12 @@
 	"attribute.name.generic.max_health.desc": "How many hit points you can have.",
 	"attribute.name.generic.movement_speed.desc": "Movement speed while walking.",
 
-	"forge.entity_reach.desc": "How far you can interact with entities, in blocks.",
-	"forge.entity_gravity.desc": "Acceleration towrds the ground, in blocks/s²",
-	"forge.name_tag_distance.desc": "How far away another player must be to see your name.",
-	"forge.block_reach.desc": "How far you can interact with blocks, in blocks.",
-	"forge.step_height.desc": "How many blocks you may step up without jumping.",
-	"forge.swim_speed.desc": "How fast you swim, relative to normal.",
+	"neoforge.entity_reach.desc": "How far you can interact with entities, in blocks.",
+	"neoforge.entity_gravity.desc": "Acceleration towrds the ground, in blocks/s²",
+	"neoforge.name_tag_distance.desc": "How far away another player must be to see your name.",
+	"neoforge.block_reach.desc": "How far you can interact with blocks, in blocks.",
+	"neoforge.step_height.desc": "How many blocks you may step up without jumping.",
+	"neoforge.swim_speed.desc": "How fast you swim, relative to normal.",
 
 	"attributeslib:draw_speed": "Draw Speed",
 	"attributeslib:draw_speed.desc": "How fast you draw ranged weapons, such as bows, crossbows, or tridents.",
@@ -112,20 +112,13 @@
 	"comment_id": "MobFx - descriptions are duplicated for JEED support.",
 
     "effect.attributeslib.knowledge": "Ancient Knowledge",
-    "effect.attributeslib.knowledge.desc": "Increases experience gained from kills and blocks.",
-    "effect.attributeslib.knowledge.description": "Increases experience gained from kills and blocks.",
+    "effect.attributeslib.vitality": "Bursting Vitality",
+    "effect.attributeslib.grievous": "Grievous Wounds",
+    "effect.attributeslib.flying": "Flying",
 
     "effect.attributeslib.sundering": "Sundering",
     "effect.attributeslib.sundering.desc": "Increases damage received.",
     "effect.attributeslib.sundering.description": "Increases damage received.",
-
-    "effect.attributeslib.vitality": "Bursting Vitality",
-    "effect.attributeslib.vitality.desc": "Increases healing received.",
-    "effect.attributeslib.vitality.description": "Increases healing received.",
-
-    "effect.attributeslib.grievous": "Grievous Wounds",
-    "effect.attributeslib.grievous.desc": "Decreases healing received.",
-    "effect.attributeslib.grievous.description": "Decreases healing received.",
 
     "effect.attributeslib.bleeding": "Bleeding",
     "effect.attributeslib.bleeding.desc": "Inflicts damage every two seconds.",
@@ -134,10 +127,6 @@
     "effect.attributeslib.detonation": "Flaming Detonation",
     "effect.attributeslib.detonation.desc": "On expiry, inflicts damage based on remaining fire ticks.",
     "effect.attributeslib.detonation.description": "On expiry, inflicts damage based on remaining fire ticks.",
-
-    "effect.attributeslib.flying": "Flying",
-    "effect.attributeslib.flying.desc": "Grants Creative Flight.",
-    "effect.attributeslib.flying.description": "Grant Creative Flight.",
 
     "effect.minecraft.night_vision.desc": "Allows you to see in the dark.",
     "effect.minecraft.invisibility.desc": "Makes you invisible, excluding equipment.",
@@ -169,5 +158,60 @@
 
     "death.attack.attributeslib:cold_damage": "%1$s was frozen to death",
     "death.attack.attributeslib:cold_damage.item": "%1$s was frozen to death by %2$s using %3$s",
-    "death.attack.attributeslib:cold_damage.player": "%1$s was frozen to death whilst fighting %2$s"
+    "death.attack.attributeslib:cold_damage.player": "%1$s was frozen to death whilst fighting %2$s",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "Potion of Resistance",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "Splash Potion of Resistance",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "Lingering Potion of Resistance",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "Arrow of Resistance",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "Potion of Absorption",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "Splash Potion of Absorption",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "Lingering Potion of Absorption",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "Arrow of Absorption",
+
+    "item.minecraft.potion.effect.minecraft.haste": "Potion of Haste",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "Splash Potion of Haste",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "Lingering Potion of Haste",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "Arrow of Haste",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "Potion of Mining Fatigue",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "Splash Potion of Mining Fatigue",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "Lingering Potion of Mining Fatigue",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "Arrow of Mining Fatigue",
+
+    "item.minecraft.potion.effect.minecraft.wither": "Potion of Wither",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "Splash Potion of Wither",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "Lingering Potion of Wither",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "Arrow of Wither",
+
+    "item.minecraft.potion.effect.minecraft.levitation": "Potion of Levitation",
+    "item.minecraft.splash_potion.effect.minecraft.levitation": "Splash Potion of Levitation",
+    "item.minecraft.lingering_potion.effect.minecraft.levitation": "Lingering Potion of Levitation",
+    "item.minecraft.tipped_arrow.effect.minecraft.levitation": "Arrow of Levitation",
+
+    "item.minecraft.potion.effect.attributeslib.sundering": "Potion of Sundering",
+    "item.minecraft.splash_potion.effect.attributeslib.sundering": "Splash Potion of Sundering",
+    "item.minecraft.lingering_potion.effect.attributeslib.sundering": "Lingering Potion of Sundering",
+    "item.minecraft.tipped_arrow.effect.attributeslib.sundering": "Arrow of Sundering",
+
+    "item.minecraft.potion.effect.attributeslib.knowledge": "Potion of Ancient Knowledge",
+    "item.minecraft.splash_potion.effect.attributeslib.knowledge": "Splash Potion of Ancient Knowledge",
+    "item.minecraft.lingering_potion.effect.attributeslib.knowledge": "Lingering Potion of Ancient Knowledge",
+    "item.minecraft.tipped_arrow.effect.attributeslib.knowledge": "Arrow of Ancient Knowledge",
+
+    "item.minecraft.potion.effect.attributeslib.vitality": "Potion of Healing Boost",
+    "item.minecraft.splash_potion.effect.attributeslib.vitality": "Splash Potion of Healing Boost",
+    "item.minecraft.lingering_potion.effect.attributeslib.vitality": "Lingering Potion of Healing Boost",
+    "item.minecraft.tipped_arrow.effect.attributeslib.vitality": "Arrow of Healing Boost",
+
+    "item.minecraft.potion.effect.attributeslib.grievous": "Potion of Healing Reduction",
+    "item.minecraft.splash_potion.effect.attributeslib.grievous": "Splash Potion of Healing Reduction",
+    "item.minecraft.lingering_potion.effect.attributeslib.grievous": "Lingering Potion of Healing Reduction",
+    "item.minecraft.tipped_arrow.effect.attributeslib.grievous": "Arrow of Healing Reduction",
+
+    "item.minecraft.potion.effect.attributeslib.flying": "Potion of Flying",
+    "item.minecraft.splash_potion.effect.attributeslib.flying": "Splash Potion of Flying",
+    "item.minecraft.lingering_potion.effect.attributeslib.flying": "Lingering Potion of Flying",
+    "item.minecraft.tipped_arrow.effect.attributeslib.flying": "Arrow of Flying"
 }

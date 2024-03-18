@@ -7,14 +7,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.extensions.IForgeEntity;
+import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.common.extensions.IEntityExtension;
 
-@Mixin(IForgeEntity.class)
-public interface IForgeEntityMixin {
+@Mixin(value = IEntityExtension.class, remap = false)
+public interface IEntityExtensionMixin {
 
     /**
-     * This mixin overwrites {@link IForgeEntity#getStepHeight()} to completely phase-out {@link Entity#maxUpStep} for players.
+     * This mixin overwrites {@link IEntityExtension#getStepHeight()} to completely phase-out {@link Entity#maxUpStep} for players.
      * <p>
      * This ensures that the attribute value accurately reflects the player's Step Height, instead of requiring additional correction.
      *
@@ -25,10 +25,10 @@ public interface IForgeEntityMixin {
     @SuppressWarnings("deprecation")
     default float getStepHeight() {
         float legacyStep = ((Entity) this).maxUpStep();
-        if (this instanceof Player player) return (float) player.getAttributeValue(ForgeMod.STEP_HEIGHT_ADDITION.get());
+        if (this instanceof Player player) return (float) player.getAttributeValue(NeoForgeMod.STEP_HEIGHT.value());
 
         if (this instanceof LivingEntity living) {
-            AttributeInstance stepHeightAttribute = living.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
+            AttributeInstance stepHeightAttribute = living.getAttribute(NeoForgeMod.STEP_HEIGHT.value());
             if (stepHeightAttribute != null) {
                 return (float) Math.max(0, legacyStep + stepHeightAttribute.getValue());
             }

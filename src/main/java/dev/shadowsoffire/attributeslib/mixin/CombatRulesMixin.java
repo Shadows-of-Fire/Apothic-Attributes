@@ -9,7 +9,7 @@ import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
-@Mixin(CombatRules.class)
+@Mixin(value = CombatRules.class, remap = false)
 public class CombatRulesMixin {
 
     /**

@@ -92,14 +92,14 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
             // continue;
             // }
             MobEffect effect = this.data.getEffect();
-            TextureAtlasSprite sprite = texMgr.get(effect);
-            float scale = 0.5F;
-            PoseStack stack = gfx.pose();
-            stack.pushPose();
-            stack.scale(scale, scale, 1);
-            stack.translate(x / scale, y / scale, 0);
-            gfx.blit(0, 0, 0, 18, 18, sprite);
-            stack.popPose();
+                TextureAtlasSprite sprite = texMgr.get(effect);
+                float scale = 0.5F;
+                PoseStack stack = gfx.pose();
+                stack.pushPose();
+                stack.scale(scale, scale, 1);
+                stack.translate(x / scale, y / scale, 0);
+                gfx.blit(0, 0, 0, 18, 18, sprite);
+                stack.popPose();
         }
 
     }

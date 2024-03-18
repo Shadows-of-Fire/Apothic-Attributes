@@ -4,8 +4,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Event;
+import net.neoforged.bus.api.Event;
 
 /**
  * This event is fired whenever the value of an attribute changes values.<br>
@@ -14,7 +13,6 @@ import net.minecraftforge.eventbus.api.Event;
  * <li>On the Server, it is fired from {@link AttributeMap#onAttributeModified} which is the builtin callback hook for values changing.</li>
  * <li>On the Client, it is fired from {@link ClientPacketListener#handleUpdateAttributes} after all changes have been processed.</li>
  * </ul>
- * It is fired on {@link MinecraftForge#EVENT_BUS}.
  */
 public class AttributeChangedValueEvent extends Event {
 

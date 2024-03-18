@@ -14,7 +14,7 @@ import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 
-@Mixin(GameType.class)
+@Mixin(value = GameType.class, remap = false)
 public class GameTypeMixin {
 
     private boolean apoth_flying;

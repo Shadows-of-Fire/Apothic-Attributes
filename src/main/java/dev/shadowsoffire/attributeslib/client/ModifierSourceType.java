@@ -53,7 +53,7 @@ public abstract class ModifierSourceType<T> {
         public void extract(LivingEntity entity, BiConsumer<AttributeModifier, ModifierSource<?>> map) {
             for (MobEffectInstance effectInst : entity.getActiveEffects()) {
                 effectInst.getEffect().getAttributeModifiers().values().forEach(modif -> {
-                    map.accept(modif, new EffectModifierSource(effectInst));
+                    map.accept(modif.create(effectInst.getAmplifier()), new EffectModifierSource(effectInst));
                 });
             }
         }

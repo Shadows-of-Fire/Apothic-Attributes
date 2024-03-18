@@ -19,7 +19,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 
-@Mixin(PotionUtils.class)
+@Mixin(value = PotionUtils.class, remap = false)
 public class PotionUtilsMixin {
 
     /**
@@ -34,7 +34,7 @@ public class PotionUtilsMixin {
      * @see PotionUtils#addPotionTooltip(ItemStack, List, float)
      * @see PotionUtils#addPotionTooltip(List, List, float)
      */
-    @Redirect(method = "addPotionTooltip(Ljava/util/List;Ljava/util/List;F)V", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z", ordinal = 1), require = 1)
+    @Redirect(method = "addPotionTooltip(Ljava/util/List;Ljava/util/List;FF)V", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z", ordinal = 1), require = 1)
     private static boolean attributeslib_potionTooltips(List<Pair<Attribute, AttributeModifier>> list, List<MobEffectInstance> effects, List<Component> tooltips, float durationFactor) {
         if (!list.isEmpty()) {
             tooltips.add(CommonComponents.EMPTY);

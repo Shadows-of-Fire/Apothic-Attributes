@@ -1,0 +1,8 @@
+{
+    "from": "attributeslib:grievous",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "to": "attributeslib:long_grievous",
+    "mix_type": "potion"
+}
