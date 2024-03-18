@@ -1,3 +1,7 @@
+## 1.3.2
+* Made the armor and protection damage reduction formulas configurable.
+  * Relevant details are in the `attributeslib.cfg` file.
+
 ## 1.3.1
 * Added a null check to the code that fires the attribute changed event.
 
