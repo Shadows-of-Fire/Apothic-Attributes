@@ -1,5 +1,7 @@
 package dev.shadowsoffire.attributeslib.api;
 
+import java.math.BigDecimal;
+
 import dev.shadowsoffire.attributeslib.ALConfig;
 import dev.shadowsoffire.attributeslib.api.ALObjects.Attributes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -43,11 +45,16 @@ public class ALCombatRules {
      * Each protection point reduces damage by 2.5%, up to 85%.
      * <p>
      * In vanilla, each protection point reduces damage by 4%, up to 80%.
+     * <p>
+     * This expression may be configured in the attributeslib.cfg file.
      *
      * @see #getDamageAfterProtection(LivingEntity, DamageSource, float, float)
      */
     public static float getProtDamageReduction(float protPoints) {
-        return ALConfig.getProtDamageReduction(protPoints);
+        if (ALConfig.getProtExpr().isPresent()) {
+            return ALConfig.getProtExpr().get().setVariable("protPoints", new BigDecimal(protPoints)).eval().floatValue();
+        }
+        return 1 - Math.min(0.025F * protPoints, 0.85F);
     }
 
     /**
@@ -91,12 +98,17 @@ public class ALCombatRules {
     /**
      * Computes the A value used in the Y = A / (A + X) formula used by {@link #getArmorDamageReduction(float, float)}.<br>
      * This value is a flat 10 for small damage values (< 20), and increases after that point.
+     * <p>
+     * This expression may be configured in the attributeslib.cfg file.
      * 
      * @param damage The amount of incoming damage.
      * @return The A value, for use in {@link #getArmorDamageReduction(float, float)}
      */
     public static float getAValue(float damage) {
-        return ALConfig.getAValue(damage);
+        if (ALConfig.getAValueExpr().isPresent()) {
+            return ALConfig.getAValueExpr().get().setVariable("damage", new BigDecimal(damage)).eval().floatValue();
+        }
+        return damage < 20 ? 10 : 10 + (damage - 20) / 2;
     }
 
     /**
@@ -113,6 +125,10 @@ public class ALCombatRules {
      * @see #getDamageAfterArmor(LivingEntity, DamageSource, float, float, float)
      */
     public static float getArmorDamageReduction(float damage, float armor) {
-        return ALConfig.getArmorDamageReduction(damage, armor);
+        float a = getAValue(damage);
+        if (ALConfig.getArmorExpr().isPresent()) {
+            return ALConfig.getArmorExpr().get().setVariable("a", new BigDecimal(a)).setVariable("damage", new BigDecimal(damage)).setVariable("armor", new BigDecimal(armor)).eval().floatValue();
+        }
+        return a / (a + armor);
     }
 }

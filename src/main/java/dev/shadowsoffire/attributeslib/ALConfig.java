@@ -2,6 +2,7 @@ package dev.shadowsoffire.attributeslib;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,9 +20,9 @@ public class ALConfig {
     public static boolean enablePotionTooltips = true;
     public static Set<ResourceLocation> hiddenAttributes = new HashSet<>();
 
-    private static Expression protectionFormula;
-    private static Expression aValueFormula;
-    private static Expression armorFormula;
+    private static Optional<Expression> protExpr;
+    private static Optional<Expression> aValueExpr;
+    private static Optional<Expression> armorExpr;
 
     public static void load() {
         Configuration cfg = new Configuration(AttributesLib.MODID);
@@ -39,7 +40,7 @@ public class ALConfig {
             }
         }
 
-        protectionFormula = readConfigExpression(cfg, "Protection Formula", "combat_rules", "1 - min(0.025 * protPoints, 0.85)",
+        protExpr = readConfigExpression(cfg, "Protection Formula", "combat_rules", "1 - min(0.025 * protPoints, 0.85)",
             """
                 The protection damage reduction formula.
                 Computed after Prot Pierce and Prot Shred are applied.
@@ -52,7 +53,7 @@ public class ALConfig {
                 """,
             "protPoints");
 
-        aValueFormula = readConfigExpression(cfg, "A-Value Formula", "combat_rules", "if(damage < 20, 10, 10 + (damage - 20) / 2)",
+        aValueExpr = readConfigExpression(cfg, "A-Value Formula", "combat_rules", "if(damage < 20, 10, 10 + (damage - 20) / 2)",
             """
                 The a-value formula, which computes an intermediate used in the armor formula.
                 Arguments:
@@ -64,7 +65,7 @@ public class ALConfig {
                 """,
             "damage");
 
-        armorFormula = readConfigExpression(cfg, "Armor Formula", "combat_rules", "a / (a + armor)",
+        armorExpr = readConfigExpression(cfg, "Armor Formula", "combat_rules", "a / (a + armor)",
             """
                 The armor damage reduction formula.
                 Computed after Armor Pierce and Armor Shred are applied.
@@ -82,23 +83,16 @@ public class ALConfig {
         if (cfg.hasChanged()) cfg.save();
     }
 
-    // Default: damage < 20 ? 10 : 10 + (damage - 20) / 2)
-    public static float getAValue(float damage) {
-        aValueFormula.setVariable("damage", new BigDecimal(damage));
-        return aValueFormula.eval().floatValue();
+    public static Optional<Expression> getAValueExpr() {
+        return aValueExpr;
     }
 
-    // Default: 1 - min(0.025 * protPoints, 0.85)
-    public static float getProtDamageReduction(float protPoints) {
-        protectionFormula.setVariable("protPoints", new BigDecimal(protPoints));
-        return protectionFormula.eval().floatValue();
+    public static Optional<Expression> getProtExpr() {
+        return protExpr;
     }
 
-    // Default: a / (a + armor)
-    public static float getArmorDamageReduction(float damage, float armor) {
-        float a = getAValue(damage);
-        armorFormula.setVariable("a", new BigDecimal(a)).setVariable("damage", new BigDecimal(damage)).setVariable("armor", new BigDecimal(armor));
-        return armorFormula.eval().floatValue();
+    public static Optional<Expression> getArmorExpr() {
+        return armorExpr;
     }
 
     public static ResourceManagerReloadListener makeReloader() {
@@ -107,11 +101,18 @@ public class ALConfig {
 
     /**
      * Parses an {@link Expression} from the config file with the specific parameters.
+     * <p>
+     * Expressions are orders of magnitudes more expensive to evaluate when compared to the relevant java code, so do not use them unless absolutely necessary.
      * 
      * @param args A list of argument names used by the expression, to sanity-check execution.
+     * @return An optional containing the configured expression, or an empty optional if the default was used or an exception occurred.
      */
-    private static Expression readConfigExpression(Configuration cfg, String key, String group, String defaultValue, String comment, String... args) {
+    private static Optional<Expression> readConfigExpression(Configuration cfg, String key, String group, String defaultValue, String comment, String... args) {
         String exprStr = cfg.getString(key, group, defaultValue, comment);
+
+        if (exprStr.equals(defaultValue)) {
+            return Optional.empty();
+        }
 
         try {
             Expression expr = new Expression(exprStr);
@@ -119,12 +120,12 @@ public class ALConfig {
                 expr.setVariable(arg, new BigDecimal(ThreadLocalRandom.current().nextInt(20)));
             }
             expr.eval();
-            return expr;
+            return Optional.of(expr);
         }
         catch (Exception ex) {
             AttributesLib.LOGGER.error("Ignoring invalid {} entry {} as the expression failed to evaluate.", key, exprStr);
             ex.printStackTrace();
-            return new Expression(defaultValue);
+            return Optional.empty();
         }
     }
 }
