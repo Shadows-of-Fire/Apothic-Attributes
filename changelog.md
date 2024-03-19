@@ -1,3 +1,6 @@
+## 2.0.1
+* Made armor / protection formulas configurable.
+
 ## 2.0.0
 * Updated to 1.20.4 (NeoForge).
 * Pulled all Potions that were previously in the Potion Module of Apotheosis.
