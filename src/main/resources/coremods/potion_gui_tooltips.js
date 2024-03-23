@@ -4,7 +4,7 @@ function initializeCoreMod() {
             'target': {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen',
-                'methodName': 'm_280113_',
+                'methodName': 'renderEffects',
                 'methodDesc': '(Lnet/minecraft/client/gui/GuiGraphics;II)V'
             },
             'transformer': function(method) {
@@ -13,7 +13,7 @@ function initializeCoreMod() {
                 var desc = "(Lnet/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen;Lnet/minecraft/world/effect/MobEffectInstance;Ljava/util/List;)Ljava/util/List;";
                 var instr = method.instructions;
 
-                var ASMAPI = Java.type('net.minecraftforge.coremod.api.ASMAPI');
+                var ASMAPI = Java.type('net.neoforged.coremod.api.ASMAPI');
                 var Opcodes = Java.type('org.objectweb.asm.Opcodes');
                 var VarInsnNode = Java.type('org.objectweb.asm.tree.VarInsnNode');
                 var InsnNode = Java.type('org.objectweb.asm.tree.InsnNode');
