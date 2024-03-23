@@ -25,7 +25,7 @@
  *
  */
 
-package repack.evalex;
+package dev.shadowsoffire.attributeslib.repack.evalex;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

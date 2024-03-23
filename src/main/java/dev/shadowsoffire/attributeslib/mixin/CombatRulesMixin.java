@@ -13,6 +13,8 @@ import net.minecraft.world.entity.LivingEntity;
 public class CombatRulesMixin {
 
     /**
+     * @author Shadows
+     * @reason Changing combat rules to reflect custom formulas.
      * @see {@link ALCombatRules#getDamageAfterProtection(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float, float)}
      */
     @Overwrite
@@ -21,6 +23,8 @@ public class CombatRulesMixin {
     }
 
     /**
+     * @author Shadows
+     * @reason Changing combat rules to reflect custom formulas.
      * @see {@link ALCombatRules#getDamageAfterArmor(LivingEntity, DamageSource, float, float, float)}
      */
     @Overwrite

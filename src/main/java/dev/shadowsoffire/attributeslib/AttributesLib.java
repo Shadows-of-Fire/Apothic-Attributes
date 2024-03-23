@@ -11,7 +11,6 @@ import dev.shadowsoffire.attributeslib.client.AttributesLibClient;
 import dev.shadowsoffire.attributeslib.compat.CuriosCompat;
 import dev.shadowsoffire.attributeslib.impl.AttributeEvents;
 import dev.shadowsoffire.attributeslib.packet.CritParticleMessage;
-import dev.shadowsoffire.attributeslib.util.MiscDatagen;
 import dev.shadowsoffire.placebo.network.PayloadHelper;
 import dev.shadowsoffire.placebo.registry.DeferredHelper;
 import net.minecraft.client.Minecraft;
@@ -73,7 +72,8 @@ public class AttributesLib {
             // if (MobEffects.SLOW_FALLING.getAttributeModifiers().isEmpty()) {
             // MobEffects.SLOW_FALLING.addAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), "A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA", -0.07, Operation.ADDITION);
             // }
-            MiscDatagen.genPotionRecipes();
+            // if (!FMLEnvironment.production) MiscDatagen.genPotionRecipes();
+            BuiltInRegistries.ATTRIBUTE.addAlias(loc("creative_flight"), new ResourceLocation("neoforge", "creative_flight"));
         });
     }
 
@@ -101,8 +101,7 @@ public class AttributesLib {
                 ALObjects.Attributes.PROT_PIERCE,
                 ALObjects.Attributes.PROT_SHRED,
                 ALObjects.Attributes.DODGE_CHANCE,
-                ALObjects.Attributes.ELYTRA_FLIGHT,
-                ALObjects.Attributes.CREATIVE_FLIGHT);
+                ALObjects.Attributes.ELYTRA_FLIGHT);
         });
         // Change the base value of Step Height to reflect the real base value of a Player.
         // The alternative is a bunch of special casing in the display.

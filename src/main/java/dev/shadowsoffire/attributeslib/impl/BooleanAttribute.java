@@ -9,6 +9,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.item.TooltipFlag;
 
 /**
@@ -23,10 +24,10 @@ import net.minecraft.world.item.TooltipFlag;
  * <p>
  * Modifiers not using one of the specified modifiers noted above will display as an error condition.
  */
-public class BooleanAttribute extends Attribute implements IFormattableAttribute {
+public class BooleanAttribute extends RangedAttribute implements IFormattableAttribute {
 
     public BooleanAttribute(String pDescriptionId, boolean defaultValue) {
-        super(pDescriptionId, defaultValue ? 1 : 0);
+        super(pDescriptionId, defaultValue ? 1 : 0, 0, Double.MAX_VALUE);
     }
 
     @Override

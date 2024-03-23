@@ -139,11 +139,6 @@ public class ALObjects {
          */
         public static final Supplier<Attribute> ELYTRA_FLIGHT = R.attribute("elytra_flight", () -> new BooleanAttribute("attributeslib:elytra_flight", false).setSyncable(true));
 
-        /**
-         * Boolean attribute for if creative flight is enabled. Default value = false.
-         */
-        public static final Supplier<Attribute> CREATIVE_FLIGHT = R.attribute("creative_flight", () -> new BooleanAttribute("attributeslib:creative_flight", false).setSyncable(true));
-
         @ApiStatus.Internal
         public static void bootstrap() {}
     }

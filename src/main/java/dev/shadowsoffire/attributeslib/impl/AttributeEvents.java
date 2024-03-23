@@ -5,18 +5,15 @@ import java.util.Random;
 import dev.shadowsoffire.attributeslib.ALConfig;
 import dev.shadowsoffire.attributeslib.AttributesLib;
 import dev.shadowsoffire.attributeslib.api.ALObjects;
-import dev.shadowsoffire.attributeslib.api.AttributeChangedValueEvent;
 import dev.shadowsoffire.attributeslib.api.AttributeHelper;
 import dev.shadowsoffire.attributeslib.api.IFormattableAttribute;
 import dev.shadowsoffire.attributeslib.packet.CritParticleMessage;
 import dev.shadowsoffire.attributeslib.util.AttributesUtil;
-import dev.shadowsoffire.attributeslib.util.IFlying;
 import dev.shadowsoffire.placebo.network.PacketDistro;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -27,7 +24,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
@@ -40,7 +36,6 @@ import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -363,45 +358,6 @@ public class AttributeEvents {
     public void trackCooldown(AttackEntityEvent e) {
         Player p = e.getEntity();
         AttributesLib.localAtkStrength = p.getAttackStrengthScale(0.5F);
-    }
-
-    @SubscribeEvent
-    public void valueChanged(AttributeChangedValueEvent e) {
-        // AttributesLib.LOGGER.info("Attribute {} changed value from {} to {}!", e.getAttributeInstance().getAttribute().getDescriptionId(), e.getOldValue(),
-        // e.getNewValue());
-        if (e.getAttributeInstance().getAttribute() == ALObjects.Attributes.CREATIVE_FLIGHT.get() && e.getEntity() instanceof ServerPlayer player) {
-
-            boolean changed = false;
-
-            if (((IFlying) player).getAndDestroyFlyingCache()) {
-                player.getAbilities().flying = true;
-                changed = true;
-            }
-
-            if (e.getNewValue() > 0) {
-                player.getAbilities().mayfly = true;
-                changed = true;
-            }
-            else if (e.getOldValue() > 0 && e.getNewValue() <= 0) {
-                player.getAbilities().mayfly = false;
-                player.getAbilities().flying = false;
-                changed = true;
-            }
-
-            if (changed) player.onUpdateAbilities();
-        }
-    }
-
-    public static void applyCreativeFlightModifier(Player player, GameType newType) {
-        AttributeInstance inst = player.getAttribute(ALObjects.Attributes.CREATIVE_FLIGHT.get());
-        if (newType == GameType.CREATIVE || newType == GameType.SPECTATOR) {
-            if (inst.getModifier(AttributeHelper.CREATIVE_FLIGHT_UUID) == null) {
-                inst.addTransientModifier(new AttributeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID, "attributeslib:creative_flight", 1, Operation.ADDITION));
-            }
-        }
-        else {
-            inst.removeModifier(AttributeHelper.CREATIVE_FLIGHT_UUID);
-        }
     }
 
     @SubscribeEvent

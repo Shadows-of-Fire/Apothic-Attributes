@@ -6,15 +6,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import dev.shadowsoffire.attributeslib.repack.evalex.Expression;
 import dev.shadowsoffire.placebo.config.Configuration;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import repack.evalex.Expression;
 
 public class ALConfig {
 
-    public static final String[] DEFAULT_BLOCKED_ATTRIBUTES = { "forge:nametag_distance", "attributeslib:creative_flight", "attributeslib:elytra_flight", "attributeslib:ghost_health" };
+    public static final String[] DEFAULT_BLOCKED_ATTRIBUTES = { "neoforge:nametag_distance", "neoforge:creative_flight", "attributeslib:elytra_flight", "attributeslib:ghost_health" };
 
     public static boolean enableAttributesGui = true;
     public static boolean enablePotionTooltips = true;
