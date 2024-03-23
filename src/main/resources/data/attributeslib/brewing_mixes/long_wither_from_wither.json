@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:wither",
-    "ingredient": {
-        "item": "minecraft:redstone"
-    },
-    "to": "attributeslib:long_wither",
-    "mix_type": "potion"
-}

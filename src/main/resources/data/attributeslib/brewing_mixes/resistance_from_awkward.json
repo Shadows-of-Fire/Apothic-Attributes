@@ -1,8 +1,0 @@
-{
-    "from": "minecraft:awkward",
-    "ingredient": {
-        "item": "minecraft:shulker_shell"
-    },
-    "to": "attributeslib:resistance",
-    "mix_type": "potion"
-}

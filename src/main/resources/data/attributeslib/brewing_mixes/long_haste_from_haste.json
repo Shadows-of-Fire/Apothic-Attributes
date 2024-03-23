@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:haste",
-    "ingredient": {
-        "item": "minecraft:redstone"
-    },
-    "to": "attributeslib:long_haste",
-    "mix_type": "potion"
-}

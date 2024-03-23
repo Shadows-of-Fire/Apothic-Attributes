@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:vitality",
-    "ingredient": {
-        "item": "minecraft:glowstone_dust"
-    },
-    "to": "attributeslib:strong_vitality",
-    "mix_type": "potion"
-}

@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:sundering",
-    "ingredient": {
-        "item": "minecraft:redstone"
-    },
-    "to": "attributeslib:long_sundering",
-    "mix_type": "potion"
-}

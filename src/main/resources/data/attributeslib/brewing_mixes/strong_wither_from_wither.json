@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:wither",
-    "ingredient": {
-        "item": "minecraft:glowstone_dust"
-    },
-    "to": "attributeslib:strong_wither",
-    "mix_type": "potion"
-}

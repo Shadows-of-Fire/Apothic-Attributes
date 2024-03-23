@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:grievous",
-    "ingredient": {
-        "item": "minecraft:glowstone_dust"
-    },
-    "to": "attributeslib:strong_grievous",
-    "mix_type": "potion"
-}

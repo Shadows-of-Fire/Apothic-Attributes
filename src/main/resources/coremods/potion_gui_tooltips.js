@@ -1,6 +1,6 @@
 function initializeCoreMod() {
     return {
-        'attributeslib_potion_gui_tooltips': {
+        'apothic_attributes_potion_gui_tooltips': {
             'target': {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen',
@@ -8,7 +8,7 @@ function initializeCoreMod() {
                 'methodDesc': '(Lnet/minecraft/client/gui/GuiGraphics;II)V'
             },
             'transformer': function(method) {
-                var owner = "dev/shadowsoffire/attributeslib/asm/ALHooks";
+                var owner = "dev/shadowsoffire/apothic_attributes/asm/ALHooks";
                 var name = "getEffectTooltip";
                 var desc = "(Lnet/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen;Lnet/minecraft/world/effect/MobEffectInstance;Ljava/util/List;)Ljava/util/List;";
                 var instr = method.instructions;

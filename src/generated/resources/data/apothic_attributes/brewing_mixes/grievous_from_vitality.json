@@ -1,0 +1,8 @@
+{
+  "mix_type": "potion",
+  "from": "apothic_attributes:vitality",
+  "ingredient": {
+    "item": "minecraft:fermented_spider_eye"
+  },
+  "to": "apothic_attributes:grievous"
+}

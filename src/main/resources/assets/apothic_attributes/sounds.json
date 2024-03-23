@@ -1,0 +1,7 @@
+{
+	"dodge": {
+		"category": "neutral",
+		"subtitle": "apothic_attributes.subtitle.dodge",
+		"sounds": ["apothic_attributes:dodge"]
+	}
+}

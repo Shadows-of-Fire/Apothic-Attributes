@@ -1,0 +1,8 @@
+{
+  "mix_type": "potion",
+  "from": "minecraft:awkward",
+  "ingredient": {
+    "item": "minecraft:wither_skeleton_skull"
+  },
+  "to": "apothic_attributes:wither"
+}

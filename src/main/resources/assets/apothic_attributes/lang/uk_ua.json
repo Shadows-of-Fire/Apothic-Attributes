@@ -1,0 +1,16 @@
+{
+    "apothic_attributes:draw_speed": "Швидкість зарядження",
+    "apothic_attributes:crit_chance": "Шанс критичного удару",
+    "apothic_attributes:crit_damage": "Шкода від критичного удару",
+    "apothic_attributes:cold_damage": "Шкода холодом",
+    "apothic_attributes:fire_damage": "Шкода вогнем",
+    "apothic_attributes:life_steal": "Вампіризм",
+    "apothic_attributes:piercing": "Бронебійність",
+    "apothic_attributes:current_hp_damage": "поточна шкода по здоров'ю",
+    "apothic_attributes:overheal": "Надлікування",
+    "apothic_attributes:ghost_health": "Примарне здоров'я",
+    "apothic_attributes:mining_speed": "Швидкість видобутку",
+    "apothic_attributes:arrow_damage": "Шкода від стріл",
+    "apothic_attributes:arrow_velocity": "Швидкість стріл",
+    "apothic_attributes:experience_gained": "Отримано досвіду"
+}

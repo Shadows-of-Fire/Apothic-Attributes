@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:fatigue",
-    "ingredient": {
-        "item": "minecraft:glowstone_dust"
-    },
-    "to": "attributeslib:strong_fatigue",
-    "mix_type": "potion"
-}

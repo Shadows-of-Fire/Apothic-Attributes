@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:strong_resistance",
-    "ingredient": {
-        "item": "minecraft:fermented_spider_eye"
-    },
-    "to": "attributeslib:strong_sundering",
-    "mix_type": "potion"
-}

@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:absorption",
-    "ingredient": {
-        "item": "minecraft:glowstone_dust"
-    },
-    "to": "attributeslib:strong_absorption",
-    "mix_type": "potion"
-}

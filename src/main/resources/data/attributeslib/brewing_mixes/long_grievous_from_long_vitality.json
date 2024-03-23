@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:long_vitality",
-    "ingredient": {
-        "item": "minecraft:fermented_spider_eye"
-    },
-    "to": "attributeslib:long_grievous",
-    "mix_type": "potion"
-}

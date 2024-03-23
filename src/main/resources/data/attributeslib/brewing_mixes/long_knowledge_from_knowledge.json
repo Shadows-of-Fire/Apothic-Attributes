@@ -1,8 +1,0 @@
-{
-    "from": "attributeslib:knowledge",
-    "ingredient": {
-        "item": "minecraft:redstone"
-    },
-    "to": "attributeslib:long_knowledge",
-    "mix_type": "potion"
-}

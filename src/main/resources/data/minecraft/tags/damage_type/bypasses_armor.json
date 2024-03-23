@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "attributeslib:bleeding",
-    "attributeslib:detonation",
-    "attributeslib:fire_damage",
-    "attributeslib:cold_damage"
+    "apothic_attributes:bleeding",
+    "apothic_attributes:detonation",
+    "apothic_attributes:fire_damage",
+    "apothic_attributes:cold_damage"
   ]
 }

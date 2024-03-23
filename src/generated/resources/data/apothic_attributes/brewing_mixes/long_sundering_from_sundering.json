@@ -1,0 +1,8 @@
+{
+  "mix_type": "potion",
+  "from": "apothic_attributes:sundering",
+  "ingredient": {
+    "item": "minecraft:redstone"
+  },
+  "to": "apothic_attributes:long_sundering"
+}

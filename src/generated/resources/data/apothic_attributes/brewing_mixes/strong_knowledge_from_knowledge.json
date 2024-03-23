@@ -1,0 +1,8 @@
+{
+  "mix_type": "potion",
+  "from": "apothic_attributes:knowledge",
+  "ingredient": {
+    "item": "minecraft:experience_bottle"
+  },
+  "to": "apothic_attributes:strong_knowledge"
+}

@@ -1,0 +1,212 @@
+{
+    "item.modifiers.both_hands": "在任意手时：",
+
+    "apothic_attributes.adv.base": "[实体：%s | 物品：%s]",
+    "apothic_attributes.adv.sharpness_bonus": "[锋利：+%s]",
+
+    "apothic_attributes.value.flat": "%s",
+    "apothic_attributes.value.percent": "%s%%",
+
+    "apothic_attributes.value.boolean.enabled": "已启用",
+    "apothic_attributes.value.boolean.disabled": "已禁用",
+    "apothic_attributes.value.boolean.enable": "启用",
+    "apothic_attributes.value.boolean.force_disable": "强制禁用",
+    "apothic_attributes.value.boolean.invalid": "无效",
+
+    "apothic_attributes.modifier.plus": "+%s %s",
+    "apothic_attributes.modifier.take": "-%s %s",
+    "apothic_attributes.modifier.bool": "%s %s",
+
+    "apothic_attributes.gui.attributes": "属性",
+    "apothic_attributes.gui.base": "基础值：%s",
+    "apothic_attributes.gui.min": "最小值：%s",
+    "apothic_attributes.gui.max": "最大值：%s",
+    "apothic_attributes.gui.modifiers": "调节器",
+    "apothic_attributes.gui.addition": "增加：%s",
+    "apothic_attributes.gui.multiply_base": "基础乘数: %s",
+    "apothic_attributes.gui.multiply_total": "总乘数: %s",
+    "apothic_attributes.gui.press_shift": "按住Shift查看更多信息。",
+    "apothic_attributes.gui.current": "当前：%s",
+    "apothic_attributes.gui.show_attributes": "显示属性",
+
+    "attribute.name.generic.armor.desc": "增加物理伤害减免。",
+    "attribute.name.generic.armor_toughness.desc": "降低敌方护甲值减少效果。",
+    "attribute.name.generic.attack_damage.desc": "完全蓄力攻击造成的物理伤害。",
+    "attribute.name.generic.attack_knockback.desc": "你的近战攻击击退敌人的距离，以半格为单位。",
+    "attribute.name.generic.attack_speed.desc": "你每秒能发动完全蓄力攻击的次数。",
+    "attribute.name.generic.knockback_resistance.desc": "你无视的击退量。",
+    "attribute.name.generic.luck.desc": "增加好事发生的可能性。",
+    "attribute.name.generic.max_health.desc": "你拥有的生命值点数。",
+    "attribute.name.generic.movement_speed.desc": "行走时的移动速度。",
+
+    "neoforge.entity_reach.desc": "你能与实体互动的距离，以格为单位。",
+    "neoforge.entity_gravity.desc": "落向地面的加速度，以格/平方秒为单位。",
+    "neoforge.name_tag_distance.desc": "其他玩家必须距离多远才能看到你的名字。",
+    "neoforge.block_reach.desc": "你能与方块互动的距离，以格为单位。",
+    "neoforge.step_height.desc": "你可以在不跳跃的情况下自动走上方块的高度。",
+    "neoforge.swim_speed.desc": "相对于正常情况，你的游泳速度。",
+
+    "apothic_attributes:draw_speed": "蓄力速度",
+    "apothic_attributes:draw_speed.desc": "你蓄力远程武器（例如弓、弩或三叉戟）的速度。",
+
+    "apothic_attributes:crit_chance": "暴击率",
+    "apothic_attributes:crit_chance.desc": "你造成暴击伤害的几率，根据你的暴击伤害造成额外伤害。",
+
+    "apothic_attributes:crit_damage": "暴击伤害",
+    "apothic_attributes:crit_damage.desc": "暴击的伤害乘数，包括原版跳跃暴击。",
+
+    "apothic_attributes:cold_damage": "冰霜伤害",
+    "apothic_attributes:cold_damage.desc": "对近战攻击施加额外魔法伤害，并减速被击中的敌人。",
+
+    "apothic_attributes:fire_damage": "火焰伤害",
+    "apothic_attributes:fire_damage.desc": "对近战攻击施加额外魔法伤害，并燃烧被击中的敌人。",
+
+    "apothic_attributes:life_steal": "生命偷取",
+    "apothic_attributes:life_steal.desc": "对你造成的伤害进行治疗的百分比。",
+
+    "apothic_attributes:current_hp_damage": "当前生命值伤害",
+    "apothic_attributes:current_hp_damage.desc": "根据目标的生命值，对近战攻击施加额外物理伤害。",
+
+    "apothic_attributes:overheal": "过量治疗",
+    "apothic_attributes:overheal.desc": "造成伤害的百分比将为你提供伤害吸收护盾。",
+
+    "apothic_attributes:ghost_health": "虚假生命",
+    "apothic_attributes:ghost_health.desc": "尚未实现",
+
+    "apothic_attributes:mining_speed": "挖掘速度",
+    "apothic_attributes:mining_speed.desc": "与正常情况相比，你的挖掘方块速度。",
+
+    "apothic_attributes:arrow_damage": "弹射物伤害",
+    "apothic_attributes:arrow_damage.desc": "弹射物的伤害乘数，三叉戟是弹射物。",
+
+    "apothic_attributes:arrow_velocity": "弹射物速度",
+    "apothic_attributes:arrow_velocity.desc": "弹射物的速度乘数，弹射物伤害与速度成比例。",
+
+    "apothic_attributes:experience_gained": "经验获取",
+    "apothic_attributes:experience_gained.desc": "通过破坏方块和杀死生物获得经验值的乘数。",
+
+    "apothic_attributes:healing_received": "受到治疗",
+    "apothic_attributes:healing_received.desc": "所有受到治疗的乘数。",
+
+    "apothic_attributes:armor_pierce": "盔甲穿透",
+    "apothic_attributes:armor_pierce.desc": "对目标的护甲值进行平摊减免。",
+
+    "apothic_attributes:armor_shred": "盔甲撕裂",
+    "apothic_attributes:armor_shred.desc": "目标护甲值降低的百分比。",
+
+    "apothic_attributes:prot_pierce": "保护穿透",
+    "apothic_attributes:prot_pierce.desc": "对目标的总保护点数进行平摊减免。",
+
+    "apothic_attributes:prot_shred": "保护撕裂",
+    "apothic_attributes:prot_shred.desc": "目标总保护点数降低的百分比。",
+
+    "apothic_attributes:dodge_chance": "闪避率",
+    "apothic_attributes:dodge_chance.desc": "有概率闪避近战攻击或弹射物。",
+
+    "apothic_attributes:elytra_flight": "鞘翅飞行",
+    "apothic_attributes:elytra_flight.desc": "你能像穿戴鞘翅一样飞行。",
+
+    "apothic_attributes:creative_flight": "创造模式飞行",
+    "apothic_attributes:creative_flight.desc": "你能像创造模式一样飞行。",
+
+    "comment_id": "/MobFx - 为了支持JEED，描述是重复的。",
+
+    "effect.apothic_attributes.knowledge": "古代知识",
+    "effect.apothic_attributes.vitality": "活力迸发",
+    "effect.apothic_attributes.grievous": "重伤",
+    "effect.apothic_attributes.flying": "飞行",
+
+    "effect.apothic_attributes.sundering": "破甲",
+    "effect.apothic_attributes.sundering.desc": "增加受到的伤害。",
+    "effect.apothic_attributes.sundering.description": "增加受到的伤害。",
+
+    "effect.apothic_attributes.bleeding": "流血",
+    "effect.apothic_attributes.bleeding.desc": "每两秒造成一次伤害。",
+    "effect.apothic_attributes.bleeding.description": "每两秒造成一次伤害。",
+
+    "effect.apothic_attributes.detonation": "火焰引爆",
+    "effect.apothic_attributes.detonation.desc": "该效果结束后，根据剩余着火时间造成伤害。",
+    "effect.apothic_attributes.detonation.description": "该效果结束后，根据剩余着火时间造成伤害。",
+
+    "effect.minecraft.night_vision.desc": "允许你在黑暗中也能看清东西。",
+    "effect.minecraft.invisibility.desc": "使你隐身，不包括装备。",
+    "effect.minecraft.jump_boost.desc": "增加跳跃高度。",
+    "effect.minecraft.fire_resistance.desc": "使你免疫火焰伤害。",
+    "effect.minecraft.water_breathing.desc": "使你不会溺水。",
+    "effect.minecraft.instant_health.desc": "立即恢复少量生命值。",
+    "effect.minecraft.instant_damage.desc": "立即造成少量魔法伤害。",
+    "effect.minecraft.poison.desc": "定期造成非致命伤害。",
+    "effect.minecraft.regeneration.desc": "使你随着时间的推移恢复生命值。",
+
+    "comment_id": "Damage Sources",
+
+    "death.attack.apothic_attributes:bleeding": "%1$s失血过多了",
+    "death.attack.apothic_attributes:bleeding.item": "%1$s因%2$s的%3$s而失血过多",
+    "death.attack.apothic_attributes:bleeding.player": "%1$s在试图逃离%2$s时失血过多了",
+
+    "death.attack.apothic_attributes:detonation": "%1$s被火焰引爆了",
+    "death.attack.apothic_attributes:detonation.item": "%1$s被火焰引爆了",
+    "death.attack.apothic_attributes:detonation.player": "%1$s被火焰引爆了",
+
+    "death.attack.apothic_attributes:current_hp_damage": "%1$s被击败了",
+    "death.attack.apothic_attributes:current_hp_damage.item": "%1$s被%2$s用%3$s击败了",
+    "death.attack.apothic_attributes:current_hp_damage.player": "%1$s在与%2$s战斗时被击败了",
+
+    "death.attack.apothic_attributes:fire_damage": "%1$s被烧焦至死",
+    "death.attack.apothic_attributes:fire_damage.item": "%1$s被%2$s用%3$s烧焦至死",
+    "death.attack.apothic_attributes:fire_damage.player": "%1$s在与%2$s战斗时被烧焦至死",
+
+    "death.attack.apothic_attributes:cold_damage": "%1$s被冰冻至死",
+    "death.attack.apothic_attributes:cold_damage.item": "%1$s被%2$s用%3$s冰冻至死",
+    "death.attack.apothic_attributes:cold_damage.player": "%1$s在与%2$s战斗时被冰冻至死",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "抗性药水",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "喷溅型抗性药水",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "滞留型抗性药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "抗性之箭",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "伤害吸收药水",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "喷溅型伤害吸收药水",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "滞留型伤害吸收药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "伤害吸收之箭",
+
+    "item.minecraft.potion.effect.minecraft.haste": "急迫药水",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "喷溅型急迫药水",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "滞留型急迫药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "急迫之箭",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "挖掘疲劳药水",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "喷溅型挖掘疲劳药水",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "滞留型挖掘疲劳药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "挖掘疲劳之箭",
+
+    "item.minecraft.potion.effect.minecraft.wither": "凋零药水",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "喷溅型凋零药水",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "滞留型凋零药水",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "凋零之箭",
+
+    "item.minecraft.potion.effect.apothic_attributes.sundering": "破甲药水",
+    "item.minecraft.splash_potion.effect.apothic_attributes.sundering": "喷溅型破甲药水",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.sundering": "滞留型破甲药水",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.sundering": "破甲之箭",
+
+    "item.minecraft.potion.effect.apothic_attributes.knowledge": "古代知识药水",
+    "item.minecraft.splash_potion.effect.apothic_attributes.knowledge": "喷溅型古代知识药水",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.knowledge": "滞留型古代知识药水",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.knowledge": "古代知识之箭",
+
+    "item.minecraft.potion.effect.apothic_attributes.vitality": "治疗提升药水",
+    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "喷溅型治疗提升药水",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "滞留型治疗提升药水",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "治疗提升之箭",
+
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "治疗减少药水",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "喷溅型治疗减少药水",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "滞留型治疗减少药水",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "治疗减少之箭",
+
+    "item.minecraft.potion.effect.apothic_attributes.flying": "飞行药水",
+    "item.minecraft.splash_potion.effect.apothic_attributes.flying": "喷溅型飞行药水",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.flying": "滞留型飞行药水",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.flying": "飞行之箭"
+}
