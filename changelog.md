@@ -1,3 +1,6 @@
+## 2.1.0
+* Changed the modid from `attributeslib` to `apothic_attributes`.
+
 ## 2.0.1
 * Made armor / protection formulas configurable.
 
