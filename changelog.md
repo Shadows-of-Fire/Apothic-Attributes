@@ -1,3 +1,6 @@
+## 1.3.4
+* Fixed tridents not respecting the arrow damage attribute.
+
 ## 1.3.3
 * Made configurable formulas fallback to java code if they are unchanged.
   * Execution of configured formulas is considerably slower than real code, which might become an issue for people not using the feature.
