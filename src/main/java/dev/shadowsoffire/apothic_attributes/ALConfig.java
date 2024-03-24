@@ -25,7 +25,7 @@ public class ALConfig {
     private static Optional<Expression> armorExpr;
 
     public static void load() {
-        Configuration cfg = new Configuration(ApothicAttributes.MODID);
+        Configuration cfg = new Configuration(ApothicAttributes.getConfigFile(ApothicAttributes.MODID));
         enableAttributesGui = cfg.getBoolean("Enable Attributes GUI", "general", true, "If the Attributes GUI is available.");
         enablePotionTooltips = cfg.getBoolean("Enable Potion Tooltips", "general", true, "If description tooltips will be added to potion items.");
         String[] hidden = cfg.getStringList("Hidden Attributes", "general", DEFAULT_BLOCKED_ATTRIBUTES, "A list of attributes that will be hidden from the Attributes GUI.");

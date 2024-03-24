@@ -1,5 +1,6 @@
 package dev.shadowsoffire.apothic_attributes;
 
+import java.io.File;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -35,6 +36,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -47,6 +49,7 @@ public class ApothicAttributes {
     public static final String MODID = "apothic_attributes";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final DeferredHelper R = DeferredHelper.create(MODID);
+    private static final File configDir = new File(FMLPaths.CONFIGDIR.get().toFile(), MODID);
 
     /**
      * Static record of {@link Player#getAttackStrengthScale(float)} for use in damage events.<br>
@@ -133,6 +136,10 @@ public class ApothicAttributes {
     public void data(GatherDataEvent e) {
         MiscDatagen gen = new MiscDatagen(e.getGenerator().getPackOutput().getOutputFolder(Target.DATA_PACK).resolve(MODID));
         e.getGenerator().addProvider(true, gen);
+    }
+
+    public static File getConfigFile(String path) {
+        return new File(configDir, path + ".cfg");
     }
 
     /**
