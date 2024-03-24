@@ -1,3 +1,7 @@
+## 2.1.1
+* Fixed some things that missed the modid transition.
+* Fixed tridents not respecting the arrow damage attribute.
+
 ## 2.1.0
 * Changed the modid from `attributeslib` to `apothic_attributes`.
 
