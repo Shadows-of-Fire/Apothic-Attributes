@@ -140,10 +140,10 @@ public class AttributesLibClient {
 
         String key = effect.getDescriptionId() + ".desc";
         if (I18n.exists(key)) {
-            tooltips.add(Component.translatable(key).withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC));
+            tooltips.add(Component.translatable(key).withStyle(ChatFormatting.DARK_GRAY));
         }
         else if (ApothicAttributes.getTooltipFlag().isAdvanced() && effect.getAttributeModifiers().isEmpty()) {
-            tooltips.add(Component.translatable(key).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+            tooltips.add(Component.translatable(key).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
         }
 
         List<Pair<Attribute, AttributeModifier>> list = Lists.newArrayList();
@@ -156,7 +156,6 @@ public class AttributesLibClient {
         }
 
         if (!list.isEmpty()) {
-            tooltips.add(CommonComponents.EMPTY);
             for (Pair<Attribute, AttributeModifier> pair : list) {
                 tooltips.add(IFormattableAttribute.toComponent(pair.getFirst(), pair.getSecond(), ApothicAttributes.getTooltipFlag()));
             }
@@ -176,12 +175,10 @@ public class AttributesLibClient {
                 MobEffect effect = effects.get(0).getEffect();
                 String key = effect.getDescriptionId() + ".desc";
                 if (I18n.exists(key)) {
-                    tooltips.add(2, Component.translatable(key).withStyle(ChatFormatting.YELLOW, ChatFormatting.ITALIC));
-                    tooltips.add(3, CommonComponents.EMPTY);
+                    tooltips.add(2, Component.translatable(key).withStyle(ChatFormatting.DARK_GRAY));
                 }
                 else if (e.getFlags().isAdvanced() && effect.getAttributeModifiers().isEmpty()) {
-                    tooltips.add(2, Component.translatable(key).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
-                    tooltips.add(3, CommonComponents.EMPTY);
+                    tooltips.add(2, Component.translatable(key).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
                 }
             }
         }
