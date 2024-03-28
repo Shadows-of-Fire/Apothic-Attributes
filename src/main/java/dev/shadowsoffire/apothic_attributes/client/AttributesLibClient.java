@@ -26,7 +26,6 @@ import dev.shadowsoffire.apothic_attributes.api.IFormattableAttribute;
 import dev.shadowsoffire.apothic_attributes.api.client.AddAttributeTooltipsEvent;
 import dev.shadowsoffire.apothic_attributes.api.client.GatherEffectScreenTooltipsEvent;
 import dev.shadowsoffire.apothic_attributes.api.client.GatherSkippedAttributeTooltipsEvent;
-import dev.shadowsoffire.apothic_attributes.util.IFlying;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -36,7 +35,6 @@ import net.minecraft.client.particle.CritParticle;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
@@ -59,7 +57,6 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
@@ -69,16 +66,6 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 public class AttributesLibClient {
 
     private static final UUID FAKE_MERGED_UUID = UUID.fromString("a6b0ac71-e435-416e-a991-7623eaa129a4");
-
-    @SubscribeEvent
-    public void updateClientFlyStateOnRespawn(ClientPlayerNetworkEvent.Clone e) {
-        // Teleporting to another dimension constitutes a respawn - the other checks we have ensure the mayFly state returns, but not the flying state.
-        // For this one we have to ensure that the state is marked to be restored before MultiPlayerGameMode#adjustPlayer is called in
-        // ClientPacketListener#handleRespawn.
-        if (e.getOldPlayer().getAbilities().flying) {
-            ((IFlying) e.getNewPlayer()).markFlying();
-        }
-    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void tooltips(ItemTooltipEvent e) {

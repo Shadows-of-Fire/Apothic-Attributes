@@ -1,4 +1,4 @@
-package dev.shadowsoffire.apothic_attributes.mobfx;
+package dev.shadowsoffire.apothic_attributes.mob_effect;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import net.minecraft.core.particles.ParticleTypes;

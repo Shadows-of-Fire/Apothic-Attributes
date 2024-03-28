@@ -1,4 +1,4 @@
-package dev.shadowsoffire.apothic_attributes.mobfx;
+package dev.shadowsoffire.apothic_attributes.mob_effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
