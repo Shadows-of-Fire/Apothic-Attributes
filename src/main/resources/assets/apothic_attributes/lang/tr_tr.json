@@ -1,0 +1,210 @@
+{
+    "apothic_attributes.gui.attributes": "Nitelikler",
+    "apothic_attributes.gui.base": "Baz: %s",
+    "apothic_attributes.gui.min": "En Düşük: %s",
+    "apothic_attributes.gui.max": "En Yüksek: %s",
+    "apothic_attributes.gui.modifiers": "Değiştiriciler",
+    "apothic_attributes.gui.add_value": "Ekleme: %s",
+    "apothic_attributes.gui.add_multiplied_base": "Bazı Çarp: %s",
+    "apothic_attributes.gui.add_multiplied_total": "Toplamı Çarp: %s",
+    "apothic_attributes.gui.press_shift": "Daha fazla bilgi için Shift'e basılı tut.",
+    "apothic_attributes.gui.current": "Mevcut: %s",
+    "apothic_attributes.gui.show_attributes": "Nitelikleri Göster",
+    "apothic_attributes.gui.dynamic": "(dinamik)",
+    "apothic_attributes.gui.formula": "Değiştirici Formülü",
+    "apothic_attributes.gui.formula.base": "Baz",
+    "apothic_attributes.gui.formula.value": "Değer",
+    "apothic_attributes.gui.no_modifiers": "Değiştirici Yok",
+	
+    "attribute.name.generic.armor.desc": "Fiziksel hasar azaltmayı artırır.",
+    "attribute.name.generic.armor_toughness.desc": "Düşman zırh azaltma etkisinin etkinliğini düşürür.",
+    "attribute.name.generic.attack_damage.desc": "Tam güçle bir saldırı ile verilen fiziksel hasar.",
+    "attribute.name.generic.attack_knockback.desc": "Yakın dövüş saldırılarının düşmanları ne kadar uzağa savurduğu, yarım blok cinsinden.",
+    "attribute.name.generic.attack_speed.desc": "Saniyede gerçekleştirebileceğin tam güçle saldırı sayısı.",
+    "attribute.name.generic.knockback_resistance.desc": "Ne kadar savurma etkisini yok saydığın.",
+    "attribute.name.generic.luck.desc": "İyi şeylerin olma olasılığını artırır.",
+    "attribute.name.generic.max_health.desc": "Sahip olabileceğin toplam vuruş puanı.",
+    "attribute.name.generic.movement_speed.desc": "Yürürken hareket hızı.",
+	
+    "neoforge.entity_reach.desc": "Varlıklarla etkileşimde bulunabileceğin mesafe, blok cinsinden.",
+    "neoforge.entity_gravity.desc": "Yere doğru hızlanma, blok/s² cinsinden.",
+    "neoforge.name_tag_distance.desc": "Adını görmek için başka bir oyuncunun sana ne kadar uzakta olması gerektiği.",
+    "neoforge.block_reach.desc": "Bloklarla etkileşimde bulunabileceğin mesafe, blok cinsinden.",
+    "neoforge.step_height.desc": "Zıplamadan çıkabileceğin blok sayısı.",
+    "neoforge.swim_speed.desc": "Normal yüzme hızına göre ne kadar hızlı yüzdüğün.",
+	
+    "button.apothic_attributes.hide_unchanged": "Değişmemiş Nitelikleri Gizle",
+    "text.apothic_attributes.hide_unchanged": "Değişmemişleri Gizle",
+
+    "apothic_attributes:draw_speed": "Çekme Hızı",
+    "apothic_attributes:draw_speed.desc": "Yay, arbalet veya zıpkın gibi menzilli silahları ne kadar hızlı çektiğin.",
+
+    "apothic_attributes:crit_chance": "Kritik Şans",
+    "apothic_attributes:crit_chance.desc": "Verdiğin herhangi bir hasarın kritik vuruş yapma ve Kritik Hasarına göre ek hasar verme şansı.",
+
+    "apothic_attributes:crit_damage": "Kritik Hasar",
+    "apothic_attributes:crit_damage.desc": "Kritik vuruşlar için hasar çarpanı, vanilla zıplama kritikleri dahil.",
+
+    "apothic_attributes:cold_damage": "Soğuk Hasarı",
+    "apothic_attributes:cold_damage.desc": "Yakın dövüş saldırılarında uygulanan bonus büyü hasarı, ve vurulan düşmanları yavaşlatır.",
+
+    "apothic_attributes:fire_damage": "Ateş Hasarı",
+    "apothic_attributes:fire_damage.desc": "Yakın dövüş saldırılarında uygulanan bonus büyü hasarı, ve vurulan düşmanları yakar.",
+	
+    "apothic_attributes:life_steal": "Can Çalma",
+    "apothic_attributes:life_steal.desc": "Hasar azaltımı sonrası hasarın belirli bir yüzdesi sizi iyileştirir.",
+
+    "apothic_attributes:current_hp_damage": "Mevcut Can Hasarı",
+    "apothic_attributes:current_hp_damage.desc": "Hedefin canına bağlı olarak yakın dövüş saldırılarında uygulanan bonus fiziksel hasar.",
+
+    "apothic_attributes:overheal": "Aşırı İyileştirme",
+    "apothic_attributes:overheal.desc": "Hasar azaltımı sonrası hasarın belirli bir yüzdesi size bir emilim kalkanı verir.",
+
+    "apothic_attributes:ghost_health": "Hayalet Can",
+    "apothic_attributes:ghost_health.desc": "Henüz Kullanıma Açılmadı",
+
+    "apothic_attributes:mining_speed": "Madencilik Hızı",
+    "apothic_attributes:mining_speed.desc": "Blokları normale göre ne kadar daha hızlı kazdığın.",
+
+    "apothic_attributes:arrow_damage": "Ok Hasarı",
+    "apothic_attributes:arrow_damage.desc": "Oklar için hasar çarpanı. Üçlü Mızraklar da ok sayılır.",
+	
+    "apothic_attributes:arrow_velocity": "Ok Hızı",
+    "apothic_attributes:arrow_velocity.desc": "Okların hız çarpanı. Ok hasarı hızla birlikte artar.",
+
+    "apothic_attributes:experience_gained": "Kazanılan Tecrübe",
+    "apothic_attributes:experience_gained.desc": "Blok kırma ve yaratık öldürme sırasında kazanılan tecrübe miktarının çarpanı.",
+
+    "apothic_attributes:healing_received": "Alınan İyileştirme",
+    "apothic_attributes:healing_received.desc": "Tüm gelen iyileştirme miktarının çarpanı.",
+
+    "apothic_attributes:armor_pierce": "Zırh Delici",
+    "apothic_attributes:armor_pierce.desc": "Hedefin zırh değerine yapılan düz indirgeme.",
+
+    "apothic_attributes:armor_shred": "Zırh Parçalama",
+    "apothic_attributes:armor_shred.desc": "Hedefin zırh değerine yapılan yüzdelik indirgeme.",
+
+    "apothic_attributes:projectile_damage": "Uzak Menzilli Saldırı Hasarı",
+    "apothic_attributes:projectile_damage.desc": "Tüm dışa giden uzak menzilli saldırılar için hasar çarpanı.",
+	
+    "apothic_attributes:prot_pierce": "Koruma Delici",
+    "apothic_attributes:prot_pierce.desc": "Hedefin toplam koruma puanına yapılan düz indirgeme.",
+
+    "apothic_attributes:prot_shred": "Koruma Parçalama",
+    "apothic_attributes:prot_shred.desc": "Hedefin toplam koruma puanına yapılan yüzdelik indirgeme.",
+
+    "apothic_attributes:dodge_chance": "Kaçınma Şansı",
+    "apothic_attributes:dodge_chance.desc": "Yakın dövüş saldırısından veya bir uzak menzilli saldırısından kaçınma şansı.",
+
+    "apothic_attributes:elytra_flight": "Elitra Uçuşu",
+    "apothic_attributes:elytra_flight.desc": "Elitra giymiş gibi uçup uçamayacağın.",
+
+    "apothic_attributes:creative_flight": "Yaratıcı Mod Uçuşu",
+    "apothic_attributes:creative_flight.desc": "Yaratıcı Moddaymış gibi uçup uçamayacağın.",
+	
+	"comment_id": "MobFx - descriptions are duplicated for JEED support.",
+	
+    "effect.apothic_attributes.knowledge": "Kadim Bilgi",
+    "effect.apothic_attributes.vitality": "Patlayan Canlılık",
+    "effect.apothic_attributes.grievous": "Ağır Yaralar",
+    "effect.apothic_attributes.flying": "Uçuş",
+
+    "effect.apothic_attributes.sundering": "Parçalanma",
+    "effect.apothic_attributes.sundering.desc": "Alınan hasarı artırır.",
+    "effect.apothic_attributes.sundering.description": "Alınan hasarı artırır.",
+
+    "effect.apothic_attributes.bleeding": "Kanama",
+    "effect.apothic_attributes.bleeding.desc": "Her iki saniyede bir hasar verir.",
+    "effect.apothic_attributes.bleeding.description": "Her iki saniyede bir hasar verir.",
+
+    "effect.apothic_attributes.detonation": "Alevli Patlama",
+    "effect.apothic_attributes.detonation.desc": "Süresi dolduğunda kalan yanma süresine göre hasar verir.",
+    "effect.apothic_attributes.detonation.description": "Süresi dolduğunda kalan yanma süresine göre hasar verir.",
+	
+    "effect.minecraft.night_vision.desc": "Karanlıkta görmeni sağlar.",
+    "effect.minecraft.invisibility.desc": "Seni görünmez yapar, ekipman hariç.",
+    "effect.minecraft.jump_boost.desc": "Zıplama yüksekliğini artırır.",
+    "effect.minecraft.fire_resistance.desc": "Ateş hasarına karşı bağışıklık sağlar.",
+    "effect.minecraft.water_breathing.desc": "Boğulmanı engeller.",
+    "effect.minecraft.instant_health.desc": "Anında bir miktar sağlığını geri kazandırır.",
+    "effect.minecraft.instant_damage.desc": "Anında bir miktar büyü hasarı verir.",
+    "effect.minecraft.poison.desc": "Periyodik olarak ölümcül olmayan hasar verir.",
+    "effect.minecraft.regeneration.desc": "Zamanla canını yeniler.",
+	
+	"comment_id": "Damage Sources",
+	
+    "death.attack.apothic_attributes:bleeding": "%1$s kan kaybından öldü",
+    "death.attack.apothic_attributes:bleeding.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası nedeniyle kan kaybından öldü",
+    "death.attack.apothic_attributes:bleeding.player": "%1$s, %2$s adlı oyuncudan kaçmaya çalışırken kan kaybından öldü",
+
+    "death.attack.apothic_attributes:detonation": "%1$s alevle patladı",
+    "death.attack.apothic_attributes:detonation.item": "%1$s alevle patladı",
+    "death.attack.apothic_attributes:detonation.player": "%1$s alevle patladı",
+
+    "death.attack.apothic_attributes:current_hp_damage": "%1$s yere serildi",
+    "death.attack.apothic_attributes:current_hp_damage.item": "%1$s, %2$s adlı oyuncu tarafından %3$s ile yere serildi",
+    "death.attack.apothic_attributes:current_hp_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken yere serildi",
+	
+    "death.attack.apothic_attributes:fire_damage": "%1$s yanarak öldü",
+    "death.attack.apothic_attributes:fire_damage.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası ile yanarak öldü",
+    "death.attack.apothic_attributes:fire_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken yanarak öldü",
+
+    "death.attack.apothic_attributes:cold_damage": "%1$s donarak öldü",
+    "death.attack.apothic_attributes:cold_damage.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası ile donarak öldü",
+    "death.attack.apothic_attributes:cold_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken donarak öldü",
+	
+    "item.minecraft.potion.effect.minecraft.resistance": "Direnç İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "Patlayıcı Direnç İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "Kalıcı Direnç İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "Direnç Oku",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "Emilim İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "Patlayıcı Emilim İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "Kalıcı Emilim İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "Emilim Oku",
+	
+    "item.minecraft.potion.effect.minecraft.haste": "Acele İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "Patlayıcı Acele İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "Kalıcı Acele İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "Acele Oku",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "Madenci Yorgunluğu İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "Patlayıcı Madenci Yorgunluğu İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "Kalıcı Madenci Yorgunluğu İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "Madenci Yorgunluğu Oku",
+	
+    "item.minecraft.potion.effect.minecraft.wither": "Solma İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "Patlayıcı Solma İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "Kalıcı Solma İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "Solma Oku",
+
+    "item.minecraft.potion.effect.minecraft.levitation": "Yükselme İksiri",
+    "item.minecraft.splash_potion.effect.minecraft.levitation": "Patlayıcı Yükselme İksiri",
+    "item.minecraft.lingering_potion.effect.minecraft.levitation": "Kalıcı Yükselme İksiri",
+    "item.minecraft.tipped_arrow.effect.minecraft.levitation": "Yükselme Oku",
+	
+    "item.minecraft.potion.effect.apothic_attributes.sundering": "Parçalanma İksiri",
+    "item.minecraft.splash_potion.effect.apothic_attributes.sundering": "Patlayıcı Parçalanma İksiri",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.sundering": "Kalıcı Parçalanma İksiri",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.sundering": "Parçalanma Oku",
+
+    "item.minecraft.potion.effect.apothic_attributes.knowledge": "Kadim Bilgi İksiri",
+    "item.minecraft.splash_potion.effect.apothic_attributes.knowledge": "Patlayıcı Kadim Bilgi İksiri",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.knowledge": "Kalıcı Kadim Bilgi İksiri",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.knowledge": "Kadim Bilgi Oku",
+	
+    "item.minecraft.potion.effect.apothic_attributes.vitality": "Canlılık Artışı İksiri",
+    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "Patlayıcı Canlılık Artışı İksiri",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "Kalıcı Canlılık Artışı İksiri",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "Canlılık Artışı Oku",
+
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "İyileştirme Azaltma İksiri",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "Patlayıcı İyileştirme Azaltma İksiri",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "Kalıcı İyileştirme Azaltma İksiri",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "İyileştirme Azaltma Oku",
+
+    "item.minecraft.potion.effect.apothic_attributes.flying": "Uçuş İksiri",
+    "item.minecraft.splash_potion.effect.apothic_attributes.flying": "Patlayıcı Uçuş İksiri",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.flying": "Kalıcı Uçuş İksiri",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.flying": "Uçuş Oku"
+}
