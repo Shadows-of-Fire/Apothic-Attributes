@@ -1,0 +1,210 @@
+{
+    "apothic_attributes.gui.attributes": "能力値",
+    "apothic_attributes.gui.base": "基本: %s",
+    "apothic_attributes.gui.min": "最小: %s",
+    "apothic_attributes.gui.max": "最大: %s",
+    "apothic_attributes.gui.modifiers": "変異因子",
+    "apothic_attributes.gui.add_value": "追加属性: %s",
+    "apothic_attributes.gui.add_multiplied_base": "基本倍率: %s",
+    "apothic_attributes.gui.add_multiplied_total": "合計倍率: %s",
+    "apothic_attributes.gui.press_shift": "Shift押しっぱなしで詳細表示",
+    "apothic_attributes.gui.current": "現在値: %s",
+    "apothic_attributes.gui.show_attributes": "能力値を表示",
+    "apothic_attributes.gui.dynamic": "(動的)",
+    "apothic_attributes.gui.formula": "変異計算式",
+    "apothic_attributes.gui.formula.base": "基本",
+    "apothic_attributes.gui.formula.value": "数値",
+    "apothic_attributes.gui.no_modifiers": "変異なし",
+
+    "attribute.name.generic.armor.desc": "物理ダメージの軽減を強化する",
+    "attribute.name.generic.armor_toughness.desc": "敵の防御弱化効率を軽減する",
+    "attribute.name.generic.attack_damage.desc": "フルチャージ攻撃による物理ダメージ",
+    "attribute.name.generic.attack_knockback.desc": "ノックバックで相手を吹き飛ばす距離。単位は半ブロック",
+    "attribute.name.generic.attack_speed.desc": "フルチャージ攻撃を秒間に何回放つことができるか",
+    "attribute.name.generic.knockback_resistance.desc": "ノックバックへの耐性度合い",
+    "attribute.name.generic.luck.desc": "良いことが起きる確率を増加させる",
+    "attribute.name.generic.max_health.desc": "保持できるHPの最大値",
+    "attribute.name.generic.movement_speed.desc": "歩いているときの速度",
+
+    "neoforge.entity_reach.desc": "どの程度離れたエンティティに働きかけられるか。単位はブロック。",
+    "neoforge.entity_gravity.desc": "落下/上昇の速度を制御する、地表に対する加速度。単位はブロック/秒²",
+    "neoforge.name_tag_distance.desc": "他プレイヤーから自分のネームタグが見える限界距離",
+    "neoforge.block_reach.desc": "ブロックに手が届く範囲。単位はブロック",
+    "neoforge.step_height.desc": "ジャンプせずに自動的に上れる段差の高さ",
+    "neoforge.swim_speed.desc": "泳ぐ速度。通常状態に対する倍率で表される",
+
+    "button.apothic_attributes.hide_unchanged": "変化なしの能力は表示しない",
+    "text.apothic_attributes.hide_unchanged": "変化なしを非表示",
+
+    "apothic_attributes:draw_speed": "射撃動作速度",
+    "apothic_attributes:draw_speed.desc": "弓やクロスボウ、トライデントなどの遠距離武器を撃ったり投げたりするときの動作の速度",
+
+    "apothic_attributes:crit_chance": "クリティカル率",
+    "apothic_attributes:crit_chance.desc": "攻撃がクリティカルヒットになる確率。追加ダメージはクリティカルダメージの数値による",
+
+    "apothic_attributes:crit_damage": "クリティカルダメージ",
+    "apothic_attributes:crit_damage.desc": "クリティカルヒット発生時のダメージ倍率。バニラのジャンプによるクリティカルもこの値の影響を受ける",
+
+    "apothic_attributes:cold_damage": "低温ダメージ",
+    "apothic_attributes:cold_damage.desc": "近接攻撃に加算される魔法ダメージ。相手の移動速度を遅くする",
+
+    "apothic_attributes:fire_damage": "火属性ダメージ",
+    "apothic_attributes:fire_damage.desc": "近接攻撃に加算される魔法ダメージ。相手を炎上させる",
+
+    "apothic_attributes:life_steal": "ライフスティール",
+    "apothic_attributes:life_steal.desc": "自分を回復させる耐性無視のダメージ比率",
+
+    "apothic_attributes:current_hp_damage": "HP割合ダメージ",
+    "apothic_attributes:current_hp_damage.desc": "対象の現在HPに応じて近接攻撃に加算される物理ダメージ",
+
+    "apothic_attributes:overheal": "オーバーヒール",
+    "apothic_attributes:overheal.desc": "衝撃吸収効果に変換される耐性無視のダメージ比率",
+
+    "apothic_attributes:ghost_health": "ゴーストヘルス",
+    "apothic_attributes:ghost_health.desc": "現在のところ未実装",
+
+    "apothic_attributes:mining_speed": "採掘速度",
+    "apothic_attributes:mining_speed.desc": "ブロックを破壊する速度。通常状態に対する倍率で表される",
+
+    "apothic_attributes:arrow_damage": "矢ダメージ倍率",
+    "apothic_attributes:arrow_damage.desc": "矢によるダメージの増加率。トライデントも矢に含まれる",
+
+    "apothic_attributes:arrow_velocity": "矢の速度",
+    "apothic_attributes:arrow_velocity.desc": "矢が飛ぶ速さの増加率。矢によるダメージは速さにも依存する",
+
+    "apothic_attributes:experience_gained": "経験値取得倍率",
+    "apothic_attributes:experience_gained.desc": "ブロック破壊時や敵を倒した時に得られる経験値の増加率",
+
+    "apothic_attributes:healing_received": "回復効率",
+    "apothic_attributes:healing_received.desc": "自身が受ける回復量の増加率",
+
+    "apothic_attributes:armor_pierce": "アーマー貫通",
+    "apothic_attributes:armor_pierce.desc": "対象の防御力を一律で減少させる",
+
+    "apothic_attributes:armor_shred": "アーマー破壊",
+    "apothic_attributes:armor_shred.desc": "対象の防御力を割合で減少させる",
+
+    "apothic_attributes:projectile_damage": "飛び道具ダメージ倍率",
+    "apothic_attributes:projectile_damage.desc": "自身から発せられる全ての飛び道具によるダメージの増加率",
+
+    "apothic_attributes:prot_pierce": "ダメージ軽減貫通",
+    "apothic_attributes:prot_pierce.desc": "対象のダメージ軽減効果の合計値を一律で減少させる",
+
+    "apothic_attributes:prot_shred": "ダメージ軽減破壊",
+    "apothic_attributes:prot_shred.desc": "対象のダメージ軽減効果の合計値を割合で減少させる",
+
+    "apothic_attributes:dodge_chance": "回避率",
+    "apothic_attributes:dodge_chance.desc": "近接攻撃や飛び道具を回避できる確率",
+
+    "apothic_attributes:elytra_flight": "エリトラ効果",
+    "apothic_attributes:elytra_flight.desc": "エリトラを装着しているかのように飛べるかどうか",
+
+    "apothic_attributes:creative_flight": "クリエイティブ飛行",
+    "apothic_attributes:creative_flight.desc": "クリエイティブモードと同じように飛び回れるかどうか",
+
+    "comment_id": "MobFx - JEED対応のため、説明文が重複しています。",
+
+    "effect.apothic_attributes.knowledge": "古の知識",
+    "effect.apothic_attributes.vitality": "みなぎる活力",
+    "effect.apothic_attributes.grievous": "重傷",
+    "effect.apothic_attributes.flying": "飛翔",
+
+    "effect.apothic_attributes.sundering": "崩壊",
+    "effect.apothic_attributes.sundering.desc": "受けるダメージが増加する。",
+    "effect.apothic_attributes.sundering.description": "受けるダメージが増加する。",
+
+    "effect.apothic_attributes.bleeding": "出血",
+    "effect.apothic_attributes.bleeding.desc": "2秒ごとの継続ダメージを受ける。",
+    "effect.apothic_attributes.bleeding.description": "2秒ごとの継続ダメージを受ける。",
+
+    "effect.apothic_attributes.detonation": "火炎爆発",
+    "effect.apothic_attributes.detonation.desc": "効果が切れたとき、燃えている炎の残り時間に応じてダメージを受ける。",
+    "effect.apothic_attributes.detonation.description": "効果が切れたとき、燃えている炎の残り時間に応じてダメージを受ける。",
+
+    "effect.minecraft.night_vision.desc": "暗闇でも視界を確保できるようになる。",
+    "effect.minecraft.invisibility.desc": "透明になるが、装備には効果がない。",
+    "effect.minecraft.jump_boost.desc": "ジャンプできる高さをブーストする。",
+    "effect.minecraft.fire_resistance.desc": "火によるダメージを無効化する。",
+    "effect.minecraft.water_breathing.desc": "溺れなくなる。",
+    "effect.minecraft.instant_health.desc": "少量のライフを即時に回復する。",
+    "effect.minecraft.instant_damage.desc": "少量の魔法ダメージを即時にもたらす。",
+    "effect.minecraft.poison.desc": "死に至らない継続ダメージを与える。",
+    "effect.minecraft.regeneration.desc": "一定時間にわたって自動回復効果を得る。",
+
+    "comment_id": "Damage Sources",
+
+    "death.attack.apothic_attributes:bleeding": "%1$sは失血死した。",
+    "death.attack.apothic_attributes:bleeding.item": "%1$sは%2$sの%3$sにより失血死した。",
+    "death.attack.apothic_attributes:bleeding.player": "%1$sは%2$sから逃れようとして失血死した。",
+
+    "death.attack.apothic_attributes:detonation": "%1$sは炎により爆発四散した。",
+    "death.attack.apothic_attributes:detonation.item": "%1$sは炎により爆発四散した。",
+    "death.attack.apothic_attributes:detonation.player": "%1$sは炎により爆発四散した。",
+
+    "death.attack.apothic_attributes:current_hp_damage": "%1$sはぶっ飛ばされた。",
+    "death.attack.apothic_attributes:current_hp_damage.item": "%1$sは、%2$sが%3$sを使ってぶっ飛ばされた。",
+    "death.attack.apothic_attributes:current_hp_damage.player": "%1$sは%2$sと戦ってぶっ飛ばされた。",
+
+    "death.attack.apothic_attributes:fire_damage": "%1$sはカリカリに焼けて死んだ。",
+    "death.attack.apothic_attributes:fire_damage.item": "%1$sは、%2$sが使う%3$sによってカリカリになるまで焼かれた。",
+    "death.attack.apothic_attributes:fire_damage.player": "%1$sは%2$sと戦って焼け死んだ。",
+
+    "death.attack.apothic_attributes:cold_damage": "%1$sは凍死した。",
+    "death.attack.apothic_attributes:cold_damage.item": "%1$sは、%2$sが使う%3$sによって凍死した。",
+    "death.attack.apothic_attributes:cold_damage.player": "%1$sは%2$sと戦って凍死した。",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "耐性のポーション",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "耐性のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "耐性の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "耐性の矢",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "衝撃吸収のポーション",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "衝撃吸収のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "衝撃吸収の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "衝撃吸収の矢",
+
+    "item.minecraft.potion.effect.minecraft.haste": "採掘速度上昇のポーション",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "採掘速度上昇のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "採掘速度上昇の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "採掘速度上昇の矢",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "採掘速度低下のポーション",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "採掘速度低下のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "採掘速度低下の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "採掘速度低下の矢",
+
+    "item.minecraft.potion.effect.minecraft.wither": "ウィザーのポーション",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "ウィザーのスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "ウィザーの残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "ウィザーの矢",
+
+    "item.minecraft.potion.effect.minecraft.levitation": "浮遊のポーション",
+    "item.minecraft.splash_potion.effect.minecraft.levitation": "浮遊のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.minecraft.levitation": "浮遊の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.minecraft.levitation": "浮遊の矢",
+
+    "item.minecraft.potion.effect.apothic_attributes.sundering": "崩壊のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.sundering": "崩壊のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.sundering": "崩壊の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.sundering": "崩壊の矢",
+
+    "item.minecraft.potion.effect.apothic_attributes.knowledge": "古の知識のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.knowledge": "古の知識のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.knowledge": "古の知識の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.knowledge": "古の知識の矢",
+
+    "item.minecraft.potion.effect.apothic_attributes.vitality": "回復増加のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "回復増加のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "回復増加の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "回復増加の矢",
+
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "回復低下のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "回復低下のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "回復低下の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "回復低下の矢",
+
+    "item.minecraft.potion.effect.apothic_attributes.flying": "飛翔のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.flying": "飛翔のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.flying": "飛翔の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.flying": "飛翔の矢"
+}
