@@ -50,8 +50,8 @@ public class ALObjects {
 
     public static class BuiltInRegs {
 
-        public static final Registry<EntityEquipmentSlot> ENTITY_EQUIPMENT_SLOT = R.registry("entity_equipment_slot", c -> c);
-        public static final Registry<EntitySlotGroup> ENTITY_SLOT_GROUP = R.registry("entity_slot_group", c -> c);
+        public static final Registry<EntityEquipmentSlot> ENTITY_EQUIPMENT_SLOT = R.registry("entity_equipment_slot", c -> c.sync(true));
+        public static final Registry<EntitySlotGroup> ENTITY_SLOT_GROUP = R.registry("entity_slot_group", c -> c.sync(true));
 
         private static void bootstrap() {}
     }
