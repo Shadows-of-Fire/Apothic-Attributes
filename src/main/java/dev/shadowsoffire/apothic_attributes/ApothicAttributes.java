@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import dev.shadowsoffire.apothic_attributes.client.AttributesLibClient;
+import dev.shadowsoffire.apothic_attributes.compat.CuriosCompat;
 import dev.shadowsoffire.apothic_attributes.impl.AttributeEvents;
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
 import dev.shadowsoffire.apothic_attributes.payload.CritParticlePayload;
@@ -34,6 +35,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -128,9 +130,9 @@ public class ApothicAttributes {
                 attr.value().setSyncable(true);
             }
         });
-        // if (ModList.get().isLoaded("curios")) {
-        // e.enqueueWork(CuriosCompat::init);
-        // }
+        if (ModList.get().isLoaded("curios")) {
+            e.enqueueWork(CuriosCompat::init);
+        }
     }
 
     @SubscribeEvent
