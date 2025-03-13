@@ -353,6 +353,7 @@ public class AttributeEvents {
         }
     }
 
+    @SuppressWarnings("removal")
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void bonusModifiers(ItemAttributeModifierEvent e) {
         ItemStack stack = e.getItemStack();
