@@ -31,10 +31,13 @@ import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.GatherEffectScreenTooltipsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class AttributesLibClient {
@@ -127,12 +130,12 @@ public class AttributesLibClient {
             e.registerReloadListener(ALConfig.makeReloader());
         }
 
-        // @SubscribeEvent
-        // public static void clientSetup(FMLClientSetupEvent e) {
-        // if (ModList.get().isLoaded("curios")) {
-        // NeoForge.EVENT_BUS.register(new CuriosClientCompat());
-        // }
-        // }
+        @SubscribeEvent
+        public static void clientSetup(FMLClientSetupEvent e) {
+            if (ModList.get().isLoaded("curios")) {
+                NeoForge.EVENT_BUS.register(new CuriosClientCompat());
+            }
+        }
 
         @SubscribeEvent
         public static void particleFactories(RegisterParticleProvidersEvent e) {
