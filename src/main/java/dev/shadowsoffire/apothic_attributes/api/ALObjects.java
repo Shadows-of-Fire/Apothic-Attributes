@@ -14,16 +14,25 @@ import dev.shadowsoffire.apothic_attributes.mob_effect.GrievousEffect;
 import dev.shadowsoffire.apothic_attributes.mob_effect.KnowledgeEffect;
 import dev.shadowsoffire.apothic_attributes.mob_effect.SunderingEffect;
 import dev.shadowsoffire.apothic_attributes.mob_effect.VitalityEffect;
+import dev.shadowsoffire.apothic_attributes.modifiers.EntityEquipmentSlot;
+import dev.shadowsoffire.apothic_attributes.modifiers.EntitySlotGroup;
+import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiers;
+import dev.shadowsoffire.apothic_attributes.modifiers.VanillaEquipmentSlot;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -35,8 +44,17 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.BooleanAttribute;
 import net.neoforged.neoforge.common.PercentageAttribute;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.registries.holdersets.AnyHolderSet;
 
 public class ALObjects {
+
+    public static class BuiltInRegs {
+
+        public static final Registry<EntityEquipmentSlot> ENTITY_EQUIPMENT_SLOT = R.registry("entity_equipment_slot", c -> c);
+        public static final Registry<EntitySlotGroup> ENTITY_SLOT_GROUP = R.registry("entity_slot_group", c -> c);
+
+        private static void bootstrap() {}
+    }
 
     public static class Attributes {
 
@@ -156,8 +174,7 @@ public class ALObjects {
          */
         public static final Holder<Attribute> ELYTRA_FLIGHT = R.attribute("elytra_flight", () -> new BooleanAttribute("apothic_attributes:elytra_flight", false).setSyncable(true));
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
     }
 
     public static class MobEffects extends net.minecraft.world.effect.MobEffects { // Hack to bring vanilla things in-scope
@@ -199,16 +216,14 @@ public class ALObjects {
          */
         public static final Holder<MobEffect> FLYING = R.effect("flying", FlyingEffect::new);
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
     }
 
     public static class Particles {
 
         public static final Supplier<SimpleParticleType> APOTH_CRIT = R.particle("apoth_crit", () -> new SimpleParticleType(false));
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
 
     }
 
@@ -216,8 +231,7 @@ public class ALObjects {
 
         public static final Holder<SoundEvent> DODGE = R.sound("dodge");
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
 
     }
 
@@ -249,8 +263,7 @@ public class ALObjects {
          */
         public static final ResourceKey<DamageType> COLD_DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE, ApothicAttributes.loc("cold_damage"));
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
     }
 
     public static final class Potions {
@@ -296,17 +309,22 @@ public class ALObjects {
         public static final Holder<Potion> LONG_FLYING = R.singlePotion("long_flying", () -> new MobEffectInstance(MobEffects.FLYING, 18000));
         public static final Holder<Potion> EXTRA_LONG_FLYING = R.singlePotion("extra_long_flying", () -> new MobEffectInstance(MobEffects.FLYING, 36000));
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
     }
 
     public static class Components {
 
+        /**
+         * @deprecated Prefer {@link #BONUS_STACK_ATTRIBUTE_MODIFIERS}.
+         */
+        @Deprecated(forRemoval = true)
         public static final DataComponentType<ItemAttributeModifiers> BONUS_ATTRIBUTE_MODIFIERS = R.component("bonus_attribute_modifiers",
             builder -> builder.persistent(ItemAttributeModifiers.CODEC).networkSynchronized(ItemAttributeModifiers.STREAM_CODEC).cacheEncoding());
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        public static final DataComponentType<StackAttributeModifiers> BONUS_STACK_ATTRIBUTE_MODIFIERS = R.component("bonus_stack_attribute_modifiers",
+            builder -> builder.persistent(StackAttributeModifiers.CODEC).networkSynchronized(StackAttributeModifiers.STREAM_CODEC).cacheEncoding());
+
+        private static void bootstrap() {}
     }
 
     public static class Attachments {
@@ -318,8 +336,7 @@ public class ALObjects {
          */
         public static final AttachmentType<Float> PRE_DAMAGE_HEALTH = R.attachment("pre_damage_health", (holder) -> 0F, b -> b);
 
-        @ApiStatus.Internal
-        public static void bootstrap() {}
+        private static void bootstrap() {}
     }
 
     public static class Tags {
@@ -332,8 +349,61 @@ public class ALObjects {
 
     }
 
+    @ApiStatus.Experimental
+    public static class EquipmentSlots {
+        public static final Holder<EntityEquipmentSlot> MAINHAND = slot(EquipmentSlot.MAINHAND);
+        public static final Holder<EntityEquipmentSlot> OFFHAND = slot(EquipmentSlot.OFFHAND);
+        public static final Holder<EntityEquipmentSlot> HEAD = slot(EquipmentSlot.HEAD);
+        public static final Holder<EntityEquipmentSlot> CHEST = slot(EquipmentSlot.CHEST);
+        public static final Holder<EntityEquipmentSlot> LEGS = slot(EquipmentSlot.LEGS);
+        public static final Holder<EntityEquipmentSlot> FEET = slot(EquipmentSlot.FEET);
+        public static final Holder<EntityEquipmentSlot> BODY = slot(EquipmentSlot.BODY);
+
+        private static Holder<EntityEquipmentSlot> slot(EquipmentSlot slot) {
+            return R.custom(slot.getSerializedName(), BuiltInRegs.ENTITY_EQUIPMENT_SLOT.key(), () -> new VanillaEquipmentSlot(slot));
+        }
+
+        private static void bootstrap() {}
+    }
+
+    @ApiStatus.Experimental
+    public static class EquipmentSlotGroups {
+        /**
+         * True "any" slot group. Matches any registered {@link EntityEquipmentSlot}.
+         */
+        public static final EntitySlotGroup ANY = group("any", new AnyHolderSet<>(BuiltInRegs.ENTITY_EQUIPMENT_SLOT.asLookup()));
+
+        /**
+         * Vanilla "any" slot group, corresponding to {@link EquipmentSlotGroup#ANY}.
+         */
+        public static final EntitySlotGroup ANY_VANILLA = group("any_vanilla", HolderSet.direct(
+            EquipmentSlots.MAINHAND, EquipmentSlots.OFFHAND, EquipmentSlots.HEAD,
+            EquipmentSlots.CHEST, EquipmentSlots.LEGS, EquipmentSlots.FEET, EquipmentSlots.BODY));
+
+        public static final EntitySlotGroup MAINHAND = group("mainhand", HolderSet.direct(EquipmentSlots.MAINHAND));
+        public static final EntitySlotGroup OFFHAND = group("offhand", HolderSet.direct(EquipmentSlots.OFFHAND));
+        public static final EntitySlotGroup HAND = group("hand", HolderSet.direct(EquipmentSlots.MAINHAND, EquipmentSlots.OFFHAND)); // TODO: Tag key for this?
+        public static final EntitySlotGroup HEAD = group("head", HolderSet.direct(EquipmentSlots.HEAD));
+        public static final EntitySlotGroup CHEST = group("chest", HolderSet.direct(EquipmentSlots.CHEST));
+        public static final EntitySlotGroup LEGS = group("legs", HolderSet.direct(EquipmentSlots.LEGS));
+        public static final EntitySlotGroup FEET = group("feet", HolderSet.direct(EquipmentSlots.FEET));
+        public static final EntitySlotGroup ARMOR = group("armor", HolderSet.direct(EquipmentSlots.HEAD, EquipmentSlots.CHEST, EquipmentSlots.LEGS, EquipmentSlots.FEET));
+        public static final EntitySlotGroup BODY = group("body", HolderSet.direct(EquipmentSlots.BODY));
+
+        private static ResourceLocation id(String path) {
+            return ApothicAttributes.loc(path);
+        }
+
+        private static EntitySlotGroup group(String path, HolderSet<EntityEquipmentSlot> slots) {
+            return R.custom(path, BuiltInRegs.ENTITY_SLOT_GROUP.key(), new EntitySlotGroup(id(path), slots));
+        }
+
+        private static void bootstrap() {}
+    }
+
     @ApiStatus.Internal
     public static void bootstrap(IEventBus bus) {
+        BuiltInRegs.bootstrap();
         Attributes.bootstrap();
         MobEffects.bootstrap();
         Particles.bootstrap();
@@ -342,6 +412,8 @@ public class ALObjects {
         Potions.bootstrap();
         Components.bootstrap();
         Attachments.bootstrap();
+        EquipmentSlots.bootstrap();
+        EquipmentSlotGroups.bootstrap();
         bus.register(R);
     }
 }
