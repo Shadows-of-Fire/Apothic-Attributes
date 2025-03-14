@@ -1,3 +1,12 @@
+## 2.7.0
+* Added the experimental `EntityEquipmentSlot` API.
+  * This API is an abstraction around Vanilla's `EquipmentSlot` / `EquipmentSlotGroup`.
+  * It allows writing code which handles `AttributeModifier`s without restricting it to the vanilla enum slots.
+  * It is possible to use this API to unify code paths around vanilla equipment slots and mod-added slots (i.e. Curios).
+* Curios support has been re-enabled. Attribute modifiers from Curios will now display properly as sources in the Attributes GUI.
+* The `/apoth add_bonus_modifier` command can now target slots registered with the `EntityEquipmentSlot` API.
+  * This does not natively allow this command to target curio slots, as it first requires a mod to register curios slots with the new API.
+
 ## 2.6.2
 * RuyaSavascisi: Added Turkish translation.
 * okazako: Added Japanese translation.
