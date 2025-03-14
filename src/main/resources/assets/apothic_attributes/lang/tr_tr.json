@@ -134,24 +134,24 @@
 	"comment_id": "Damage Sources",
 	
     "death.attack.apothic_attributes:bleeding": "%1$s kan kaybından öldü",
-    "death.attack.apothic_attributes:bleeding.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası nedeniyle kan kaybından öldü",
-    "death.attack.apothic_attributes:bleeding.player": "%1$s, %2$s adlı oyuncudan kaçmaya çalışırken kan kaybından öldü",
+    "death.attack.apothic_attributes:bleeding.item": "%1$s, %2$s tarafından %3$s eşyası nedeniyle kan kaybından öldü",
+    "death.attack.apothic_attributes:bleeding.player": "%1$s, %2$s kaçmaya çalışırken kan kaybından öldü",
 
     "death.attack.apothic_attributes:detonation": "%1$s alevle patladı",
     "death.attack.apothic_attributes:detonation.item": "%1$s alevle patladı",
     "death.attack.apothic_attributes:detonation.player": "%1$s alevle patladı",
 
     "death.attack.apothic_attributes:current_hp_damage": "%1$s yere serildi",
-    "death.attack.apothic_attributes:current_hp_damage.item": "%1$s, %2$s adlı oyuncu tarafından %3$s ile yere serildi",
-    "death.attack.apothic_attributes:current_hp_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken yere serildi",
+    "death.attack.apothic_attributes:current_hp_damage.item": "%1$s, %2$s tarafından %3$s ile yere serildi",
+    "death.attack.apothic_attributes:current_hp_damage.player": "%1$s, %2$s ile savaşırken yere serildi",
 	
     "death.attack.apothic_attributes:fire_damage": "%1$s yanarak öldü",
-    "death.attack.apothic_attributes:fire_damage.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası ile yanarak öldü",
-    "death.attack.apothic_attributes:fire_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken yanarak öldü",
+    "death.attack.apothic_attributes:fire_damage.item": "%1$s, %2$s tarafından %3$s eşyası ile yanarak öldü",
+    "death.attack.apothic_attributes:fire_damage.player": "%1$s, %2$s ile savaşırken yanarak öldü",
 
     "death.attack.apothic_attributes:cold_damage": "%1$s donarak öldü",
-    "death.attack.apothic_attributes:cold_damage.item": "%1$s, %2$s adlı oyuncunun %3$s eşyası ile donarak öldü",
-    "death.attack.apothic_attributes:cold_damage.player": "%1$s, %2$s adlı oyuncu ile savaşırken donarak öldü",
+    "death.attack.apothic_attributes:cold_damage.item": "%1$s, %2$s tarafından %3$s eşyası ile donarak öldü",
+    "death.attack.apothic_attributes:cold_damage.player": "%1$s, %2$s ile savaşırken donarak öldü",
 	
     "item.minecraft.potion.effect.minecraft.resistance": "Direnç İksiri",
     "item.minecraft.splash_potion.effect.minecraft.resistance": "Patlayıcı Direnç İksiri",
