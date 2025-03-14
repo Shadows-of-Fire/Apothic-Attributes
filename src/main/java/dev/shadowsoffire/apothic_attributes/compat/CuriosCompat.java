@@ -3,13 +3,16 @@ package dev.shadowsoffire.apothic_attributes.compat;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Multimap;
 
+import dev.shadowsoffire.apothic_attributes.api.ALObjects.BuiltInRegs;
 import dev.shadowsoffire.apothic_attributes.client.ModifierSource;
 import dev.shadowsoffire.apothic_attributes.client.ModifierSource.ItemModifierSource;
 import dev.shadowsoffire.apothic_attributes.client.ModifierSourceType;
+import dev.shadowsoffire.apothic_attributes.modifiers.EntityEquipmentSlot;
 import dev.shadowsoffire.apothic_attributes.modifiers.EntitySlotGroup;
 import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiers;
 import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiersEvent;
@@ -30,7 +33,19 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 public class CuriosCompat {
 
-    public static final BiMap<String, EntitySlotGroup> CURIOS_TO_APOTH = HashBiMap.create();
+    public static final LoadingCache<String, Holder<EntityEquipmentSlot>> CURIO_TYPE_TO_EQUIPMENT_SLOT = CacheBuilder.newBuilder().build(new CacheLoader<>(){
+
+        @Override
+        public Holder<EntityEquipmentSlot> load(String key) throws Exception {
+            for (EntityEquipmentSlot slot : BuiltInRegs.ENTITY_EQUIPMENT_SLOT) {
+                if (slot instanceof CurioEquipmentSlot curioSlot && curioSlot.curioType().equals(key)) {
+                    return BuiltInRegs.ENTITY_EQUIPMENT_SLOT.wrapAsHolder(slot);
+                }
+            }
+            return null;
+        }
+
+    });
 
     static {
         if (!ModList.get().isLoaded("curios")) {
@@ -73,25 +88,50 @@ public class CuriosCompat {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CuriosCompat::stackAttrModifierCompat);
     }
 
+    /**
+     * This method attempts to bridge Curios with {@link StackAttributeModifiers}.
+     * <p>
+     * For this to work, a mod wanting compat with a specific curio slot needs to register
+     * both a {@link CurioEquipmentSlot} and a {@link EntitySlotGroup} with the same key.
+     * <p>
+     * This method will then try to map a curio slot type to a {@link EntityEquipmentSlot} by iterating the registry for a matching {@link CurioEquipmentSlot}.
+     * If one is found, it will fire the {@link StackAttributeModifiersEvent}, with the following contracts:
+     * <ol>
+     * <li>If a matching {@link EntitySlotGroup} is found, the base curio modifiers will be visible in the event</li>
+     * <li>Modifiers for any {@link EntitySlotGroup} that contain the "selected" {@link CurioEquipmentSlot} will be reflected in the curio</li>
+     * </ol>
+     * Unfortunately this falls apart if multiple mods try to create equipment slots and groups for the same curio slot. Not sure what to do about that just yet.
+     */
     public static void stackAttrModifierCompat(CurioAttributeModifierEvent e) {
-        EntitySlotGroup slotGroup = CURIOS_TO_APOTH.get(e.getSlotContext().identifier());
-        if (slotGroup != null) {
+        Holder<EntityEquipmentSlot> curioSlot = CURIO_TYPE_TO_EQUIPMENT_SLOT.getUnchecked(e.getSlotContext().identifier());
+        if (curioSlot != null) {
             var builder = StackAttributeModifiers.builder();
-            e.getModifiers().forEach((attr, modif) -> {
-                builder.add(attr, modif, slotGroup);
-            });
+            // Try to find a group with the same name, if it exists.
+            // The mod which created the equipment slot should have also created the group object.
+            EntitySlotGroup group = BuiltInRegs.ENTITY_SLOT_GROUP.get(curioSlot.getKey().location());
+            if (group != null) {
+                e.getModifiers().forEach((attr, modif) -> {
+                    builder.add(attr, modif, group);
+                });
+            }
 
             var event = new StackAttributeModifiersEvent(e.getItemStack(), builder.build());
             NeoForge.EVENT_BUS.post(event);
 
             if (event.hasChanges()) {
-                e.clearModifiers();
+                // Only wipe the original modifiers if we were able to populate them to the stack event.
+                if (group != null) {
+                    e.clearModifiers();
+                }
                 StackAttributeModifiers newModifs = event.build();
 
-                newModifs.forEach(slotGroup, (attr, modif) -> {
-                    e.addModifier(attr, modif);
-                });
+                for (StackAttributeModifiers.Entry entry : newModifs.modifiers()) {
+                    if (entry.slots().test(curioSlot)) {
+                        e.addModifier(entry.attribute(), entry.modifier());
+                    }
+                }
             }
         }
     }
+
 }

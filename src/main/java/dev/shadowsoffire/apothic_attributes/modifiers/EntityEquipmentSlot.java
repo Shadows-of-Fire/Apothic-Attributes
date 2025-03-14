@@ -23,6 +23,6 @@ public interface EntityEquipmentSlot {
      * @param entity
      * @return
      */
-    public Iterable<ItemStack> getStacks(LivingEntity entity);
+    Iterable<ItemStack> getStacks(LivingEntity entity);
 
 }
