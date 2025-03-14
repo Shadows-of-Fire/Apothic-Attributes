@@ -60,6 +60,9 @@ public class EquipmentSlotCompat {
      */
     @Nullable
     public static EquipmentSlotGroup toVanilla(EntitySlotGroup group) {
+        if (group == ALObjects.EquipmentSlotGroups.ANY) {
+            return EquipmentSlotGroup.ANY;
+        }
         return GROUP_MAP.inverse().get(group);
     }
 
