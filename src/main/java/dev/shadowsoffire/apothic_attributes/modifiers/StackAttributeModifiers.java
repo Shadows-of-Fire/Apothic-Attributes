@@ -77,7 +77,7 @@ public record StackAttributeModifiers(List<StackAttributeModifiers.Entry> modifi
     public static StackAttributeModifiers fromVanilla(ItemAttributeModifiers modifiers) {
         Builder builder = builder();
         for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
-            builder.add(entry.attribute(), entry.modifier(), EntitySlotGroup.fromVanilla(entry.slot()));
+            builder.add(entry.attribute(), entry.modifier(), EquipmentSlotCompat.fromVanilla(entry.slot()));
         }
         return builder.build();
     }

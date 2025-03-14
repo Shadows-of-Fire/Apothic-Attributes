@@ -7,9 +7,15 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+/**
+ * Interface which represents an equipment slot type for a living entity. This is an extensible version of {@link EquipmentSlot}.
+ * 
+ * @see {@link EquipmentSlotCompat} for interop code between this class and {@link EquipmentSlot}.
+ */
 public interface EntityEquipmentSlot {
 
     public static final Codec<Holder<EntityEquipmentSlot>> CODEC = BuiltInRegs.ENTITY_EQUIPMENT_SLOT.holderByNameCodec();

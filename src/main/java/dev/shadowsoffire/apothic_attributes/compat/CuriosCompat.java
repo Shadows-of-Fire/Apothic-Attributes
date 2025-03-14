@@ -1,11 +1,11 @@
 package dev.shadowsoffire.apothic_attributes.compat;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import org.jetbrains.annotations.Nullable;
+
 import com.google.common.collect.Multimap;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects.BuiltInRegs;
@@ -33,19 +33,7 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 public class CuriosCompat {
 
-    public static final LoadingCache<String, Holder<EntityEquipmentSlot>> CURIO_TYPE_TO_EQUIPMENT_SLOT = CacheBuilder.newBuilder().build(new CacheLoader<>(){
-
-        @Override
-        public Holder<EntityEquipmentSlot> load(String key) throws Exception {
-            for (EntityEquipmentSlot slot : BuiltInRegs.ENTITY_EQUIPMENT_SLOT) {
-                if (slot instanceof CurioEquipmentSlot curioSlot && curioSlot.curioType().equals(key)) {
-                    return BuiltInRegs.ENTITY_EQUIPMENT_SLOT.wrapAsHolder(slot);
-                }
-            }
-            return null;
-        }
-
-    });
+    private static final Map<String, Holder<EntityEquipmentSlot>> CURIO_TYPE_TO_EQUIPMENT_SLOT = new HashMap<>();
 
     static {
         if (!ModList.get().isLoaded("curios")) {
@@ -88,6 +76,18 @@ public class CuriosCompat {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CuriosCompat::stackAttrModifierCompat);
     }
 
+    @Nullable
+    public static synchronized Holder<EntityEquipmentSlot> getSlotForCurio(String curioType) {
+        return CURIO_TYPE_TO_EQUIPMENT_SLOT.computeIfAbsent(curioType, key -> {
+            for (EntityEquipmentSlot slot : BuiltInRegs.ENTITY_EQUIPMENT_SLOT) {
+                if (slot instanceof CurioEquipmentSlot curioSlot && curioSlot.curioType().equals(key)) {
+                    return BuiltInRegs.ENTITY_EQUIPMENT_SLOT.wrapAsHolder(slot);
+                }
+            }
+            return null;
+        });
+    }
+
     /**
      * This method attempts to bridge Curios with {@link StackAttributeModifiers}.
      * <p>
@@ -103,7 +103,7 @@ public class CuriosCompat {
      * Unfortunately this falls apart if multiple mods try to create equipment slots and groups for the same curio slot. Not sure what to do about that just yet.
      */
     public static void stackAttrModifierCompat(CurioAttributeModifierEvent e) {
-        Holder<EntityEquipmentSlot> curioSlot = CURIO_TYPE_TO_EQUIPMENT_SLOT.getUnchecked(e.getSlotContext().identifier());
+        Holder<EntityEquipmentSlot> curioSlot = getSlotForCurio(e.getSlotContext().identifier());
         if (curioSlot != null) {
             var builder = StackAttributeModifiers.builder();
             // Try to find a group with the same name, if it exists.

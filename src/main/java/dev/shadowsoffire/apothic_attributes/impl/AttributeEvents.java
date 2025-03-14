@@ -10,6 +10,7 @@ import dev.shadowsoffire.apothic_attributes.api.AttributeHelper;
 import dev.shadowsoffire.apothic_attributes.commands.BonusModifierCommand;
 import dev.shadowsoffire.apothic_attributes.event.ApotheosisCommandEvent;
 import dev.shadowsoffire.apothic_attributes.modifiers.EntitySlotGroup;
+import dev.shadowsoffire.apothic_attributes.modifiers.EquipmentSlotCompat;
 import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiers;
 import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiersEvent;
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
@@ -374,7 +375,7 @@ public class AttributeEvents {
             e.clearModifiers();
             StackAttributeModifiers newModifs = event.build();
             for (EquipmentSlotGroup slots : EquipmentSlotGroup.values()) {
-                EntitySlotGroup group = EntitySlotGroup.fromVanilla(slots);
+                EntitySlotGroup group = EquipmentSlotCompat.fromVanilla(slots);
                 newModifs.forEach(group, (attr, modif) -> {
                     e.addModifier(attr, modif, slots);
                 });
