@@ -347,6 +347,12 @@ public class ALObjects {
          */
         public static final TagKey<Attribute> DYNAMIC_BASE_ATTRIBUTES = TagKey.create(Registries.ATTRIBUTE, ApothicAttributes.loc("dynamic_base"));
 
+        /**
+         * This tag is a joined tag of all non-physical damage type tags (magic, fire, lightning, explosions, etc).
+         * <p>
+         * It is used to determine if a damage type is physical or not.
+         */
+        public static final TagKey<DamageType> IS_NON_PHYSICAL = TagKey.create(Registries.DAMAGE_TYPE, ApothicAttributes.loc("is_non_physical"));
     }
 
     @ApiStatus.Experimental
