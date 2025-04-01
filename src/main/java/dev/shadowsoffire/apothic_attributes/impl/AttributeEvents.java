@@ -192,7 +192,7 @@ public class AttributeEvents {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void apothCriticalStrike(LivingIncomingDamageEvent e) {
         LivingEntity attacker = e.getSource().getEntity() instanceof LivingEntity le ? le : null;
-        if (attacker == null) return;
+        if (attacker == null || e.getSource().is(ALObjects.Tags.CANNOT_CRITICALLY_STRIKE)) return;
 
         double critChance = attacker.getAttributeValue(ALObjects.Attributes.CRIT_CHANCE);
         float critDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.CRIT_DAMAGE);

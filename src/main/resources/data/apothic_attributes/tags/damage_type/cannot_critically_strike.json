@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "apothic_attributes:current_hp_damage",
+    "#bypasses_invulnerability"
+  ]
+}

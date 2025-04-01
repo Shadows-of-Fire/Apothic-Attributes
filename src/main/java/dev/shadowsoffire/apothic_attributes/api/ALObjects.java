@@ -353,6 +353,11 @@ public class ALObjects {
          * It is used to determine if a damage type is physical or not.
          */
         public static final TagKey<DamageType> IS_NON_PHYSICAL = TagKey.create(Registries.DAMAGE_TYPE, ApothicAttributes.loc("is_non_physical"));
+
+        /**
+         * Damage Types with this tag are immune from any processing by {@link Attributes#CRIT_CHANCE} and {@link Attributes#CRIT_DAMAGE}.
+         */
+        public static final TagKey<DamageType> CANNOT_CRITICALLY_STRIKE = TagKey.create(Registries.DAMAGE_TYPE, ApothicAttributes.loc("cannot_critically_strike"));
     }
 
     @ApiStatus.Experimental
