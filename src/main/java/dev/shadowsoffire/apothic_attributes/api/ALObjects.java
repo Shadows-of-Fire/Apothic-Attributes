@@ -18,6 +18,7 @@ import dev.shadowsoffire.apothic_attributes.modifiers.EntityEquipmentSlot;
 import dev.shadowsoffire.apothic_attributes.modifiers.EntitySlotGroup;
 import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiers;
 import dev.shadowsoffire.apothic_attributes.modifiers.VanillaEquipmentSlot;
+import dev.shadowsoffire.apothic_attributes.util.AuxDmgTracker;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -335,6 +336,14 @@ public class ALObjects {
          * This allows effects to be computed based on the actual amount of damage taken.
          */
         public static final AttachmentType<Float> PRE_DAMAGE_HEALTH = R.attachment("pre_damage_health", (holder) -> 0F, b -> b);
+
+        /**
+         * Records invulnerability times and last hurt amounts for the auxiliary damage types.
+         * <p>
+         * This allows us to keep track of these damages on their own, without merging them with other damage types.
+         */
+        public static final AttachmentType<AuxDmgTracker> AUX_DMG_TRACKER = R.attachment("aux_dmg_tracker", () -> new AuxDmgTracker(), b -> b
+            .serialize(AuxDmgTracker.CODEC));
 
         private static void bootstrap() {}
     }

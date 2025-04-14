@@ -15,6 +15,7 @@ import dev.shadowsoffire.apothic_attributes.modifiers.StackAttributeModifiersEve
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
 import dev.shadowsoffire.apothic_attributes.payload.CritParticlePayload;
 import dev.shadowsoffire.apothic_attributes.util.AttributesUtil;
+import dev.shadowsoffire.apothic_attributes.util.AuxDmgTracker;
 import dev.shadowsoffire.apothic_attributes.util.LEInvoker;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.commands.Commands;
@@ -62,6 +63,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class AttributeEvents {
@@ -143,6 +145,7 @@ public class AttributeEvents {
      * <li>{@link ALObjects#FIRE_DAMAGE}</li>
      * <li>{@link ALObjects#COLD_DAMAGE}</li>
      * </ul>
+     * TODO: Flatten this into some kind of tag or other generic system for aux dmg types.
      */
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void meleeDamageAttributes(LivingIncomingDamageEvent e) {
@@ -154,27 +157,30 @@ public class AttributeEvents {
             float fireDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.FIRE_DAMAGE);
             float coldDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.COLD_DAMAGE);
             LivingEntity target = e.getEntity();
-            int time = target.invulnerableTime;
             float atkStrength = ApothicAttributes.getLocalAtkStrength(attacker);
 
-            target.invulnerableTime = 0;
-            if (hpDmg > 0.001 && atkStrength >= 0.85F) {
-                target.hurt(src(ALObjects.DamageTypes.CURRENT_HP_DAMAGE, attacker), atkStrength * hpDmg * target.getHealth());
-            }
+            AuxDmgTracker.executeWith(target, tracker -> {
+                tracker.setup(target, ALObjects.DamageTypes.CURRENT_HP_DAMAGE);
+                if (hpDmg > 0.001 && atkStrength >= 0.85F) {
+                    target.hurt(src(ALObjects.DamageTypes.CURRENT_HP_DAMAGE, attacker), atkStrength * hpDmg * target.getHealth());
+                    tracker.record(target, ALObjects.DamageTypes.CURRENT_HP_DAMAGE);
+                }
 
-            target.invulnerableTime = 0;
-            if (fireDmg > 0.001 && atkStrength >= 0.55F) {
-                target.hurt(src(ALObjects.DamageTypes.FIRE_DAMAGE, attacker), atkStrength * fireDmg);
-                target.setRemainingFireTicks(target.getRemainingFireTicks() + (int) (10 * fireDmg));
-            }
+                tracker.setup(target, ALObjects.DamageTypes.FIRE_DAMAGE);
+                if (fireDmg > 0.001 && atkStrength >= 0.55F) {
+                    target.hurt(src(ALObjects.DamageTypes.FIRE_DAMAGE, attacker), atkStrength * fireDmg);
+                    target.setRemainingFireTicks(target.getRemainingFireTicks() + (int) (10 * fireDmg));
+                    tracker.record(target, ALObjects.DamageTypes.FIRE_DAMAGE);
+                }
 
-            target.invulnerableTime = 0;
-            if (coldDmg > 0.001 && atkStrength >= 0.55F) {
-                target.hurt(src(ALObjects.DamageTypes.COLD_DAMAGE, attacker), atkStrength * coldDmg);
-                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) (15 * coldDmg), Mth.floor(coldDmg / 5)));
-            }
+                tracker.setup(target, ALObjects.DamageTypes.COLD_DAMAGE);
+                if (coldDmg > 0.001 && atkStrength >= 0.55F) {
+                    target.hurt(src(ALObjects.DamageTypes.COLD_DAMAGE, attacker), atkStrength * coldDmg);
+                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) (15 * coldDmg), Mth.floor(coldDmg / 5)));
+                    tracker.record(target, ALObjects.DamageTypes.COLD_DAMAGE);
+                }
+            });
 
-            target.invulnerableTime = time;
             if (target.isDeadOrDying()) {
                 target.getPersistentData().putBoolean("apoth.killed_by_aux_dmg", true);
             }
@@ -435,6 +441,14 @@ public class AttributeEvents {
         }
         else {
             PacketDistributor.sendToAllPlayers(new ConfigPayload());
+        }
+    }
+
+    @SubscribeEvent
+    public void tickDmgTrackers(EntityTickEvent.Post e) {
+        if (!e.getEntity().level().isClientSide && e.getEntity().hasData(ALObjects.Attachments.AUX_DMG_TRACKER)) {
+            AuxDmgTracker tracker = e.getEntity().getData(ALObjects.Attachments.AUX_DMG_TRACKER);
+            tracker.tick();
         }
     }
 
