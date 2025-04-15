@@ -4,17 +4,25 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.datafixers.util.Pair;
 
 import dev.shadowsoffire.apothic_attributes.ALConfig;
 import dev.shadowsoffire.apothic_attributes.ApothicAttributes;
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
+import dev.shadowsoffire.placebo.config.Configuration;
+import dev.shadowsoffire.placebo.util.Offset;
+import dev.shadowsoffire.placebo.util.Offset.AnchorPoint;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.CritParticle;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -34,6 +42,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.GatherEffectScreenTooltipsEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
@@ -54,7 +63,6 @@ public class AttributesLibClient {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void effectGuiTooltips(GatherEffectScreenTooltipsEvent e) {
         List<Component> tooltips = e.getTooltip();
@@ -115,6 +123,30 @@ public class AttributesLibClient {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void commands(RegisterClientCommandsEvent e) {
+        e.getDispatcher().register(
+            LiteralArgumentBuilder.<CommandSourceStack>literal("apothic_attributes_client")
+                .then(LiteralArgumentBuilder.<CommandSourceStack>literal("set_btn_pos")
+                    .then(Commands.argument("anchor", StringArgumentType.string()).suggests(AnchorPoint.SUGGEST_ANCHOR_POINT)
+                        .executes(c -> {
+                            updateHudPos(AnchorPoint.parse(c.getArgument("anchor", String.class)), 0, 0);
+                            return 0;
+                        })
+                        .then(Commands.argument("x", IntegerArgumentType.integer(-1000, 1000))
+                            .then(Commands.argument("y", IntegerArgumentType.integer(-1000, 1000))
+                                .executes(c -> {
+                                    updateHudPos(AnchorPoint.parse(c.getArgument("anchor", String.class)), c.getArgument("x", Integer.class), c.getArgument("y", Integer.class));
+                                    return 0;
+                                }))))));
+    }
+
+    private static void updateHudPos(AnchorPoint anchor, int x, int y) {
+        Configuration cfg = ALConfig.load();
+        ALConfig.attributesGuiButtonOffset = new Offset(anchor, x, y);
+        Offset.save("GUI Button Offset", "client", ALConfig.attributesGuiButtonOffset, cfg);
     }
 
     public static void apothCrit(int entityId) {

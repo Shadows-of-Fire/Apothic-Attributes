@@ -15,7 +15,7 @@ public class CuriosClientCompat {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void addAttribComponent(ScreenEvent.Init.Post e) {
         if (ALConfig.enableAttributesGui && e.getScreen() instanceof CuriosScreen scn) {
-            ImageButton button = new ImageButton(scn.getGuiLeft() + 63, scn.getGuiTop() + 10, 10, 10, AttributesGui.SWORD_BUTTON_SPRITES, btn -> {
+            ImageButton button = new ImageButton(0, 0, 10, 10, AttributesGui.SWORD_BUTTON_SPRITES, btn -> {
                 if (Minecraft.getInstance().player == null) return;
                 InventoryScreen invScn = new InventoryScreen(Minecraft.getInstance().player);
                 AttributesGui.swappedFromCurios = true;
@@ -25,6 +25,7 @@ public class CuriosClientCompat {
                 @Override
                 public void setFocused(boolean pFocused) {}
             };
+            ButtonPlacement.positionGuiButton(button, ALConfig.attributesGuiButtonOffset, scn.getGuiLeft(), scn.getGuiTop());
             e.addListener(button);
         }
     }

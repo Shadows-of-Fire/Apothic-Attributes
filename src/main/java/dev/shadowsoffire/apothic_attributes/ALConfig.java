@@ -8,6 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import dev.shadowsoffire.apothic_attributes.repack.evalex.Expression;
 import dev.shadowsoffire.placebo.config.Configuration;
+import dev.shadowsoffire.placebo.util.Offset;
+import dev.shadowsoffire.placebo.util.Offset.AnchorPoint;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
@@ -20,13 +22,14 @@ public class ALConfig {
     public static boolean enablePotionTooltips = true;
     public static Set<ResourceLocation> hiddenAttributes = new HashSet<>();
     public static float knowledgeMultiplier = 4.0F;
+    public static Offset attributesGuiButtonOffset = new Offset(AnchorPoint.TOP_RIGHT, -3, 3);
 
     private static Optional<Expression> protExpr;
     private static Optional<Expression> aValueExpr;
     private static Optional<Expression> armorExpr;
     private static Optional<Expression> toughnessExpr;
 
-    public static void load() {
+    public static Configuration load() {
         Configuration cfg = new Configuration(ApothicAttributes.getConfigFile(ApothicAttributes.MODID));
         enableAttributesGui = cfg.getBoolean("Enable Attributes GUI", "general", true, "If the Attributes GUI is available.\nClient-authoritative.");
         enablePotionTooltips = cfg.getBoolean("Enable Potion Tooltips", "general", true, "If description tooltips will be added to potion items.\nClient-authoritative.");
@@ -42,6 +45,8 @@ public class ALConfig {
                 ApothicAttributes.LOGGER.error("Ignoring invalid \"Hidden Attributes\" config entry " + name, ex);
             }
         }
+
+        attributesGuiButtonOffset = Offset.load("GUI Button Offset", "client", attributesGuiButtonOffset, cfg);
 
         protExpr = readConfigExpression(cfg, "Protection Formula", "combat_rules", "1 - min(0.025 * protPoints, 0.85)",
             """
@@ -102,6 +107,7 @@ public class ALConfig {
             "damage", "armor", "toughness");
 
         if (cfg.hasChanged()) cfg.save();
+        return cfg;
     }
 
     public static Optional<Expression> getAValueExpr() {

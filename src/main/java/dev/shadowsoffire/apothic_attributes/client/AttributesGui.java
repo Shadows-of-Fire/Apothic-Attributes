@@ -91,7 +91,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
         this.refreshData();
         this.leftPos = parent.getGuiLeft() - WIDTH;
         this.topPos = parent.getGuiTop();
-        this.toggleBtn = new ImageButton(parent.getGuiLeft() + 63, parent.getGuiTop() + 10, 10, 10, SWORD_BUTTON_SPRITES, btn -> {
+        this.toggleBtn = new ImageButton(0, 0, 10, 10, SWORD_BUTTON_SPRITES, btn -> {
             this.toggleVisibility();
         }, Component.translatable("apothic_attributes.gui.show_attributes")){
             @Override
@@ -103,6 +103,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
         }
         else this.recipeBookButton = null;
         this.hideUnchangedBtn = new HideUnchangedButton(0, 0);
+        ButtonPlacement.positionGuiButton(toggleBtn, ALConfig.attributesGuiButtonOffset, parent.getGuiLeft(), parent.getGuiTop());
     }
 
     @SuppressWarnings("deprecation")
@@ -155,8 +156,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
 
     @Override
     public void render(GuiGraphics gfx, int mouseX, int mouseY, float partialTicks) {
-        this.toggleBtn.setX(this.parent.getGuiLeft() + 63);
-        this.toggleBtn.setY(this.parent.getGuiTop() + 10);
+        ButtonPlacement.positionGuiButton(this.toggleBtn, ALConfig.attributesGuiButtonOffset, this.parent.getGuiLeft(), this.parent.getGuiTop());
         if (this.parent.getRecipeBookComponent().isVisible()) this.open = false;
         wasOpen = this.open;
         if (!this.open) return;
