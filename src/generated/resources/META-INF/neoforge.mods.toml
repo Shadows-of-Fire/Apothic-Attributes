@@ -8,7 +8,7 @@ license="MIT License"
 
 modId="apothic_attributes"
 
-version="2.7.0"
+version="2.8.0"
 
 displayName="Apothic Attributes"
 
@@ -36,6 +36,6 @@ config="apothic_attributes.mixins.json"
 [[dependencies.apothic_attributes]]
     modId="placebo"
     type="required"
-    versionRange="[9.8.0-beta4,)"
+    versionRange="[9.8.0,)"
     ordering="AFTER"
     side="BOTH"

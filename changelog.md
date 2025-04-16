@@ -1,3 +1,14 @@
+## 2.8.0
+* Added the `apothic_attributes:is_non_physical` tag to better determine physical damage.
+  * For the purposes of Apothic Attributes effects, damage types must be in `neoforge:is_physical` and NOT be in `apothic_attributes:is_non_physical`.
+* Added the `apothic_attributes:cannot_critically_strike` tag, which allows setting damage types that may not critically strike using Apoth mechanics.
+  * Current HP Damage is in this tag by default.
+* Made auxiliary damage types (cold, fire, current hp) respect invulnerability timers.
+* Made the Attributes GUI open button (the dagger) movable.
+  * The position can be adjusted in the config file, or with the `/apothic_attributes_client set_btn_pos` client command.
+* RuyaSavascisi: Updated Turkish Translation.
+* ZHAY10086: Updated Chinese Translation.
+
 ## 2.7.0
 * Added the experimental `EntityEquipmentSlot` API.
   * This API is an abstraction around Vanilla's `EquipmentSlot` / `EquipmentSlotGroup`.
