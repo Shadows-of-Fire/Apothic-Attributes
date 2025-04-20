@@ -20,13 +20,11 @@ import dev.shadowsoffire.apothic_attributes.util.LEInvoker;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -145,7 +143,6 @@ public class AttributeEvents {
      * <li>{@link ALObjects#FIRE_DAMAGE}</li>
      * <li>{@link ALObjects#COLD_DAMAGE}</li>
      * </ul>
-     * TODO: Flatten this into some kind of tag or other generic system for aux dmg types.
      */
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void meleeDamageAttributes(LivingIncomingDamageEvent e) {
@@ -153,43 +150,34 @@ public class AttributeEvents {
         if (noRecurse) return;
         noRecurse = true;
         if (e.getSource().getDirectEntity() instanceof LivingEntity attacker && AttributesUtil.isPhysicalDamage(e.getSource())) {
-            float hpDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.CURRENT_HP_DAMAGE);
-            float fireDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.FIRE_DAMAGE);
-            float coldDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.COLD_DAMAGE);
             LivingEntity target = e.getEntity();
-            float atkStrength = ApothicAttributes.getLocalAtkStrength(attacker);
 
             AuxDmgTracker.executeWith(target, tracker -> {
-                tracker.setup(target, ALObjects.DamageTypes.CURRENT_HP_DAMAGE);
-                if (hpDmg > 0.001 && atkStrength >= 0.85F) {
-                    target.hurt(src(ALObjects.DamageTypes.CURRENT_HP_DAMAGE, attacker), atkStrength * hpDmg * target.getHealth());
-                    tracker.record(target, ALObjects.DamageTypes.CURRENT_HP_DAMAGE);
-                }
+                float hpDmg = (float) attacker.getAttributeValue(ALObjects.Attributes.CURRENT_HP_DAMAGE) * target.getHealth();
+                tracker.attackWith(attacker, target, ALObjects.DamageTypes.CURRENT_HP_DAMAGE, hpDmg, null);
 
-                tracker.setup(target, ALObjects.DamageTypes.FIRE_DAMAGE);
-                if (fireDmg > 0.001 && atkStrength >= 0.55F) {
-                    target.hurt(src(ALObjects.DamageTypes.FIRE_DAMAGE, attacker), atkStrength * fireDmg);
-                    target.setRemainingFireTicks(target.getRemainingFireTicks() + (int) (10 * fireDmg));
-                    tracker.record(target, ALObjects.DamageTypes.FIRE_DAMAGE);
-                }
+                tracker.attackWith(attacker, target, ALObjects.DamageTypes.FIRE_DAMAGE, ALObjects.Attributes.FIRE_DAMAGE, AttributeEvents::applyPostFireDamage);
 
-                tracker.setup(target, ALObjects.DamageTypes.COLD_DAMAGE);
-                if (coldDmg > 0.001 && atkStrength >= 0.55F) {
-                    target.hurt(src(ALObjects.DamageTypes.COLD_DAMAGE, attacker), atkStrength * coldDmg);
-                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) (15 * coldDmg), Mth.floor(coldDmg / 5)));
-                    tracker.record(target, ALObjects.DamageTypes.COLD_DAMAGE);
-                }
+                tracker.attackWith(attacker, target, ALObjects.DamageTypes.COLD_DAMAGE, ALObjects.Attributes.COLD_DAMAGE, AttributeEvents::applyPostColdDamage);
             });
 
             if (target.isDeadOrDying()) {
+                // Communicates back to PlayerMixin that the return value of hurt() should be true, so post-attack effects (like sweep attacks) are applied.
                 target.getPersistentData().putBoolean("apoth.killed_by_aux_dmg", true);
+                e.setCanceled(true);
             }
         }
         noRecurse = false;
     }
 
-    private static DamageSource src(ResourceKey<DamageType> type, LivingEntity entity) {
-        return entity.level().damageSources().source(type, entity);
+    private static void applyPostFireDamage(LivingEntity attacker, LivingEntity target, DamageSource src, float dmg, float delta) {
+        target.setRemainingFireTicks(target.getRemainingFireTicks() + (int) (10 * dmg));
+    }
+
+    private static void applyPostColdDamage(LivingEntity attacker, LivingEntity target, DamageSource src, float dmg, float delta) {
+        int duration = (int) Math.min(150, 15 * dmg);
+        int amp = Math.max(0, Mth.log2(Math.round(dmg / 5)));
+        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, amp));
     }
 
     /**

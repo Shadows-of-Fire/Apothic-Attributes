@@ -52,6 +52,7 @@ public class ApothicAttributes {
     public static final String MODID = "apothic_attributes";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final DeferredHelper R = DeferredHelper.create(MODID);
+    public static final boolean DEBUG_AUX_DMG = "on".equalsIgnoreCase(System.getenv("APOTH_DEBUG_AUX_DMG"));
     private static final File configDir = new File(FMLPaths.CONFIGDIR.get().toFile(), "apotheosis");
 
     /**
