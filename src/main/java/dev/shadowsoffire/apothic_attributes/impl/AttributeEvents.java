@@ -193,21 +193,22 @@ public class AttributeEvents {
 
         RandomSource rand = e.getEntity().getRandom();
 
-        float critMult = 1.0F;
+        float damage = e.getAmount();
 
         // Roll for crits. Each overcrit reduces the effectiveness by 15%
         // We stop rolling when crit chance fails or the crit damage would reduce the total damage dealt.
+        // Multicrits are additive with previous crits.
         while (rand.nextFloat() <= critChance && critDmg > 1.0F) {
             critChance--;
-            critMult *= critDmg;
+            damage += e.getAmount() * (critDmg - 1);
             critDmg *= 0.85F;
         }
 
-        e.setAmount(e.getAmount() * critMult);
-
-        if (critMult > 1 && !attacker.level().isClientSide) {
+        if (damage > e.getAmount() && !attacker.level().isClientSide) {
             PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) attacker.level(), e.getEntity().chunkPosition(), new CritParticlePayload(e.getEntity().getId()));
         }
+
+        e.setAmount(damage);
     }
 
     /**
