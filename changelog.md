@@ -1,3 +1,7 @@
+## 2.8.1
+* Rewrote handling for auxiliary damage types. The damage numbers should be more consistent with expected values in certain cases, and should be less bug-prone.
+* Multi-crits (over 100% crit chance) are now additive instead of multiplicative.
+
 ## 2.8.0
 * Added the `apothic_attributes:is_non_physical` tag to better determine physical damage.
   * For the purposes of Apothic Attributes effects, damage types must be in `neoforge:is_physical` and NOT be in `apothic_attributes:is_non_physical`.
