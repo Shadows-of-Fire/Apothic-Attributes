@@ -164,6 +164,7 @@ public class AttributeEvents {
             if (target.isDeadOrDying()) {
                 // Communicates back to PlayerMixin that the return value of hurt() should be true, so post-attack effects (like sweep attacks) are applied.
                 target.getPersistentData().putBoolean("apoth.killed_by_aux_dmg", true);
+                // We need to cancel the event if the target is already dead, otherwise the original attack will go through and call die() twice.
                 e.setCanceled(true);
             }
         }
