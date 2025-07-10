@@ -11,6 +11,7 @@ import dev.shadowsoffire.placebo.config.Configuration;
 import dev.shadowsoffire.placebo.util.Offset;
 import dev.shadowsoffire.placebo.util.Offset.AnchorPoint;
 import net.minecraft.ResourceLocationException;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
@@ -35,12 +36,41 @@ public class ALConfig {
         enableAttributesGui = cfg.getBoolean("Enable Attributes GUI", "general", true, "If the Attributes GUI is available.\nClient-authoritative.");
         enablePotionTooltips = cfg.getBoolean("Enable Potion Tooltips", "general", true, "If description tooltips will be added to potion items.\nClient-authoritative.");
         knowledgeMultiplier = cfg.getFloat("Ancient Knowledge Multiplier", "effects", 4.0F, 1.0F, 1024F, "The value (per-level) of the Experience Gained attribute modifier provided by Ancient Knowledge.\nSynced.");
-        String[] hidden = cfg.getStringList("Hidden Attributes", "general", DEFAULT_BLOCKED_ATTRIBUTES, "A list of attributes that will be hidden from the Attributes GUI.\nClient-authoritative.");
+        String[] hidden = cfg.getStringList("Hidden Attributes", "general", DEFAULT_BLOCKED_ATTRIBUTES,
+            """
+                A list of attributes that will be hidden from the Attributes GUI. Client-authoritative.
+                This is useful for attributes that are not meant to be visible to players, such as those used by Apothic Attributes itself.
+                This config supports the following input formats:
+                    - ResourceLocation strings, such as minecraft:generic.max_health, used to block specific attributes.
+                    - Namespaced wildcards, such as apothic_attributes:*, used to block all attributes in a namespace.
+                    - Negation entries, such as !apothic_attributes:elytra_flight, which will un-block a specific attribute that would otherwise be blocked by a wildcard.
+                Note:
+                    The list is processed in order. Place negation entries at the end of the list to ensure they take precedence.
+                """);
 
         hiddenAttributes.clear();
         for (String name : hidden) {
+            // Handle normal ResourceLocation strings
             try {
-                hiddenAttributes.add(ResourceLocation.parse(name));
+                if (name.endsWith("*")) {
+                    // Handle namespace wildcards
+                    String namespace = name.split(":")[0];
+                    for (ResourceLocation loc : BuiltInRegistries.ATTRIBUTE.keySet()) {
+                        if (namespace.equals(loc.getNamespace())) {
+                            hiddenAttributes.add(loc);
+                        }
+                    }
+                }
+                else if (name.startsWith("!")) {
+                    // Handle negation entries
+                    name = name.substring(1);
+                    ResourceLocation negatedLoc = ResourceLocation.parse(name);
+                    hiddenAttributes.remove(negatedLoc);
+                }
+                else {
+                    // Handle normal ResourceLocation strings
+                    hiddenAttributes.add(ResourceLocation.parse(name));
+                }
             }
             catch (ResourceLocationException ex) {
                 ApothicAttributes.LOGGER.error("Ignoring invalid \"Hidden Attributes\" config entry " + name, ex);

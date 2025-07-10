@@ -72,13 +72,13 @@ public class ApothicAttributes {
 
         PayloadHelper.registerPayload(new CritParticlePayload.Provider());
         ALObjects.bootstrap(bus);
-        ALConfig.load();
         NeoForgeMod.enableMergedAttributeTooltips();
     }
 
     @SubscribeEvent
     public void init(FMLCommonSetupEvent e) {
         e.enqueueWork(() -> {
+            ALConfig.load();
             MobEffects.BLINDNESS.value().addAttributeModifier(Attributes.FOLLOW_RANGE, loc("blindness"), -0.75, Operation.ADD_MULTIPLIED_TOTAL);
             // TODO: Update to show in GUI without applying attribute to entity
             // if (MobEffects.SLOW_FALLING.getAttributeModifiers().isEmpty()) {
