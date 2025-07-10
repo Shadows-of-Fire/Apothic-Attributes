@@ -1,3 +1,10 @@
+## 2.9.0
+* Fixed negative armor values (after applying armor pen) not causing increased damage to be taken.
+  * Now, negative effective armor will cause the target to take 1.5% increased damage per point of negative armor.
+  * The negative armor factor is configurable.
+* Added the ability to use namespaced wildcards and negations in the "Hidden Attributes" config entry.
+* ZzThanhBaozZ: Added Vietnamese translation.
+
 ## 2.8.1
 * Rewrote handling for auxiliary damage types. The damage numbers should be more consistent with expected values in certain cases, and should be less bug-prone.
 * Multi-crits (over 100% crit chance) are now additive instead of multiplicative.
