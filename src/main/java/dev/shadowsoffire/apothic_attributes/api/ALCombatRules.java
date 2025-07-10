@@ -94,7 +94,7 @@ public class ALCombatRules {
         }
 
         if (armor <= 0) {
-            return amount;
+            return amount + (ALConfig.negativeArmorFactor * -armor * amount);
         }
 
         float reduction = getArmorDamageReduction(amount, armor, toughness);

@@ -28,6 +28,7 @@ public class ALConfig {
     private static Optional<Expression> aValueExpr;
     private static Optional<Expression> armorExpr;
     private static Optional<Expression> toughnessExpr;
+    public static float negativeArmorFactor = 0.015F;
 
     public static Configuration load() {
         Configuration cfg = new Configuration(ApothicAttributes.getConfigFile(ApothicAttributes.MODID));
@@ -105,6 +106,15 @@ public class ALConfig {
                     See https://github.com/ezylang/EvalEx#usage-examples for how to write expressions.
                 """,
             "damage", "armor", "toughness");
+
+        negativeArmorFactor = cfg.getFloat("Negative Armor Factor", "combat_rules", 0.015F, 0.0F, 1.0F,
+            """
+                The factor by which negative armor values will increase incoming damage.
+                Each point of negative armor will increase incoming damage by this factor.
+                A value of 0.015 means that 1 point of negative armor will increase incoming damage by 1.5%.
+                Note:
+                    Negative armor is typically only encountered when the attacker has more armor pen than the defender has armor.
+                """);
 
         if (cfg.hasChanged()) cfg.save();
         return cfg;
