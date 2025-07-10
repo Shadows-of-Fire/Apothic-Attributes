@@ -380,7 +380,7 @@ public class ALObjects {
         public static final Holder<EntityEquipmentSlot> BODY = slot(EquipmentSlot.BODY);
 
         private static Holder<EntityEquipmentSlot> slot(EquipmentSlot slot) {
-            return R.<EntityEquipmentSlot, EntityEquipmentSlot>custom(slot.getSerializedName(), BuiltInRegs.ENTITY_EQUIPMENT_SLOT.key(), () -> new VanillaEquipmentSlot(slot));
+            return R.customDH(slot.getSerializedName(), BuiltInRegs.ENTITY_EQUIPMENT_SLOT.key(), () -> new VanillaEquipmentSlot(slot));
         }
 
         private static void bootstrap() {}

@@ -29,13 +29,13 @@ config="apothic_attributes.mixins.json"
 [[dependencies.apothic_attributes]]
     modId="neoforge"
     type="required"
-    versionRange="[21.1.144,)"
+    versionRange="[21.1.187,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.apothic_attributes]]
     modId="placebo"
     type="required"
-    versionRange="[9.8.0,)"
+    versionRange="[9.9.0,)"
     ordering="AFTER"
     side="BOTH"
