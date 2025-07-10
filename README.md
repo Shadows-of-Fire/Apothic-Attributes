@@ -1,4 +1,4 @@
-# Apothic Attributes [![](http://cf.way2muchnoise.eu/apothic-attributes.svg)](https://www.curseforge.com/minecraft/mc-mods/apothic-attributes) [![](http://cf.way2muchnoise.eu/versions/apothic-attributes.svg)](https://www.curseforge.com/minecraft/mc-mods/apothic-attributes)
+# Apothic Attributes [![](http://cf.way2muchnoise.eu/898963.svg)](https://www.curseforge.com/minecraft/mc-mods/apothic-attributes) [![](http://cf.way2muchnoise.eu/versions/898963.svg)](https://www.curseforge.com/minecraft/mc-mods/apothic-attributes)
 
 Apothic Attributes is a library mod for Minecraft, primarily used by [Apotheosis](https://github.com/Shadows-of-Fire/Apotheosis).
 
