@@ -1,0 +1,210 @@
+{
+    "apothic_attributes.gui.attributes": "Thuộc Tính",
+    "apothic_attributes.gui.base": "Gốc: %s",
+    "apothic_attributes.gui.min": "Tối Thiểu: %s",
+    "apothic_attributes.gui.max": "Tối Đa: %s",
+    "apothic_attributes.gui.modifiers": "Bổ Trợ",
+    "apothic_attributes.gui.add_value": "Cộng Thêm: %s",
+    "apothic_attributes.gui.add_multiplied_base": "Nhân Theo Gốc: %s",
+    "apothic_attributes.gui.add_multiplied_total": "Nhân Theo Tổng: %s",
+    "apothic_attributes.gui.press_shift": "Giữa Shift để hiện thêm thông tin.",
+    "apothic_attributes.gui.current": "Hiện Tại: %s",
+    "apothic_attributes.gui.show_attributes": "Hiện Thuộc Tính",
+    "apothic_attributes.gui.dynamic": "(động)",
+    "apothic_attributes.gui.formula": "Công Thức Bổ Trợ",
+    "apothic_attributes.gui.formula.base": "Gốc",
+    "apothic_attributes.gui.formula.value": "Giá Trị",
+    "apothic_attributes.gui.no_modifiers": "Không Có Bổ Trợ",
+
+    "attribute.name.generic.armor.desc": "Tăng cường giảm thiểu sát thương vật lý.",
+    "attribute.name.generic.armor_toughness.desc": "Giảm hiệu quả giảm sát thương của giáp kẻ thù.",
+    "attribute.name.generic.attack_damage.desc": "Sát thương vật lý gây ra với một đòn tích đầy thanh.",
+    "attribute.name.generic.attack_knockback.desc": "Tầm đẩy lùi vũ khí cận chiến của bạn với kẻ địch, đơn vị nửa khối.",
+    "attribute.name.generic.attack_speed.desc": "Số lượng đòn tích đầy thanh bạn có thể đánh mỗi giây.",
+    "attribute.name.generic.knockback_resistance.desc": "Số lượng đầy lùi bạn kháng lại.",
+    "attribute.name.generic.luck.desc": "Tăng số lượng sự kiện tốt diễn ra.",
+    "attribute.name.generic.max_health.desc": "Số lượng máu tối đa của bạn có.",
+    "attribute.name.generic.movement_speed.desc": "Tốc độ di chuyển khi đi bộ.",
+
+    "neoforge.entity_reach.desc": "Tầm tương tác của bạn với thực thể, đơn vị khối.",
+    "neoforge.entity_gravity.desc": "Gia tốc rơi xuống đất, đơn vị khối/s²",
+    "neoforge.name_tag_distance.desc": "Khoảng cách cách xa của người chơi khác để có thể thấy tên bạn.",
+    "neoforge.block_reach.desc": "Tầm tương tác của bạn với các khối, đơn vị khối.",
+    "neoforge.step_height.desc": "Số lượng khối mà bạn có thể bước lên mà không cần nhảy.",
+    "neoforge.swim_speed.desc": "Tốc độ bơi, so với bình thường.",
+
+    "button.apothic_attributes.hide_unchanged": "Ẩn Thuộc Tính Không Đổi",
+    "text.apothic_attributes.hide_unchanged": "Ẩn Không Đổi",
+
+    "apothic_attributes:draw_speed": "Tốc Độ Kéo Cung",
+    "apothic_attributes:draw_speed.desc": "Tốc độ bạn kéo vũ khí tầm xa, như là cung, nỏ, hoặc đinh ba.",
+
+    "apothic_attributes:crit_chance": "Tỉ Lệ Chí Mạng",
+    "apothic_attributes:crit_chance.desc": "Tỉ lệ bạn gây sát thương chí mạng, gây thêm sát thương dựa theo Sát Thương Chí Mạng.",
+
+    "apothic_attributes:crit_damage": "Sát Thương Chí Mạng",
+    "apothic_attributes:crit_damage.desc": "Hệ số nhân sát thương chí mạng, gồm cả đòn nhảy đánh chí mạng.",
+
+    "apothic_attributes:cold_damage": "Sát Thương Hệ Băng",
+    "apothic_attributes:cold_damage.desc": "Sát thương phép cộng thêm cho đòn vật lý, và làm chậm kẻ thù.",
+
+    "apothic_attributes:fire_damage": "Sát Thương Hệ Hỏa",
+    "apothic_attributes:fire_damage.desc": "Sát thương phép cộng thêm cho đòn vật lý, và đốt cháy kẻ thù.",
+
+    "apothic_attributes:life_steal": "Hút Máu",
+    "apothic_attributes:life_steal.desc": "Phần trăm sát thương gây ra thực tế hồi lại máu cho bạn.",
+
+    "apothic_attributes:current_hp_damage": "Sát Thương Máu Hiện Tại",
+    "apothic_attributes:current_hp_damage.desc": "Sát thương vật lý cộng thêm cho đòn vật lý, dựa theo máu hiện tại của mục tiêu.",
+
+    "apothic_attributes:overheal": "Hồi Máu Siêu Việt",
+    "apothic_attributes:overheal.desc": "Phần trăm sát thương gây ra thực tế tăng thêm cho bạn giáp hấp thụ.",
+
+    "apothic_attributes:ghost_health": "Sinh Lực Linh Hồn",
+    "apothic_attributes:ghost_health.desc": "Chưa Thực Hiện",
+
+    "apothic_attributes:mining_speed": "Tốc Độ Đào",
+    "apothic_attributes:mining_speed.desc": "Tốc độ bạn đào khối, so với bình thường.",
+
+    "apothic_attributes:arrow_damage": "Sát Thương Mũi Tên",
+    "apothic_attributes:arrow_damage.desc": "Hệ số nhân sát thương cho mũi tên. Đinh ba cũng được coi là mũi tên.",
+
+    "apothic_attributes:arrow_velocity": "Vận Tốc Mũi Tên",
+    "apothic_attributes:arrow_velocity.desc": "Hệ số nhân tốc độ cho mũi tên. Mũi tên càng nhanh thì sát thương càng cao.",
+
+    "apothic_attributes:experience_gained": "Kinh Nghiệm Nhận Thêm",
+    "apothic_attributes:experience_gained.desc": "Hệ số nhân kinh nghiệm nhận được khi đập khối hoặc tiêu diệt quái.",
+
+    "apothic_attributes:healing_received": "Hồi Máu Nhận Được",
+    "apothic_attributes:healing_received.desc": "Hệ số nhân tất cả nguồn hồi máu.",
+
+    "apothic_attributes:armor_pierce": "Xuyên Giáp",
+    "apothic_attributes:armor_pierce.desc": "Giảm giá trị giáp của mục tiêu.",
+
+    "apothic_attributes:armor_shred": "Phá Giáp",
+    "apothic_attributes:armor_shred.desc": "Phần trăm giảm giá trị giáp của mục tiêu.",
+
+    "apothic_attributes:projectile_damage": "Sát thương Vật Bắn Ra",
+    "apothic_attributes:projectile_damage.desc": "Hệ số nhân sát thương cho tất cả vật bắn ra.",
+
+    "apothic_attributes:prot_pierce": "Xuyên Bảo Vệ",
+    "apothic_attributes:prot_pierce.desc": "Giảm tổng điểm bảo vệ của mục tiêu.",
+
+    "apothic_attributes:prot_shred": "Phá Bảo Vệ",
+    "apothic_attributes:prot_shred.desc": "Phần trăm giảm tổng điểm bảo vệ của mục tiêu.",
+
+    "apothic_attributes:dodge_chance": "Tỉ Lệ Né Đòn",
+    "apothic_attributes:dodge_chance.desc": "Tỉ lệ né đòn tấn công vật lý hoặc vật bắn ra.",
+
+    "apothic_attributes:elytra_flight": "Bay Elytra",
+    "apothic_attributes:elytra_flight.desc": "Bạn có thể bay như là đang đeo Elytra.",
+
+    "apothic_attributes:creative_flight": "Bay Sáng Tạo",
+    "apothic_attributes:creative_flight.desc": "Bạn có thể bay như là trong Chế Độ Sáng Tạo.",
+
+    "comment_id": "MobFx - descriptions are duplicated for JEED support.",
+
+    "effect.apothic_attributes.knowledge": "Tri Thức Cổ Xưa",
+    "effect.apothic_attributes.vitality": "Sinh Lực Bùng Nổ",
+    "effect.apothic_attributes.grievous": "Vết Thương Trầm Trọng",
+    "effect.apothic_attributes.flying": "Bay",
+
+    "effect.apothic_attributes.sundering": "Xé Toạc",
+    "effect.apothic_attributes.sundering.desc": "Tăng sát thương nhận phải.",
+    "effect.apothic_attributes.sundering.description": "Tăng sát thương nhận phải.",
+
+    "effect.apothic_attributes.bleeding": "Chảy Máu",
+    "effect.apothic_attributes.bleeding.desc": "Nhận sát thương mỗi hai giây.",
+    "effect.apothic_attributes.bleeding.description": "Nhận sát thương mỗi hai giây.",
+
+    "effect.apothic_attributes.detonation": "Hỏa Bạo",
+    "effect.apothic_attributes.detonation.desc": "Khi kết thúc, gây sát thương dựa trên thời gian bị cháy còn lại.",
+    "effect.apothic_attributes.detonation.description": "Khi kết thúc, gây sát thương dựa trên thời gian bị cháy còn lại.",
+
+    "effect.minecraft.night_vision.desc": "Cho phép bạn nhìn trong bóng tối.",
+    "effect.minecraft.invisibility.desc": "Khiến bạn tàng hình, không kèm trang bị.",
+    "effect.minecraft.jump_boost.desc": "Tăng độ cao khi nhảy.",
+    "effect.minecraft.fire_resistance.desc": "Khiến bạn miễn nhiễm với sát thương lửa.",
+    "effect.minecraft.water_breathing.desc": "Khiến bạn không thể chết đuối.",
+    "effect.minecraft.instant_health.desc": "Hồi lập tức một lượng máu của bạn.",
+    "effect.minecraft.instant_damage.desc": "Gây lập tức một lượng sát thương phép.",
+    "effect.minecraft.poison.desc": "Gây sát thương theo đợt nhưng không chết.",
+    "effect.minecraft.regeneration.desc": "Khiến bạn hồi phục máu theo thời gian.",
+
+    "comment_id": "Damage Sources",
+
+    "death.attack.apothic_attributes:bleeding": "%1$s chảy máu đến chết",
+    "death.attack.apothic_attributes:bleeding.item": "%1$s chảy máu đến chết vì %3$s của %2$s ",
+    "death.attack.apothic_attributes:bleeding.player": "%1$s chảy máu đến chết khi cố gắng chạy thoát %2$s",
+
+    "death.attack.apothic_attributes:detonation": "%1$s đã bị hỏa bạo đến chết",
+    "death.attack.apothic_attributes:detonation.item": "%1$s đã bị hỏa bạo đến chết",
+    "death.attack.apothic_attributes:detonation.player": "%1$s đã bị hỏa bạo đến chết",
+
+    "death.attack.apothic_attributes:current_hp_damage": "%1$s đã bị hạ gục",
+    "death.attack.apothic_attributes:current_hp_damage.item": "%1$s đã bị %2$s hạ gục bằng %3$s",
+    "death.attack.apothic_attributes:current_hp_damage.player": "%1$s đã bị hạ gục khi chiến đấu với %2$s",
+
+    "death.attack.apothic_attributes:fire_damage": "%1$s đã bị thiêu đến chết",
+    "death.attack.apothic_attributes:fire_damage.item": "%1$s đã bị %2$s thiêu đến chết bằng %3$s",
+    "death.attack.apothic_attributes:fire_damage.player": "%1$s đã bị thiêu đến chết khi chiến đấu với %2$s",
+
+    "death.attack.apothic_attributes:cold_damage": "%1$s đã bị đóng băng đến chết",
+    "death.attack.apothic_attributes:cold_damage.item": "%1$s đã bị %2$s đóng băng đến chết bằng %3$s",
+    "death.attack.apothic_attributes:cold_damage.player": "%1$s đã bị đóng băng đến chết khi chiến đấu với %2$s",
+
+    "item.minecraft.potion.effect.minecraft.resistance": "Thuốc kháng cự",
+    "item.minecraft.splash_potion.effect.minecraft.resistance": "Thuốc kháng cự có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.resistance": "Thuốc kháng cự kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.resistance": "Mũi tên kháng cự",
+
+    "item.minecraft.potion.effect.minecraft.absorption": "Thuốc hấp thụ",
+    "item.minecraft.splash_potion.effect.minecraft.absorption": "Thuốc hấp thụ có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.absorption": "Thuốc hấp thụ kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.absorption": "Mũi tên hấp thụ",
+
+    "item.minecraft.potion.effect.minecraft.haste": "Thuốc đào nhanh",
+    "item.minecraft.splash_potion.effect.minecraft.haste": "Thuốc đào nhanh có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.haste": "Thuốc đào nhanh kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.haste": "Mũi tên đào nhanh",
+
+    "item.minecraft.potion.effect.minecraft.mining_fatigue": "Thuốc đào chậm",
+    "item.minecraft.splash_potion.effect.minecraft.mining_fatigue": "Thuốc đào chậm có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.mining_fatigue": "Thuốc đào chậm kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.mining_fatigue": "Mũi tên đào chậm",
+
+    "item.minecraft.potion.effect.minecraft.wither": "Thuốc khô héo",
+    "item.minecraft.splash_potion.effect.minecraft.wither": "Thuốc khô héo có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.wither": "Thuốc khô héo kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.wither": "Mũi tên khô héo",
+
+    "item.minecraft.potion.effect.minecraft.levitation": "Thuốc bay lên",
+    "item.minecraft.splash_potion.effect.minecraft.levitation": "Thuốc bay lên có thể ném được",
+    "item.minecraft.lingering_potion.effect.minecraft.levitation": "Thuốc bay lên kéo dài",
+    "item.minecraft.tipped_arrow.effect.minecraft.levitation": "Mũi tên bay lên",
+
+    "item.minecraft.potion.effect.apothic_attributes.sundering": "Thuốc xé toạc",
+    "item.minecraft.splash_potion.effect.apothic_attributes.sundering": "Thuốc xé toạc có thể ném được",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.sundering": "Thuốc xé toạc kéo dài",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.sundering": "Mũi tên xé toạc",
+
+    "item.minecraft.potion.effect.apothic_attributes.knowledge": "Thuốc tri thức cổ xưa",
+    "item.minecraft.splash_potion.effect.apothic_attributes.knowledge": "Thuốc tri thức cổ xưa có thể ném được",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.knowledge": "Thuốc tri thức cổ xưa kéo dài",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.knowledge": "Mũi tên tri thức cổ xưa",
+
+    "item.minecraft.potion.effect.apothic_attributes.vitality": "Thuốc tăng cường hồi phục",
+    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "Thuốc tăng cường hồi phục có thể ném được",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "Thuốc tăng cường hồi phục kéo dài",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "Mũi tên tăng cường hồi phục",
+
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "Thuốc giảm thiểu hồi phục",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "Thuốc giảm thiểu hồi phục có thể ném được",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "Thuốc giảm thiểu hồi phục kéo dài",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "Mũi tên giảm thiểu hồi phục",
+
+    "item.minecraft.potion.effect.apothic_attributes.flying": "Thuốc bay",
+    "item.minecraft.splash_potion.effect.apothic_attributes.flying": "Thuốc bay có thể ném được",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.flying": "Thuốc bay kéo dài",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.flying": "Mũi tên bay"
+}
