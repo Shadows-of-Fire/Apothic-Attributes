@@ -48,8 +48,8 @@ public abstract class LivingEntityMixin extends Entity implements LEInvoker {
      * @author Shadows
      * @reason Used to enter an if-condition so the above mixin always triggers.
      */
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z"), method = "getDamageAfterMagicAbsorb(Lnet/minecraft/world/damagesource/DamageSource;F)F")
-    public boolean apoth_sunderingHasEffect(LivingEntity ths, MobEffect effect) {
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hasEffect(Lnet/minecraft/core/Holder;)Z"), method = "getDamageAfterMagicAbsorb(Lnet/minecraft/world/damagesource/DamageSource;F)F")
+    public boolean apoth_sunderingHasEffect(LivingEntity instance, Holder<MobEffect> effect) {
         return true;
     }
 
