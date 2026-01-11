@@ -1,3 +1,9 @@
+## 2.9.1
+* PrincessStellar: Updated Brazilian translation.
+* Wajt: Updated Ukranian translation.
+* Mgazul: Fixed incorrect mixin target for sundering logic.
+* Fixed Sundering not increasing damage taken unless the target had Resistance.
+
 ## 2.9.0
 * Fixed negative armor values (after applying armor pen) not causing increased damage to be taken.
   * Now, negative effective armor will cause the target to take 1.5% increased damage per point of negative armor.
