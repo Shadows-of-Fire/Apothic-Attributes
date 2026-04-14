@@ -10,9 +10,9 @@ import dev.shadowsoffire.apothic_attributes.repack.evalex.Expression;
 import dev.shadowsoffire.placebo.config.Configuration;
 import dev.shadowsoffire.placebo.util.Offset;
 import dev.shadowsoffire.placebo.util.Offset.AnchorPoint;
-import net.minecraft.ResourceLocationException;
+import net.minecraft.IdentifierException;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
 public class ALConfig {
@@ -21,7 +21,7 @@ public class ALConfig {
 
     public static boolean enableAttributesGui = true;
     public static boolean enablePotionTooltips = true;
-    public static Set<ResourceLocation> hiddenAttributes = new HashSet<>();
+    public static Set<Identifier> hiddenAttributes = new HashSet<>();
     public static float knowledgeMultiplier = 4.0F;
     public static Offset attributesGuiButtonOffset = new Offset(AnchorPoint.TOP_RIGHT, -3, 3);
 
@@ -41,7 +41,7 @@ public class ALConfig {
                 A list of attributes that will be hidden from the Attributes GUI. Client-authoritative.
                 This is useful for attributes that are not meant to be visible to players, such as those used by Apothic Attributes itself.
                 This config supports the following input formats:
-                    - ResourceLocation strings, such as minecraft:generic.max_health, used to block specific attributes.
+                    - Identifier strings, such as minecraft:generic.max_health, used to block specific attributes.
                     - Namespaced wildcards, such as apothic_attributes:*, used to block all attributes in a namespace.
                     - Negation entries, such as !apothic_attributes:elytra_flight, which will un-block a specific attribute that would otherwise be blocked by a wildcard.
                 Note:
@@ -50,12 +50,12 @@ public class ALConfig {
 
         hiddenAttributes.clear();
         for (String name : hidden) {
-            // Handle normal ResourceLocation strings
+            // Handle normal Identifier strings
             try {
                 if (name.endsWith("*")) {
                     // Handle namespace wildcards
                     String namespace = name.split(":")[0];
-                    for (ResourceLocation loc : BuiltInRegistries.ATTRIBUTE.keySet()) {
+                    for (Identifier loc : BuiltInRegistries.ATTRIBUTE.keySet()) {
                         if (namespace.equals(loc.getNamespace())) {
                             hiddenAttributes.add(loc);
                         }
@@ -64,15 +64,15 @@ public class ALConfig {
                 else if (name.startsWith("!")) {
                     // Handle negation entries
                     name = name.substring(1);
-                    ResourceLocation negatedLoc = ResourceLocation.parse(name);
+                    Identifier negatedLoc = Identifier.parse(name);
                     hiddenAttributes.remove(negatedLoc);
                 }
                 else {
-                    // Handle normal ResourceLocation strings
-                    hiddenAttributes.add(ResourceLocation.parse(name));
+                    // Handle normal Identifier strings
+                    hiddenAttributes.add(Identifier.parse(name));
                 }
             }
-            catch (ResourceLocationException ex) {
+            catch (IdentifierException ex) {
                 ApothicAttributes.LOGGER.error("Ignoring invalid \"Hidden Attributes\" config entry " + name, ex);
             }
         }

@@ -20,6 +20,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.CritParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -28,6 +32,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffect.AttributeTemplate;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -41,15 +46,23 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.GatherEffectScreenTooltipsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 public class AttributesLibClient {
+
+    /**
+     * Holds the currently-active {@link AttributesGui} so we can route {@link ScreenEvent.MouseScrolled.Pre}
+     * events to it directly — in 26.1, {@link net.minecraft.client.gui.screens.inventory.AbstractContainerScreen#mouseScrolled}
+     * no longer falls through to {@code ContainerEventHandler.mouseScrolled}, so listeners added via
+     * {@link ScreenEvent.Init.Post#addListener} never receive scroll events through the normal dispatch path.
+     */
+    @org.jetbrains.annotations.Nullable
+    private static AttributesGui activeAttribGui = null;
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void addAttribComponent(ScreenEvent.Init.Post e) {
@@ -60,11 +73,27 @@ public class AttributesLibClient {
             e.addListener(atrComp.hideUnchangedBtn);
             if (AttributesGui.wasOpen || AttributesGui.swappedFromCurios) atrComp.toggleVisibility();
             AttributesGui.swappedFromCurios = false;
+            activeAttribGui = atrComp;
+        }
+        else if (!(e.getScreen() instanceof InventoryScreen)) {
+            activeAttribGui = null;
+        }
+    }
+
+    @SubscribeEvent
+    public void forwardScroll(ScreenEvent.MouseScrolled.Pre e) {
+        AttributesGui gui = activeAttribGui;
+        if (gui != null && e.getScreen() instanceof InventoryScreen
+            && gui.isMouseOver(e.getMouseX(), e.getMouseY())
+            && gui.mouseScrolled(e.getMouseX(), e.getMouseY(), e.getScrollDeltaX(), e.getScrollDeltaY())) {
+            e.setCanceled(true);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void effectGuiTooltips(GatherEffectScreenTooltipsEvent e) {
+        if (e.getTooltip().size() == 0) return;
+
         List<Component> tooltips = e.getTooltip();
         MobEffectInstance effectInst = e.getEffectInstance();
         Holder<MobEffect> effect = effectInst.getEffect();
@@ -76,7 +105,7 @@ public class AttributesLibClient {
         name.append(" ").append(duration);
 
         if (ApothicAttributes.getTooltipFlag().isAdvanced()) {
-            name.append(" ").append(Component.translatable("[%s]", effect.unwrapKey().get().location().toString()).withStyle(ChatFormatting.GRAY));
+            name.append(" ").append(Component.translatable("[%s]", effect.unwrapKey().get().identifier().toString()).withStyle(ChatFormatting.GRAY));
         }
 
         String key = effect.value().getDescriptionId() + ".desc";
@@ -158,32 +187,45 @@ public class AttributesLibClient {
 
     public static class ModBusSub {
         @SubscribeEvent
-        public static void clientReload(RegisterClientReloadListenersEvent e) {
-            e.registerReloadListener(ALConfig.makeReloader());
+        public static void clientReload(AddClientReloadListenersEvent e) {
+            e.addListener(ApothicAttributes.loc("al_config"), ALConfig.makeReloader());
         }
 
         @SubscribeEvent
         public static void clientSetup(FMLClientSetupEvent e) {
             if (ModList.get().isLoaded("curios")) {
-                NeoForge.EVENT_BUS.register(new CuriosClientCompat());
+                // NeoForge.EVENT_BUS.register(new CuriosClientCompat());
             }
         }
 
         @SubscribeEvent
         public static void particleFactories(RegisterParticleProvidersEvent e) {
-            e.registerSprite(ALObjects.Particles.APOTH_CRIT.get(), ApothCritParticle::new);
+            e.registerSpriteSet(ALObjects.Particles.APOTH_CRIT.get(), ApothCritProvider::new);
         }
     }
 
     public static class ApothCritParticle extends CritParticle {
 
-        public ApothCritParticle(SimpleParticleType type, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+        public ApothCritParticle(ClientLevel level, double x, double y, double z, double xa, double ya, double za, TextureAtlasSprite sprite) {
+            super(level, x, y, z, xa, ya, za, sprite);
             this.bCol = 1F;
             this.rCol = 0.3F;
             this.gCol = 0.8F;
         }
 
+    }
+
+    public static class ApothCritProvider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprite;
+
+        public ApothCritProvider(SpriteSet sprite) {
+            this.sprite = sprite;
+        }
+
+        @Override
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xa, double ya, double za, RandomSource random) {
+            return new ApothCritParticle(level, x, y, z, xa, ya, za, this.sprite.get(random));
+        }
     }
 
 }

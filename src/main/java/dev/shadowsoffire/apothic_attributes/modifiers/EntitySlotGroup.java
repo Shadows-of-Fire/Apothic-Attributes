@@ -10,9 +10,9 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public record EntitySlotGroup(ResourceLocation id, HolderSet<EntityEquipmentSlot> slots) implements Predicate<Holder<EntityEquipmentSlot>> {
+public record EntitySlotGroup(Identifier id, HolderSet<EntityEquipmentSlot> slots) implements Predicate<Holder<EntityEquipmentSlot>> {
 
     public static final Codec<EntitySlotGroup> CODEC = BuiltInRegs.ENTITY_SLOT_GROUP.byNameCodec();
     public static final StreamCodec<RegistryFriendlyByteBuf, EntitySlotGroup> STREAM_CODEC = ByteBufCodecs.registry(BuiltInRegs.ENTITY_SLOT_GROUP.key());

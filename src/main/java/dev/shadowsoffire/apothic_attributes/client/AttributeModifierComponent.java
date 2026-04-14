@@ -3,20 +3,19 @@ package dev.shadowsoffire.apothic_attributes.client;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
 
 import dev.shadowsoffire.apothic_attributes.ApothicAttributes;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 
 public class AttributeModifierComponent implements ClientTooltipComponent {
 
-    public static final ResourceLocation TEXTURE = ApothicAttributes.loc("textures/gui/attribute_component.png");
+    public static final Identifier TEXTURE = ApothicAttributes.loc("textures/gui/attribute_component.png");
 
     @Nullable
     private final ModifierSource<?> source;
@@ -28,7 +27,7 @@ public class AttributeModifierComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight(Font font) {
         return this.text.size() * 10;
     }
 
@@ -38,19 +37,19 @@ public class AttributeModifierComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics gfx) {
-        gfx.blit(TEXTURE, x, y, 0, this.source == null ? 9 : 0, 0, 9, 9, 18, 9);
+    public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor gfx) {
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, this.source == null ? 9 : 0, 9, 9, 18, 9);
         if (this.source == null) return;
         this.source.render(gfx, font, x, y);
     }
 
     @Override
-    public void renderText(Font font, int pX, int pY, Matrix4f pMatrix4f, BufferSource pBufferSource) {
+    public void extractText(GuiGraphicsExtractor gfx, Font font, int x, int y) {
         var line = this.text.get(0);
-        font.drawInBatch(line, pX + 12, pY, -1, true, pMatrix4f, pBufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+        gfx.text(font, line, x + 12, y, -1, true);
         for (int i = 1; i < this.text.size(); i++) {
             line = this.text.get(i);
-            font.drawInBatch(line, pX, pY + i * (font.lineHeight + 1), -1, true, pMatrix4f, pBufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+            gfx.text(font, line, x, y + i * (font.lineHeight + 1), -1, true);
         }
     }
 

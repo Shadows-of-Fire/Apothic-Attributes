@@ -2,16 +2,15 @@ package dev.shadowsoffire.apothic_attributes.client;
 
 import java.util.Comparator;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-
 import dev.shadowsoffire.apothic_attributes.util.Comparators;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.MobEffectTextureManager;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,13 +34,8 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
 
     /**
      * Render this ModifierSource as whatever visual representation it may take.
-     * 
-     * @param gfx
-     * @param font
-     * @param x
-     * @param y
      */
-    public abstract void render(GuiGraphics gfx, Font font, int x, int y);
+    public abstract void render(GuiGraphicsExtractor gfx, Font font, int x, int y);
 
     public ModifierSourceType<T> getType() {
         return this.type;
@@ -68,14 +62,14 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
         }
 
         @Override
-        public void render(GuiGraphics gfx, Font font, int x, int y) {
-            PoseStack pose = gfx.pose();
-            pose.pushPose();
+        public void render(GuiGraphicsExtractor gfx, Font font, int x, int y) {
+            var pose = gfx.pose();
+            pose.pushMatrix();
             float scale = 0.5F;
-            pose.scale(scale, scale, 1);
-            pose.translate(1 + x / scale, 1 + y / scale, 0);
-            gfx.renderFakeItem(this.data, 0, 0);
-            pose.popPose();
+            pose.scale(scale, scale);
+            pose.translate(1 + x / scale, 1 + y / scale);
+            gfx.fakeItem(this.data, 0, 0);
+            pose.popMatrix();
         }
 
     }
@@ -88,23 +82,16 @@ public abstract class ModifierSource<T> implements Comparable<ModifierSource<T>>
         }
 
         @Override
-        public void render(GuiGraphics gfx, Font font, int x, int y) {
-            MobEffectTextureManager texMgr = Minecraft.getInstance().getMobEffectTextures();
-            // We don't have an EffectRenderingInventoryScreen, so we'll just hope the texture is good enough.
-            // var renderer = net.minecraftforge.client.extensions.common.IClientMobEffectExtensions.of(inst);
-            // if (renderer.renderInventoryIcon(inst, this, pPoseStack, pRenderX + (p_194013_ ? 6 : 7), i, this.getBlitOffset())) {
-            // i += pYOffset;
-            // continue;
-            // }
+        public void render(GuiGraphicsExtractor gfx, Font font, int x, int y) {
             Holder<MobEffect> effect = this.data.getEffect();
-            TextureAtlasSprite sprite = texMgr.get(effect);
+            Identifier sprite = Gui.getMobEffectSprite(effect);
             float scale = 0.5F;
-            PoseStack stack = gfx.pose();
-            stack.pushPose();
-            stack.scale(scale, scale, 1);
-            stack.translate(x / scale, y / scale, 0);
-            gfx.blit(0, 0, 0, 18, 18, sprite);
-            stack.popPose();
+            var pose = gfx.pose();
+            pose.pushMatrix();
+            pose.scale(scale, scale);
+            pose.translate(x / scale, y / scale);
+            gfx.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, 0, 0, 18, 18);
+            pose.popMatrix();
         }
 
     }

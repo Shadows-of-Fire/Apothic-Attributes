@@ -11,7 +11,7 @@ import java.util.function.BiConsumer;
 import dev.shadowsoffire.apothic_attributes.client.ModifierSource.EffectModifierSource;
 import dev.shadowsoffire.apothic_attributes.client.ModifierSource.ItemModifierSource;
 import dev.shadowsoffire.apothic_attributes.util.Comparators;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -74,7 +74,7 @@ public abstract class ModifierSourceType<T> {
         return type;
     }
 
-    public static Comparator<AttributeModifier> compareBySource(Map<ResourceLocation, ModifierSource<?>> sources) {
+    public static Comparator<AttributeModifier> compareBySource(Map<Identifier, ModifierSource<?>> sources) {
 
         Comparator<AttributeModifier> comp = Comparators.chained(
             Comparator.comparingInt(a -> sources.get(a.id()).getType().getPriority()),

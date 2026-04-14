@@ -35,9 +35,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ElytraItem;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TridentItem;
@@ -47,7 +47,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.AttributeUtil;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -146,7 +146,7 @@ public class AttributeEvents {
      */
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void meleeDamageAttributes(LivingIncomingDamageEvent e) {
-        if (e.getEntity().level().isClientSide || e.getEntity().isDeadOrDying()) return;
+        if (e.getEntity().level().isClientSide() || e.getEntity().isDeadOrDying()) return;
         if (noRecurse) return;
         noRecurse = true;
         if (e.getSource().getDirectEntity() instanceof LivingEntity attacker && AttributesUtil.isPhysicalDamage(e.getSource())) {
@@ -178,7 +178,7 @@ public class AttributeEvents {
     private static void applyPostColdDamage(LivingEntity attacker, LivingEntity target, DamageSource src, float dmg, float delta) {
         int duration = (int) Math.min(150, 15 * dmg);
         int amp = Math.max(0, Mth.log2(Math.round(dmg / 5)));
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, amp));
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, duration, amp));
     }
 
     /**
@@ -205,7 +205,7 @@ public class AttributeEvents {
             critDmg *= 0.85F;
         }
 
-        if (damage > e.getAmount() && !attacker.level().isClientSide) {
+        if (damage > e.getAmount() && !attacker.level().isClientSide()) {
             PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) attacker.level(), e.getEntity().chunkPosition(), new CritParticlePayload(e.getEntity().getId()));
         }
 
@@ -266,9 +266,9 @@ public class AttributeEvents {
     @SubscribeEvent
     public void arrow(EntityJoinLevelEvent e) {
         if (e.getEntity() instanceof AbstractArrow arrow) {
-            if (arrow.level().isClientSide || arrow.getPersistentData().getBoolean("apothic_attributes.arrow.done")) return;
+            if (arrow.level().isClientSide() || arrow.getPersistentData().getBooleanOr("apothic_attributes.arrow.done", false)) return;
             if (arrow.getOwner() instanceof LivingEntity le) {
-                arrow.setBaseDamage(arrow.getBaseDamage() * le.getAttributeValue(ALObjects.Attributes.ARROW_DAMAGE));
+                arrow.setBaseDamage(arrow.baseDamage * le.getAttributeValue(ALObjects.Attributes.ARROW_DAMAGE));
                 arrow.setDeltaMovement(arrow.getDeltaMovement().scale(le.getAttributeValue(ALObjects.Attributes.ARROW_VELOCITY)));
             }
             arrow.getPersistentData().putBoolean("apothic_attributes.arrow.done", true);
@@ -290,7 +290,7 @@ public class AttributeEvents {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void dodge(LivingIncomingDamageEvent e) {
         LivingEntity target = e.getEntity();
-        if (target.level().isClientSide) return;
+        if (target.level().isClientSide()) return;
         Entity attacker = e.getSource().getDirectEntity();
         if (attacker instanceof Player player) {
             double atkRange = player.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE);
@@ -324,7 +324,7 @@ public class AttributeEvents {
     }
 
     private void onDodge(LivingEntity target) {
-        target.level().playSound(null, target, ALObjects.Sounds.DODGE.value(), SoundSource.NEUTRAL, 1, 0.7F + target.getRandom().nextFloat() * 0.3F);
+        target.level().playSound(null, target, ALObjects.Sounds.DODGE, SoundSource.NEUTRAL, 1, 0.7F + target.getRandom().nextFloat() * 0.3F);
         if (target.level() instanceof ServerLevel sl) {
             double height = target.getBbHeight();
             double width = target.getBbWidth();
@@ -402,14 +402,14 @@ public class AttributeEvents {
             }
         }
 
-        if (e.getItemStack().getItem() instanceof ElytraItem && e.getModifiers().stream().noneMatch(entry -> entry.attribute().equals(ALObjects.Attributes.ELYTRA_FLIGHT))) {
+        if (e.getItemStack().has(DataComponents.GLIDER) && e.getModifiers().stream().noneMatch(entry -> entry.attribute().equals(ALObjects.Attributes.ELYTRA_FLIGHT))) {
             e.addModifier(ALObjects.Attributes.ELYTRA_FLIGHT, new AttributeModifier(ApothicAttributes.loc("elytra_item_flight"), 1, Operation.ADD_VALUE), EquipmentSlotGroup.CHEST);
         }
     }
 
     @SubscribeEvent
-    public void reloads(AddReloadListenerEvent e) {
-        e.addListener(ALConfig.makeReloader());
+    public void reloads(AddServerReloadListenersEvent e) {
+        e.addListener(ApothicAttributes.loc("al_config"), ALConfig.makeReloader());
     }
 
     @SubscribeEvent
@@ -436,7 +436,7 @@ public class AttributeEvents {
 
     @SubscribeEvent
     public void tickDmgTrackers(EntityTickEvent.Post e) {
-        if (!e.getEntity().level().isClientSide && e.getEntity().hasData(ALObjects.Attachments.AUX_DMG_TRACKER)) {
+        if (!e.getEntity().level().isClientSide() && e.getEntity().hasData(ALObjects.Attachments.AUX_DMG_TRACKER)) {
             AuxDmgTracker tracker = e.getEntity().getData(ALObjects.Attachments.AUX_DMG_TRACKER);
             tracker.tick();
         }

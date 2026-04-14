@@ -1,8 +1,6 @@
 {
   "mix_type": "potion",
   "from": "minecraft:awkward",
-  "ingredient": {
-    "item": "minecraft:mushroom_stew"
-  },
+  "ingredient": "minecraft:mushroom_stew",
   "to": "apothic_attributes:haste"
 }

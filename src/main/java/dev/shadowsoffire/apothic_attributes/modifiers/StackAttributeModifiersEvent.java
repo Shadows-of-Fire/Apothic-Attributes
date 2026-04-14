@@ -19,7 +19,7 @@ import com.google.common.collect.ImmutableList;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -78,7 +78,7 @@ public class StackAttributeModifiersEvent extends Event {
      * @param modifier  The new attribute modifier
      * @param slot      The equipment slots for which the modifier should apply
      * @return True if the modifier was added, false if it was already present
-     * @apiNote Modifiers must have a unique and consistent {@link ResourceLocation} id, or the modifier will not be removed when the item is unequipped.
+     * @apiNote Modifiers must have a unique and consistent {@link Identifier} id, or the modifier will not be removed when the item is unequipped.
      */
     public boolean addModifier(Holder<Attribute> attribute, AttributeModifier modifier, EntitySlotGroup slot) {
         return getBuilder().addModifier(attribute, modifier, slot);
@@ -89,7 +89,7 @@ public class StackAttributeModifiersEvent extends Event {
      * 
      * @return True if an attribute modifier was removed, false otherwise
      */
-    public boolean removeModifier(Holder<Attribute> attribute, ResourceLocation id) {
+    public boolean removeModifier(Holder<Attribute> attribute, Identifier id) {
         return getBuilder().removeModifier(attribute, id);
     }
 
@@ -99,7 +99,7 @@ public class StackAttributeModifiersEvent extends Event {
      * @param attribute The attribute the modifier is for
      * @param modifier  The new attribute modifier
      * @param slot      The equipment slots for which the modifier should apply
-     * @apiNote Modifiers must have a unique and consistent {@link ResourceLocation} id, or the modifier will not be removed when the item is unequipped.
+     * @apiNote Modifiers must have a unique and consistent {@link Identifier} id, or the modifier will not be removed when the item is unequipped.
      */
     public void replaceModifier(Holder<Attribute> attribute, AttributeModifier modifier, EntitySlotGroup slot) {
         getBuilder().replaceModifier(attribute, modifier, slot);
@@ -204,7 +204,7 @@ public class StackAttributeModifiersEvent extends Event {
          * 
          * @return true if a modifier was removed
          */
-        boolean removeModifier(Holder<Attribute> attribute, ResourceLocation id) {
+        boolean removeModifier(Holder<Attribute> attribute, Identifier id) {
             StackAttributeModifiers.Entry entry = entriesByKey.remove(new Key(attribute, id));
 
             if (entry != null) {
@@ -265,7 +265,7 @@ public class StackAttributeModifiersEvent extends Event {
         /**
          * Internal key class. Attribute modifiers are unique by id for each Attribute.
          */
-        private static record Key(Holder<Attribute> attr, ResourceLocation id) {
+        private static record Key(Holder<Attribute> attr, Identifier id) {
 
         }
     }

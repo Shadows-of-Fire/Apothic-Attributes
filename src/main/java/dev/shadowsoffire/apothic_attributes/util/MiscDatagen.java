@@ -16,7 +16,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -92,15 +92,15 @@ public class MiscDatagen implements DataProvider {
     }
 
     private void addMix(Holder<Potion> input, Item ingredient, Holder<Potion> output) {
-        ResourceLocation inKey = input.unwrapKey().get().location();
-        ResourceLocation outKey = output.unwrapKey().get().location();
+        Identifier inKey = input.unwrapKey().get().identifier();
+        Identifier outKey = output.unwrapKey().get().identifier();
         write(new JsonMix<>(input, Ingredient.of(ingredient), output, JsonMix.Type.POTION), "brewing_mixes", outKey.getPath() + "_from_" + inKey.getPath());
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" }) // ECJ has an issue with converting CompletableFuture<?> to CompletableFuture<Object>
     private <T extends CodecProvider<T>> void write(T object, String type, String path) {
         this.futures.add(this.regs.thenCompose(registries -> {
-            return DataProvider.saveStable(this.cachedOutput, registries, (Codec<T>) object.getCodec(), object, outputDir.resolve(type + "/" + path + ".json"));
+            return (CompletableFuture) DataProvider.saveStable(this.cachedOutput, registries, (Codec<T>) object.getCodec(), object, outputDir.resolve(type + "/" + path + ".json"));
         }));
     }
 

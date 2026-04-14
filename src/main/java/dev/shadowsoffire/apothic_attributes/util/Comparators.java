@@ -3,7 +3,7 @@ package dev.shadowsoffire.apothic_attributes.util;
 import java.util.Comparator;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Misc Comparator Utils
@@ -21,7 +21,7 @@ public class Comparators {
 
     // Note: Will NPE on unregistered objects.
     public static <T> Comparator<T> idComparator(Registry<T> reg) {
-        return Comparator.comparing(reg::getKey, ResourceLocation::compareTo);
+        return Comparator.comparing(reg::getKey, Identifier::compareTo);
     }
 
 }

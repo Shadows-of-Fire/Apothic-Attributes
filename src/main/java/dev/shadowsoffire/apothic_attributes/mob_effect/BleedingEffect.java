@@ -1,6 +1,7 @@
 package dev.shadowsoffire.apothic_attributes.mob_effect;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,8 +13,8 @@ public class BleedingEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-        entity.hurt(entity.level().damageSources().source(ALObjects.DamageTypes.BLEEDING, entity.getLastAttacker()), 1.0F + amplifier);
+    public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
+        entity.hurtServer(level, level.damageSources().source(ALObjects.DamageTypes.BLEEDING, entity.getLastAttacker()), 1.0F + amplifier);
         return true;
     }
 

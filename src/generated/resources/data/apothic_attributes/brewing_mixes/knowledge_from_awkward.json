@@ -1,8 +1,6 @@
 {
   "mix_type": "potion",
   "from": "minecraft:awkward",
-  "ingredient": {
-    "item": "minecraft:experience_bottle"
-  },
+  "ingredient": "minecraft:experience_bottle",
   "to": "apothic_attributes:knowledge"
 }

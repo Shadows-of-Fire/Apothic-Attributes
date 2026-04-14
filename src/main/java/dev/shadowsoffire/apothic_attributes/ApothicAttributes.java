@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import dev.shadowsoffire.apothic_attributes.client.AttributesLibClient;
-import dev.shadowsoffire.apothic_attributes.compat.CuriosCompat;
 import dev.shadowsoffire.apothic_attributes.impl.AttributeEvents;
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
 import dev.shadowsoffire.apothic_attributes.payload.CritParticlePayload;
@@ -21,7 +20,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput.Target;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -65,7 +64,7 @@ public class ApothicAttributes {
         bus.register(this);
         NeoForge.EVENT_BUS.register(new AttributeEvents());
         NeoForge.EVENT_BUS.addListener(ApothicAttributes::trackCooldown);
-        if (FMLEnvironment.dist.isClient()) {
+        if (FMLEnvironment.getDist().isClient()) {
             NeoForge.EVENT_BUS.register(new AttributesLibClient());
             bus.register(AttributesLibClient.ModBusSub.class);
         }
@@ -126,18 +125,18 @@ public class ApothicAttributes {
     @SubscribeEvent
     public void setup(FMLCommonSetupEvent e) {
         AttributeSupplier playerAttribs = DefaultAttributes.getSupplier(EntityType.PLAYER);
-        BuiltInRegistries.ATTRIBUTE.holders().forEach(attr -> {
+        BuiltInRegistries.ATTRIBUTE.listElements().forEach(attr -> {
             if (playerAttribs.hasAttribute(attr)) {
                 attr.value().setSyncable(true);
             }
         });
         if (ModList.get().isLoaded("curios")) {
-            e.enqueueWork(CuriosCompat::init);
+            // e.enqueueWork(CuriosCompat::init);
         }
     }
 
     @SubscribeEvent
-    public void data(GatherDataEvent e) {
+    public void data(GatherDataEvent.Client e) {
         MiscDatagen gen = new MiscDatagen(e.getGenerator().getPackOutput().getOutputFolder(Target.DATA_PACK).resolve(MODID), e.getLookupProvider());
         e.getGenerator().addProvider(true, gen);
     }
@@ -166,14 +165,14 @@ public class ApothicAttributes {
      * @return If called on the client, the current tooltip flag, otherwise {@link TooltipFlag#NORMAL}
      */
     public static TooltipFlag getTooltipFlag() {
-        if (FMLEnvironment.dist.isClient()) {
+        if (FMLEnvironment.getDist().isClient()) {
             return ClientAccess.getTooltipFlag();
         }
         return TooltipFlag.NORMAL;
     }
 
-    public static ResourceLocation loc(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    public static Identifier loc(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 
     /**

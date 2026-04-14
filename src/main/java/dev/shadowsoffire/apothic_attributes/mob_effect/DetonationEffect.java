@@ -18,12 +18,11 @@ public class DetonationEffect extends MobEffect {
 
     // TODO: Figure out how to trigger this on removal instead of on last tick, since it should always go off.
     @Override
-    public boolean applyEffectTick(LivingEntity entity, int amp) {
+    public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amp) {
         int ticks = entity.getRemainingFireTicks();
         if (ticks > 0) {
             entity.setRemainingFireTicks(0);
-            entity.hurt(entity.level().damageSources().source(ALObjects.DamageTypes.BLEEDING), (1 + amp) * ticks / 14F);
-            ServerLevel level = (ServerLevel) entity.level();
+            entity.hurtServer(level, level.damageSources().source(ALObjects.DamageTypes.BLEEDING), (1 + amp) * ticks / 14F);
             AABB bb = entity.getBoundingBox();
             level.sendParticles(ParticleTypes.FLAME, entity.getX(), entity.getY(), entity.getZ(), 100, bb.getXsize(), bb.getYsize(), bb.getZsize(), 0.25);
             level.playSound(null, entity, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.HOSTILE, 1, 1.2F);

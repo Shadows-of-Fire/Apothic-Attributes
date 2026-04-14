@@ -41,7 +41,7 @@ public record CritParticlePayload(int entityId) implements CustomPacketPayload {
         }
 
         @Override
-        public void handle(CritParticlePayload msg, IPayloadContext ctx) {
+        public void handleClient(CritParticlePayload msg, IPayloadContext ctx) {
             AttributesLibClient.apothCrit(msg.entityId);
         }
 

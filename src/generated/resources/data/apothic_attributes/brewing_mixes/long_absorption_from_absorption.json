@@ -1,8 +1,6 @@
 {
   "mix_type": "potion",
   "from": "apothic_attributes:absorption",
-  "ingredient": {
-    "item": "minecraft:redstone"
-  },
+  "ingredient": "minecraft:redstone",
   "to": "apothic_attributes:long_absorption"
 }

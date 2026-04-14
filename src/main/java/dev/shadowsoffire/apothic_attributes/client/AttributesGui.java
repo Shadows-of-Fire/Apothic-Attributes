@@ -10,8 +10,7 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import org.joml.Matrix3x2fStack;
 
 import dev.shadowsoffire.apothic_attributes.ALConfig;
 import dev.shadowsoffire.apothic_attributes.ApothicAttributes;
@@ -20,7 +19,7 @@ import dev.shadowsoffire.placebo.PlaceboClient;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
@@ -30,7 +29,9 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.input.InputWithModifiers;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.locale.Language;
@@ -39,7 +40,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -54,18 +55,17 @@ import net.neoforged.neoforge.common.extensions.IAttributeExtension;
 
 public class AttributesGui implements Renderable, GuiEventListener {
 
-    public static final ResourceLocation TEXTURES = ApothicAttributes.loc("textures/gui/attributes_gui.png");
+    public static final Identifier TEXTURES = ApothicAttributes.loc("textures/gui/attributes_gui.png");
     public static final WidgetSprites SWORD_BUTTON_SPRITES = new WidgetSprites(ApothicAttributes.loc("sword"), ApothicAttributes.loc("sword_highlighted"));
     public static final int ENTRY_HEIGHT = 22;
     public static final int MAX_ENTRIES = 6;
     public static final int WIDTH = 131;
+    private static final int TEX_W = 256;
+    private static final int TEX_H = 256;
 
     // There's only one player, so we can just happily track if this menu was open via static field.
-    // It isn't persistent through sessions, but that's not a huge issue.
     public static boolean wasOpen = false;
-    // Similar to the above, we use a static field to record where the scroll bar was.
     protected static float scrollOffset = 0;
-    // Ditto.
     protected static boolean hideUnchanged = false;
     protected static boolean swappedFromCurios = false;
 
@@ -89,8 +89,8 @@ public class AttributesGui implements Renderable, GuiEventListener {
         this.parent = parent;
         this.player = Minecraft.getInstance().player;
         this.refreshData();
-        this.leftPos = parent.getGuiLeft() - WIDTH;
-        this.topPos = parent.getGuiTop();
+        this.leftPos = parent.getLeftPos() - WIDTH;
+        this.topPos = parent.getTopPos();
         this.toggleBtn = new ImageButton(0, 0, 10, 10, SWORD_BUTTON_SPRITES, btn -> {
             this.toggleVisibility();
         }, Component.translatable("apothic_attributes.gui.show_attributes")){
@@ -103,16 +103,16 @@ public class AttributesGui implements Renderable, GuiEventListener {
         }
         else this.recipeBookButton = null;
         this.hideUnchangedBtn = new HideUnchangedButton(0, 0);
-        ButtonPlacement.positionGuiButton(toggleBtn, ALConfig.attributesGuiButtonOffset, parent.getGuiLeft(), parent.getGuiTop());
+        ButtonPlacement.positionGuiButton(toggleBtn, ALConfig.attributesGuiButtonOffset, parent.getLeftPos(), parent.getTopPos());
     }
 
     @SuppressWarnings("deprecation")
     public void refreshData() {
         this.data.clear();
-        BuiltInRegistries.ATTRIBUTE.holders()
+        BuiltInRegistries.ATTRIBUTE.listElements()
             .map(this.player::getAttribute)
             .filter(Objects::nonNull)
-            .filter(ai -> !ALConfig.hiddenAttributes.contains(ai.getAttribute().unwrapKey().get().location()))
+            .filter(ai -> !ALConfig.hiddenAttributes.contains(ai.getAttribute().unwrapKey().get().identifier()))
             .filter(ai -> !hideUnchanged || (ai.getBaseValue() != ai.getValue()))
             .forEach(this.data::add);
         this.data.sort(this::compareAttrs);
@@ -121,8 +121,8 @@ public class AttributesGui implements Renderable, GuiEventListener {
 
     public void toggleVisibility() {
         this.open = !this.open;
-        if (this.open && this.parent.getRecipeBookComponent().isVisible()) {
-            this.parent.getRecipeBookComponent().toggleVisibility();
+        if (this.open && this.parent.recipeBookComponent.isVisible()) {
+            this.parent.recipeBookComponent.toggleVisibility();
         }
         this.hideUnchangedBtn.visible = this.open;
 
@@ -135,10 +135,10 @@ public class AttributesGui implements Renderable, GuiEventListener {
         }
 
         this.parent.leftPos = newLeftPos;
-        this.leftPos = this.parent.getGuiLeft() - WIDTH;
-        this.topPos = this.parent.getGuiTop();
+        this.leftPos = this.parent.getLeftPos() - WIDTH;
+        this.topPos = this.parent.getTopPos();
 
-        if (this.recipeBookButton != null) this.recipeBookButton.setPosition(this.parent.getGuiLeft() + 104, this.parent.height / 2 - 22);
+        if (this.recipeBookButton != null) this.recipeBookButton.setPosition(this.parent.getLeftPos() + 104, this.parent.height / 2 - 22);
         this.hideUnchangedBtn.setPosition(this.leftPos + 7, this.topPos + 151);
     }
 
@@ -151,13 +151,16 @@ public class AttributesGui implements Renderable, GuiEventListener {
     @Override
     public boolean isMouseOver(double pMouseX, double pMouseY) {
         if (!this.open) return false;
+        if (this.hideUnchangedBtn.isMouseOver(pMouseX, pMouseY)) {
+            return false; // 26.1 only permits one thing to be "active" at a time, so we have to lie here.
+        }
         return this.isHovering(0, 0, WIDTH, 166, pMouseX, pMouseY);
     }
 
     @Override
-    public void render(GuiGraphics gfx, int mouseX, int mouseY, float partialTicks) {
-        ButtonPlacement.positionGuiButton(this.toggleBtn, ALConfig.attributesGuiButtonOffset, this.parent.getGuiLeft(), this.parent.getGuiTop());
-        if (this.parent.getRecipeBookComponent().isVisible()) this.open = false;
+    public void extractRenderState(GuiGraphicsExtractor gfx, int mouseX, int mouseY, float partialTicks) {
+        ButtonPlacement.positionGuiButton(this.toggleBtn, ALConfig.attributesGuiButtonOffset, this.parent.getLeftPos(), this.parent.getTopPos());
+        if (this.parent.recipeBookComponent.isVisible()) this.open = false;
         wasOpen = this.open;
         if (!this.open) return;
 
@@ -166,26 +169,23 @@ public class AttributesGui implements Renderable, GuiEventListener {
             this.refreshData();
         }
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURES);
         int left = this.leftPos;
         int top = this.topPos;
-        gfx.blit(TEXTURES, left, top, 0, 0, WIDTH, 166);
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, left, top, 0, 0, WIDTH, 166, TEX_W, TEX_H);
         int scrollbarPos = (int) (117 * scrollOffset);
-        gfx.blit(TEXTURES, left + 111, top + 16 + scrollbarPos, 244, this.isScrollBarActive() ? 0 : 15, 12, 15);
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, left + 111, top + 16 + scrollbarPos, 244, this.isScrollBarActive() ? 0 : 15, 12, 15, TEX_W, TEX_H);
         int idx = this.startIndex;
         while (idx < this.startIndex + MAX_ENTRIES && idx < this.data.size()) {
             this.renderEntry(gfx, this.data.get(idx), this.leftPos + 8, this.topPos + 16 + ENTRY_HEIGHT * (idx - this.startIndex), mouseX, mouseY);
             idx++;
         }
         this.renderTooltip(gfx, mouseX, mouseY);
-        gfx.drawString(font, Component.translatable("apothic_attributes.gui.attributes"), this.leftPos + 8, this.topPos + 5, 0x404040, false);
-        gfx.drawString(font, ApothicAttributes.lang("text", "hide_unchanged"), this.leftPos + 20, this.topPos + 152, 0x404040, false);
+        gfx.text(font, Component.translatable("apothic_attributes.gui.attributes"), this.leftPos + 8, this.topPos + 5, 0xFF404040, false);
+        gfx.text(font, ApothicAttributes.lang("text", "hide_unchanged"), this.leftPos + 20, this.topPos + 152, 0xFF404040, false);
     }
 
     @SuppressWarnings("deprecation")
-    protected void renderTooltip(GuiGraphics gfx, int mouseX, int mouseY) {
+    protected void renderTooltip(GuiGraphicsExtractor gfx, int mouseX, int mouseY) {
         AttributeInstance inst = this.getHoveredSlot(mouseX, mouseY);
         if (inst != null) {
             Attribute attr = inst.getAttribute().value();
@@ -249,7 +249,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
                 this.addComp(CommonComponents.EMPTY, finalTooltip);
                 this.addComp(Component.translatable("apothic_attributes.gui.modifiers").withStyle(ChatFormatting.GOLD), finalTooltip);
 
-                Map<ResourceLocation, ModifierSource<?>> modifiersToSources = new HashMap<>();
+                Map<Identifier, ModifierSource<?>> modifiersToSources = new HashMap<>();
 
                 for (ModifierSourceType<?> type : ModifierSourceType.getTypes()) {
                     type.extract(this.player, (modif, source) -> modifiersToSources.put(modif.id(), source));
@@ -294,7 +294,8 @@ public class AttributesGui implements Renderable, GuiEventListener {
                 this.addComp(Component.translatable("apothic_attributes.gui.no_modifiers").withStyle(ChatFormatting.GOLD), finalTooltip);
             }
 
-            gfx.renderTooltipInternal(font, finalTooltip, this.leftPos - 16 - finalTooltip.stream().map(c -> c.getWidth(this.font)).max(Integer::compare).get(), mouseY, DefaultTooltipPositioner.INSTANCE);
+            int maxWidth = finalTooltip.stream().map(c -> c.getWidth(this.font)).max(Integer::compare).get();
+            gfx.tooltip(font, finalTooltip, this.leftPos - 16 - maxWidth, mouseY, DefaultTooltipPositioner.INSTANCE, null);
         }
     }
 
@@ -309,9 +310,9 @@ public class AttributesGui implements Renderable, GuiEventListener {
         }
     }
 
-    private void renderEntry(GuiGraphics gfx, AttributeInstance inst, int x, int y, int mouseX, int mouseY) {
+    private void renderEntry(GuiGraphicsExtractor gfx, AttributeInstance inst, int x, int y, int mouseX, int mouseY) {
         boolean hover = this.getHoveredSlot(mouseX, mouseY) == inst;
-        gfx.blit(TEXTURES, x, y, 142, hover ? ENTRY_HEIGHT : 0, 100, ENTRY_HEIGHT);
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, x, y, 142, hover ? ENTRY_HEIGHT : 0, 100, ENTRY_HEIGHT, TEX_W, TEX_H);
 
         Component txt = Component.translatable(inst.getAttribute().value().getDescriptionId());
         int splitWidth = 60;
@@ -322,14 +323,14 @@ public class AttributesGui implements Renderable, GuiEventListener {
             lines = this.font.split(txt, splitWidth);
         }
 
-        PoseStack stack = gfx.pose();
+        Matrix3x2fStack pose = gfx.pose();
 
-        stack.pushPose();
+        pose.pushMatrix();
         float scale = 1;
         int maxWidth = lines.stream().map(this.font::width).max(Integer::compareTo).get();
         if (maxWidth > 66) {
             scale = 66F / maxWidth;
-            stack.scale(scale, scale, 1);
+            pose.scale(scale, scale);
         }
 
         for (int i = 0; i < lines.size(); i++) {
@@ -337,10 +338,10 @@ public class AttributesGui implements Renderable, GuiEventListener {
             float width = this.font.width(line) * scale;
             float lineX = (x + 1 + (68 - width) / 2) / scale;
             float lineY = (y + (lines.size() == 1 ? 7 : 2) + i * 10) / scale;
-            gfx.drawString(font, line, lineX, lineY, 0x404040, false);
+            gfx.text(font, line, (int) lineX, (int) lineY, 0xFF404040, false);
         }
-        stack.popPose();
-        stack.pushPose();
+        pose.popMatrix();
+        pose.pushMatrix();
 
         MutableComponent value = inst.getAttribute().value().toValueComponent(null, inst.getValue(), TooltipFlag.Default.NORMAL);
 
@@ -351,16 +352,18 @@ public class AttributesGui implements Renderable, GuiEventListener {
         scale = 1;
         if (this.font.width(value) > 27) {
             scale = 27F / this.font.width(value);
-            stack.scale(scale, scale, 1);
+            pose.scale(scale, scale);
         }
 
-        int color = getValueColor(inst, ChatFormatting.WHITE.getColor());
-        gfx.drawString(font, value, (int) ((x + 72 + (27 - this.font.width(value) * scale) / 2) / scale), (int) ((y + 7) / scale), color, true);
-        stack.popPose();
+        int color = getValueColor(inst, ChatFormatting.WHITE.getColor()) | 0xFF000000;
+        gfx.text(font, value, (int) ((x + 72 + (27 - this.font.width(value) * scale) / 2) / scale), (int) ((y + 7) / scale), color, true);
+        pose.popMatrix();
     }
 
     @Override
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        double pMouseX = event.x();
+        double pMouseY = event.y();
         if (!this.open || !this.isScrollBarActive()) return false;
         this.scrolling = false;
         int left = this.leftPos + 111;
@@ -378,7 +381,8 @@ public class AttributesGui implements Renderable, GuiEventListener {
     }
 
     @Override
-    public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
+    public boolean mouseDragged(MouseButtonEvent event, double pDragX, double pDragY) {
+        double pMouseY = event.y();
         if (!this.open) return false;
         if (this.scrolling && this.isScrollBarActive()) {
             int i = this.topPos + 15;
@@ -546,24 +550,18 @@ public class AttributesGui implements Renderable, GuiEventListener {
         }
 
         @Override
-        public void onPress() {
+        public void onPress(InputWithModifiers input) {
             hideUnchanged = !hideUnchanged;
         }
 
         @Override
-        public void renderWidget(GuiGraphics gfx, int pMouseX, int pMouseY, float pPartialTick) {
+        protected void extractContents(GuiGraphicsExtractor gfx, int pMouseX, int pMouseY, float pPartialTick) {
             int u = 131, v = 20;
             int vOffset = hideUnchanged ? 0 : 10;
             if (this.isHovered) {
                 vOffset += 20;
             }
-
-            RenderSystem.enableDepthTest();
-            PoseStack pose = gfx.pose();
-            pose.pushPose();
-            pose.translate(0, 0, 100);
-            gfx.blit(TEXTURES, this.getX(), this.getY(), u, v + vOffset, 10, 10, 256, 256);
-            pose.popPose();
+            gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, this.getX(), this.getY(), u, v + vOffset, 10, 10, TEX_W, TEX_H);
         }
 
         @Override

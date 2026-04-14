@@ -45,7 +45,7 @@ public record ConfigPayload(float knowledgeMultiplier) implements CustomPacketPa
         }
 
         @Override
-        public void handle(ConfigPayload msg, IPayloadContext ctx) {
+        public void handleClient(ConfigPayload msg, IPayloadContext ctx) {
             ALConfig.knowledgeMultiplier = msg.knowledgeMultiplier;
         }
 

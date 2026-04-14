@@ -1,8 +1,6 @@
 {
   "mix_type": "potion",
   "from": "minecraft:awkward",
-  "ingredient": {
-    "item": "minecraft:golden_apple"
-  },
+  "ingredient": "minecraft:golden_apple",
   "to": "apothic_attributes:absorption"
 }

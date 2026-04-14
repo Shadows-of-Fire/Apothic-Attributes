@@ -10,7 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -25,19 +25,19 @@ public class AttributeHelper {
      * UUID of the base modifier for Attack Damage
      */
     @Deprecated
-    public static final ResourceLocation BASE_ATTACK_DAMAGE = AttributeUtil.BASE_ATTACK_DAMAGE_ID;
+    public static final Identifier BASE_ATTACK_DAMAGE = AttributeUtil.BASE_ATTACK_DAMAGE_ID;
 
     /**
      * UUID of the base modifier for Attack Speed
      */
     @Deprecated
-    public static final ResourceLocation BASE_ATTACK_SPEED = AttributeUtil.BASE_ATTACK_SPEED_ID;
+    public static final Identifier BASE_ATTACK_SPEED = AttributeUtil.BASE_ATTACK_SPEED_ID;
 
     /**
      * UUID of the base modifier for Attack Range
      */
     @Deprecated
-    public static final ResourceLocation BASE_ENTITY_REACH = AttributeUtil.BASE_ENTITY_REACH_ID;
+    public static final Identifier BASE_ENTITY_REACH = AttributeUtil.BASE_ENTITY_REACH_ID;
 
     /**
      * A brief explanation of {@link Operation} and Attribute calculations:
@@ -66,7 +66,7 @@ public class AttributeHelper {
      * @param operation The operation of the attribute modifier. See above.
      * @see AttributeInstance#calculateValue()
      */
-    public static void modify(LivingEntity entity, Holder<Attribute> attribute, ResourceLocation id, double value, Operation operation) {
+    public static void modify(LivingEntity entity, Holder<Attribute> attribute, Identifier id, double value, Operation operation) {
         AttributeInstance inst = entity.getAttribute(attribute);
         if (inst != null) {
             inst.addPermanentModifier(new AttributeModifier(id, value, operation));
@@ -76,7 +76,7 @@ public class AttributeHelper {
     /**
      * Adds the given modifier to the base value of the attribute.
      */
-    public static void addToBase(LivingEntity entity, Holder<Attribute> attribute, ResourceLocation id, double modifier) {
+    public static void addToBase(LivingEntity entity, Holder<Attribute> attribute, Identifier id, double modifier) {
         modify(entity, attribute, id, modifier, Operation.ADD_VALUE);
     }
 
@@ -84,7 +84,7 @@ public class AttributeHelper {
      * Adds (modifier * new base value) to the final value of the attribute.
      * New base value is the base value plus all additions (operation 0 AttributeModifiers).
      */
-    public static void addXTimesNewBase(LivingEntity entity, Holder<Attribute> attribute, ResourceLocation id, double modifier) {
+    public static void addXTimesNewBase(LivingEntity entity, Holder<Attribute> attribute, Identifier id, double modifier) {
         modify(entity, attribute, id, modifier, Operation.ADD_MULTIPLIED_BASE);
     }
 
@@ -92,7 +92,7 @@ public class AttributeHelper {
      * Multiplies the final value of this attribute by 1.0 + modifier.
      * Final value is the value after computing all operation 0 and 1 AttributeModifiers.
      */
-    public static void multiplyFinal(LivingEntity entity, Holder<Attribute> attribute, ResourceLocation id, double modifier) {
+    public static void multiplyFinal(LivingEntity entity, Holder<Attribute> attribute, Identifier id, double modifier) {
         modify(entity, attribute, id, modifier, Operation.ADD_MULTIPLIED_TOTAL);
     }
 

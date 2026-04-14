@@ -16,6 +16,7 @@ import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
@@ -75,14 +76,14 @@ public class AuxDmgTracker {
      */
     public boolean attackWith(LivingEntity attacker, LivingEntity target, ResourceKey<DamageType> type, float damage, @Nullable PostAttackEffect callback) {
         float atkStrength = ApothicAttributes.getLocalAtkStrength(attacker);
-        debugLog("Attacking {} with {}: damage = {}, atkStrength = {}", target, type.location(), damage, atkStrength);
-        if (damage > 0.001 && atkStrength >= 0.55F && !target.isDeadOrDying()) {
+        debugLog("Attacking {} with {}: damage = {}, atkStrength = {}", target, type.identifier(), damage, atkStrength);
+        if (damage > 0.001 && atkStrength >= 0.55F && !target.isDeadOrDying() && target.level() instanceof ServerLevel serverLevel) {
             this.setup(target, type);
             float dmg = modifyDamage(attacker, target, atkStrength * damage);
             float health = target.getHealth();
-            if (target.hurt(src(type, attacker), dmg)) {
+            if (target.hurtServer(serverLevel, src(type, attacker), dmg)) {
                 float delta = health - target.getHealth();
-                debugLog("Attack successful: {} -> {}: type = {}, damage = {}, atkStrength = {}", attacker, target, type.location(), dmg, atkStrength);
+                debugLog("Attack successful: {} -> {}: type = {}, damage = {}, atkStrength = {}", attacker, target, type.identifier(), dmg, atkStrength);
                 if (callback != null) {
                     callback.apply(attacker, target, src(type, attacker), dmg, delta);
                 }
@@ -112,7 +113,7 @@ public class AuxDmgTracker {
         Entry entry = getData(type);
         entity.invulnerableTime = entry.time();
         entity.lastHurt = entry.lastHurt();
-        debugLog("Setup values for {} / {}: invulTime = {}, lastHurt = {}", entity, type.location(), entry.time(), entry.lastHurt());
+        debugLog("Setup values for {} / {}: invulTime = {}, lastHurt = {}", entity, type.identifier(), entry.time(), entry.lastHurt());
     }
 
     /**
@@ -122,7 +123,7 @@ public class AuxDmgTracker {
     public void record(LivingEntity entity, ResourceKey<DamageType> type) {
         Entry entry = new Entry(entity.invulnerableTime, entity.lastHurt);
         data.put(type, entry);
-        debugLog("Recorded values for {} / {}: invulTime = {}, lastHurt = {}", entity, type.location(), entry.time(), entry.lastHurt());
+        debugLog("Recorded values for {} / {}: invulTime = {}, lastHurt = {}", entity, type.identifier(), entry.time(), entry.lastHurt());
     }
 
     /**
@@ -155,7 +156,7 @@ public class AuxDmgTracker {
      * PlayerMixin is responsible for raising apoth.hit_by_sweep_attack.
      */
     private static float modifyDamage(LivingEntity attacker, LivingEntity target, float damage) {
-        if (target.getPersistentData().getBoolean("apoth.hit_by_sweep_attack") && attacker.getAttributes().hasAttribute(Attributes.SWEEPING_DAMAGE_RATIO)) {
+        if (target.getPersistentData().getBooleanOr("apoth.hit_by_sweep_attack", false) && attacker.getAttributes().hasAttribute(Attributes.SWEEPING_DAMAGE_RATIO)) {
             float realDmg = Math.min(damage, 1 + (float) attacker.getAttributeValue(Attributes.SWEEPING_DAMAGE_RATIO) * damage);
             debugLog("Sweep attack detected. Modifying damage for {} from {} to {}.", attacker, damage, realDmg);
             return realDmg;

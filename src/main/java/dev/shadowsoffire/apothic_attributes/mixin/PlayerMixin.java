@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,30 +18,26 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 public class PlayerMixin {
 
     /**
-     * Wraps the first call to {@link Entity#hurt(DamageSource, float)} in {@link Player#attack(Entity)} to allow for the attack logic to continue if any of Apoth's
-     * aux damage types kill the target.
+     * Wraps {@link Entity#hurtOrSimulate(DamageSource, float)} in {@link Player#attack(Entity)} so aux damage kills still flow through follow-up logic.
      * <p>
      * This is necessary since if we kill the target in aux damage, we have to cancel the {@link LivingIncomingDamageEvent} to prevent
-     * {@link LivingEntity#die(DamageSource)} from being called twice.
-     * Under normal conditions, canceling the event will cause {@code hurt} to return false, which would prevent follow-up effects (like sweep attacks).
+     * {@link LivingEntity#die(DamageSource)} from being called twice. Under normal conditions, canceling the event will cause {@code hurtOrSimulate}
+     * to return false, which would prevent follow-up effects (like sweep attacks).
      */
-    @WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"), method = "attack(Lnet/minecraft/world/entity/Entity;)V", require = 1)
+    @WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurtOrSimulate(Lnet/minecraft/world/damagesource/DamageSource;F)Z"), method = "attack(Lnet/minecraft/world/entity/Entity;)V", require = 1)
     private static boolean apoth_handleKilledByAuxDmg(Entity target, DamageSource src, float dmg, Operation<Boolean> wrapped) {
         boolean res = wrapped.call(target, src, dmg);
-        return res || target.getPersistentData().getBoolean("apoth.killed_by_aux_dmg");
+        return res || target.getPersistentData().getBooleanOr("apoth.killed_by_aux_dmg", false);
     }
 
     /**
-     * Raises a flag on the target entity if we are in the "sweep attack" block, so we can modify
-     * aux damage based on the value of {@link Attributes#SWEEPING_DAMAGE_RATIO}.
-     * <p>
-     * You might notice that the signature of this one is slightly different from the one above, which is because the receiver is always
-     * a {@link LivingEntity} for the sweep attack.
+     * Raises a flag on the target entity while vanilla's sweep-attack block is calling {@link LivingEntity#hurtServer(ServerLevel, DamageSource, float)}
+     * so we can modify aux damage based on the value of {@link Attributes#SWEEPING_DAMAGE_RATIO}.
      */
-    @WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"), method = "attack(Lnet/minecraft/world/entity/Entity;)V", require = 1)
-    private static boolean apoth_markSweepAttacks(LivingEntity target, DamageSource src, float dmg, Operation<Boolean> wrapped) {
+    @WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"), method = "doSweepAttack(Lnet/minecraft/world/entity/Entity;FLnet/minecraft/world/damagesource/DamageSource;FLnet/minecraft/world/phys/AABB;)V", require = 1)
+    private boolean apoth_markSweepAttacks(LivingEntity target, ServerLevel level, DamageSource src, float dmg, Operation<Boolean> wrapped) {
         target.getPersistentData().putBoolean("apoth.hit_by_sweep_attack", true);
-        boolean res = wrapped.call(target, src, dmg);
+        boolean res = wrapped.call(target, level, src, dmg);
         target.getPersistentData().remove("apoth.hit_by_sweep_attack");
         return res;
     }

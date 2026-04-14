@@ -12,7 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -116,7 +116,7 @@ public record StackAttributeModifiers(List<StackAttributeModifiers.Entry> modifi
             EntitySlotGroup.STREAM_CODEC, StackAttributeModifiers.Entry::slots,
             StackAttributeModifiers.Entry::new);
 
-        public boolean matches(Holder<Attribute> attribute, ResourceLocation id) {
+        public boolean matches(Holder<Attribute> attribute, Identifier id) {
             return attribute.equals(this.attribute) && this.modifier.is(id);
         }
     }

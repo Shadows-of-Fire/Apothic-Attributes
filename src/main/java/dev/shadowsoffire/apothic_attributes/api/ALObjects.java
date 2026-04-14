@@ -6,6 +6,8 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.ApiStatus;
 
+import com.mojang.serialization.MapCodec;
+
 import dev.shadowsoffire.apothic_attributes.ApothicAttributes;
 import dev.shadowsoffire.apothic_attributes.mob_effect.BleedingEffect;
 import dev.shadowsoffire.apothic_attributes.mob_effect.DetonationEffect;
@@ -25,8 +27,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -230,7 +232,7 @@ public class ALObjects {
 
     public static class Sounds {
 
-        public static final Holder<SoundEvent> DODGE = R.sound("dodge");
+        public static final SoundEvent DODGE = R.sound("dodge");
 
         private static void bootstrap() {}
 
@@ -268,21 +270,21 @@ public class ALObjects {
     }
 
     public static final class Potions {
-        public static final Holder<Potion> RESISTANCE = R.singlePotion("resistance", () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600));
-        public static final Holder<Potion> LONG_RESISTANCE = R.singlePotion("long_resistance", () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 9600));
-        public static final Holder<Potion> STRONG_RESISTANCE = R.singlePotion("strong_resistance", () -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1800, 1));
+        public static final Holder<Potion> RESISTANCE = R.singlePotion("resistance", () -> new MobEffectInstance(MobEffects.RESISTANCE, 3600));
+        public static final Holder<Potion> LONG_RESISTANCE = R.singlePotion("long_resistance", () -> new MobEffectInstance(MobEffects.RESISTANCE, 9600));
+        public static final Holder<Potion> STRONG_RESISTANCE = R.singlePotion("strong_resistance", () -> new MobEffectInstance(MobEffects.RESISTANCE, 1800, 1));
 
         public static final Holder<Potion> ABSORPTION = R.singlePotion("absorption", () -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 1));
         public static final Holder<Potion> LONG_ABSORPTION = R.singlePotion("long_absorption", () -> new MobEffectInstance(MobEffects.ABSORPTION, 3600, 1));
         public static final Holder<Potion> STRONG_ABSORPTION = R.singlePotion("strong_absorption", () -> new MobEffectInstance(MobEffects.ABSORPTION, 600, 3));
 
-        public static final Holder<Potion> HASTE = R.singlePotion("haste", () -> new MobEffectInstance(MobEffects.DIG_SPEED, 3600));
-        public static final Holder<Potion> LONG_HASTE = R.singlePotion("long_haste", () -> new MobEffectInstance(MobEffects.DIG_SPEED, 9600));
-        public static final Holder<Potion> STRONG_HASTE = R.singlePotion("strong_haste", () -> new MobEffectInstance(MobEffects.DIG_SPEED, 1800, 1));
+        public static final Holder<Potion> HASTE = R.singlePotion("haste", () -> new MobEffectInstance(MobEffects.HASTE, 3600));
+        public static final Holder<Potion> LONG_HASTE = R.singlePotion("long_haste", () -> new MobEffectInstance(MobEffects.HASTE, 9600));
+        public static final Holder<Potion> STRONG_HASTE = R.singlePotion("strong_haste", () -> new MobEffectInstance(MobEffects.HASTE, 1800, 1));
 
-        public static final Holder<Potion> FATIGUE = R.singlePotion("fatigue", () -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 3600));
-        public static final Holder<Potion> LONG_FATIGUE = R.singlePotion("long_fatigue", () -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 9600));
-        public static final Holder<Potion> STRONG_FATIGUE = R.singlePotion("strong_fatigue", () -> new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 1800, 1));
+        public static final Holder<Potion> FATIGUE = R.singlePotion("fatigue", () -> new MobEffectInstance(MobEffects.MINING_FATIGUE, 3600));
+        public static final Holder<Potion> LONG_FATIGUE = R.singlePotion("long_fatigue", () -> new MobEffectInstance(MobEffects.MINING_FATIGUE, 9600));
+        public static final Holder<Potion> STRONG_FATIGUE = R.singlePotion("strong_fatigue", () -> new MobEffectInstance(MobEffects.MINING_FATIGUE, 1800, 1));
 
         public static final Holder<Potion> WITHER = R.singlePotion("wither", () -> new MobEffectInstance(MobEffects.WITHER, 3600));
         public static final Holder<Potion> LONG_WITHER = R.singlePotion("long_wither", () -> new MobEffectInstance(MobEffects.WITHER, 9600));
@@ -343,7 +345,7 @@ public class ALObjects {
          * This allows us to keep track of these damages on their own, without merging them with other damage types.
          */
         public static final AttachmentType<AuxDmgTracker> AUX_DMG_TRACKER = R.attachment("aux_dmg_tracker", () -> new AuxDmgTracker(), b -> b
-            .serialize(AuxDmgTracker.CODEC));
+            .serialize(MapCodec.assumeMapUnsafe(AuxDmgTracker.CODEC)));
 
         private static void bootstrap() {}
     }
@@ -391,7 +393,7 @@ public class ALObjects {
         /**
          * True "any" slot group. Matches any registered {@link EntityEquipmentSlot}.
          */
-        public static final EntitySlotGroup ANY = group("any", new AnyHolderSet<>(BuiltInRegs.ENTITY_EQUIPMENT_SLOT.asLookup()));
+        public static final EntitySlotGroup ANY = group("any", new AnyHolderSet<>(BuiltInRegs.ENTITY_EQUIPMENT_SLOT));
 
         /**
          * Vanilla "any" slot group, corresponding to {@link EquipmentSlotGroup#ANY}.
@@ -410,7 +412,7 @@ public class ALObjects {
         public static final EntitySlotGroup ARMOR = group("armor", HolderSet.direct(EquipmentSlots.HEAD, EquipmentSlots.CHEST, EquipmentSlots.LEGS, EquipmentSlots.FEET));
         public static final EntitySlotGroup BODY = group("body", HolderSet.direct(EquipmentSlots.BODY));
 
-        private static ResourceLocation id(String path) {
+        private static Identifier id(String path) {
             return ApothicAttributes.loc(path);
         }
 
