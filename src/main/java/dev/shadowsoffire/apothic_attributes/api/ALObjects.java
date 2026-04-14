@@ -146,11 +146,6 @@ public class ALObjects {
         public static final Holder<Attribute> LIFE_STEAL = R.attribute("life_steal", () -> new PercentageAttribute("apothic_attributes:life_steal", 0.0D, 0.0D, 10.0D).setSyncable(true));
 
         /**
-         * Mining Speed. Base value = (1.0) = 100% default break speed
-         */
-        public static final Holder<Attribute> MINING_SPEED = R.attribute("mining_speed", () -> new PercentageAttribute("apothic_attributes:mining_speed", 1.0D, 0.0D, 10.0D).setSyncable(true));
-
-        /**
          * Percent of physical damage converted to absorption hearts. Base value = (0.0) = 0%
          */
         public static final Holder<Attribute> OVERHEAL = R.attribute("overheal", () -> new PercentageAttribute("apothic_attributes:overheal", 0.0D, 0.0D, 10.0D).setSyncable(true));

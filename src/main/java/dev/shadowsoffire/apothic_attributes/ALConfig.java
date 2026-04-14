@@ -17,7 +17,18 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
 public class ALConfig {
 
-    public static final String[] DEFAULT_BLOCKED_ATTRIBUTES = { "neoforge:nametag_distance", "neoforge:creative_flight", "apothic_attributes:elytra_flight", "apothic_attributes:ghost_health" };
+    public static final String[] DEFAULT_BLOCKED_ATTRIBUTES = {
+        "neoforge:nametag_distance",
+        "neoforge:creative_flight",
+        "apothic_attributes:elytra_flight",
+        "apothic_attributes:ghost_health",
+        "minecraft:camera_distance",
+        "minecraft:explosion_knockback_resistance",
+        "minecraft:mining_efficiency",
+        "minecraft:movement_efficiency",
+        "minecraft:waypoint_receive_range",
+        "minecraft:waypoint_transmit_range",
+    };
 
     public static boolean enableAttributesGui = true;
     public static boolean enablePotionTooltips = true;

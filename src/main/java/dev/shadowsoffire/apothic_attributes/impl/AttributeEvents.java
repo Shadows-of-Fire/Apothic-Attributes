@@ -19,6 +19,7 @@ import dev.shadowsoffire.apothic_attributes.util.AuxDmgTracker;
 import dev.shadowsoffire.apothic_attributes.util.LEInvoker;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -35,7 +36,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -59,7 +59,6 @@ import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -221,14 +220,6 @@ public class AttributeEvents {
         if (e.isVanillaCritical()) {
             e.setDamageMultiplier(Math.max(e.getDamageMultiplier(), critDmg));
         }
-    }
-
-    /**
-     * Handles {@link ALObjects#MINING_SPEED}
-     */
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public void breakSpd(BreakSpeed e) {
-        e.setNewSpeed(e.getNewSpeed() * (float) e.getEntity().getAttributeValue(ALObjects.Attributes.MINING_SPEED));
     }
 
     /**

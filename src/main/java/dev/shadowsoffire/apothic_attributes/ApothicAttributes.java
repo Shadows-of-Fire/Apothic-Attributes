@@ -101,7 +101,6 @@ public class ApothicAttributes {
                 ALObjects.Attributes.CURRENT_HP_DAMAGE,
                 ALObjects.Attributes.OVERHEAL,
                 ALObjects.Attributes.GHOST_HEALTH,
-                ALObjects.Attributes.MINING_SPEED,
                 ALObjects.Attributes.ARROW_DAMAGE,
                 ALObjects.Attributes.ARROW_VELOCITY,
                 ALObjects.Attributes.EXPERIENCE_GAINED,
