@@ -36,6 +36,6 @@ config="apothic_attributes.mixins.json"
 [[dependencies.apothic_attributes]]
     modId="placebo"
     type="required"
-    versionRange="[10.0.0-beta1,)"
+    versionRange="[10.0.0-beta2,)"
     ordering="AFTER"
     side="BOTH"
