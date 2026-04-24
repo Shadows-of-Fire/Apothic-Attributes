@@ -38,7 +38,7 @@ public class AttributeModifierComponent implements ClientTooltipComponent {
 
     @Override
     public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor gfx) {
-        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, this.source == null ? 9 : 0, 9, 9, 18, 9);
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, this.source == null ? 9 : 0, 0, 9, 9, 18, 9);
         if (this.source == null) return;
         this.source.render(gfx, font, x, y);
     }

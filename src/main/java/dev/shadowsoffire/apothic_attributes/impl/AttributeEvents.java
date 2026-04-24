@@ -116,7 +116,7 @@ public class AttributeEvents {
         if (e.getSource().getDirectEntity() instanceof LivingEntity attacker && AttributesUtil.isPhysicalDamage(e.getSource())) {
             float oldEntityHealth = e.getEntity().getData(Attachments.PRE_DAMAGE_HEALTH);
             float lifesteal = (float) attacker.getAttributeValue(ALObjects.Attributes.LIFE_STEAL);
-            float dmg = Math.min(e.getNewDamage(), oldEntityHealth);
+            float dmg = Math.min(e.getNewDamage(), oldEntityHealth); // TODO: getHealthDamage after NeoForge/3101
             if (lifesteal > 0.001) {
                 attacker.heal(dmg * lifesteal);
             }
