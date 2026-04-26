@@ -94,7 +94,7 @@ public class MiscDatagen implements DataProvider {
     private void addMix(Holder<Potion> input, Item ingredient, Holder<Potion> output) {
         Identifier inKey = input.unwrapKey().get().identifier();
         Identifier outKey = output.unwrapKey().get().identifier();
-        write(new JsonMix<>(input, Ingredient.of(ingredient), output, JsonMix.Type.POTION), "brewing_mixes", outKey.getPath() + "_from_" + inKey.getPath());
+        write(new JsonMix<>(input, Ingredient.of(ingredient), output, JsonMix.Type.POTION), "placebo/brewing_mixes", outKey.getPath() + "_from_" + inKey.getPath());
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" }) // ECJ has an issue with converting CompletableFuture<?> to CompletableFuture<Object>
