@@ -3,6 +3,8 @@ package dev.shadowsoffire.apothic_attributes.client;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
+
 import com.google.common.collect.Lists;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -61,7 +63,7 @@ public class AttributesLibClient {
      * no longer falls through to {@code ContainerEventHandler.mouseScrolled}, so listeners added via
      * {@link ScreenEvent.Init.Post#addListener} never receive scroll events through the normal dispatch path.
      */
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     private static AttributesGui activeAttribGui = null;
 
     @SubscribeEvent(priority = EventPriority.HIGH)
