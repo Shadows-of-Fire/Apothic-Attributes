@@ -1,10 +1,7 @@
 package dev.shadowsoffire.apothic_attributes.api;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
-
-import com.google.common.collect.Multimap;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -17,27 +14,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.neoforge.common.util.AttributeUtil;
 
 public class AttributeHelper {
-
-    /**
-     * UUID of the base modifier for Attack Damage
-     */
-    @Deprecated
-    public static final Identifier BASE_ATTACK_DAMAGE = AttributeUtil.BASE_ATTACK_DAMAGE_ID;
-
-    /**
-     * UUID of the base modifier for Attack Speed
-     */
-    @Deprecated
-    public static final Identifier BASE_ATTACK_SPEED = AttributeUtil.BASE_ATTACK_SPEED_ID;
-
-    /**
-     * UUID of the base modifier for Attack Range
-     */
-    @Deprecated
-    public static final Identifier BASE_ENTITY_REACH = AttributeUtil.BASE_ENTITY_REACH_ID;
 
     /**
      * A brief explanation of {@link Operation} and Attribute calculations:
@@ -94,16 +72,6 @@ public class AttributeHelper {
      */
     public static void multiplyFinal(LivingEntity entity, Holder<Attribute> attribute, Identifier id, double modifier) {
         modify(entity, attribute, id, modifier, Operation.ADD_MULTIPLIED_TOTAL);
-    }
-
-    @Deprecated
-    public static Multimap<Holder<Attribute>, AttributeModifier> sortedMap() {
-        return AttributeUtil.sortedMap();
-    }
-
-    @Deprecated
-    public static Comparator<AttributeModifier> modifierComparator() {
-        return AttributeUtil.ATTRIBUTE_MODIFIER_COMPARATOR;
     }
 
     /**

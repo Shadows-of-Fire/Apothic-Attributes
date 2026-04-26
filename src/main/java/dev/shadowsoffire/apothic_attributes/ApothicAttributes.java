@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import dev.shadowsoffire.apothic_attributes.client.AttributesLibClient;
+import dev.shadowsoffire.apothic_attributes.compat.CuriosCompat;
 import dev.shadowsoffire.apothic_attributes.impl.AttributeEvents;
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
 import dev.shadowsoffire.apothic_attributes.payload.CritParticlePayload;
@@ -130,7 +131,7 @@ public class ApothicAttributes {
             }
         });
         if (ModList.get().isLoaded("curios")) {
-            // e.enqueueWork(CuriosCompat::init);
+            e.enqueueWork(CuriosCompat::init);
         }
     }
 
