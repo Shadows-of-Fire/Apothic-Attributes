@@ -28,9 +28,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.util.thread.EffectiveSide;
 import net.neoforged.neoforge.common.NeoForge;
 import top.theillusivec4.curios.api.CurioAttributeModifiers;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosSlotTypes;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.event.CurioAttributeModifierEvent;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
@@ -99,62 +101,41 @@ public class CuriosCompat {
      * <p>
      * For this to work, a mod wanting compat with a specific curio slot needs to register both a
      * {@link CurioEquipmentSlot} and a {@link EntitySlotGroup} with matching keys.
-     * <p>
-     * Curios 15.x reshaped {@link CurioAttributeModifierEvent} from per-slot to per-item: each
-     * {@link CurioAttributeModifiers.Entry default modifier} carries its own
-     * {@link top.theillusivec4.curios.api.common.slot.SlotTypePredicate slot-type predicate}, which lists the
-     * curio slot ids it applies to. We walk those entries, group them by the {@link EntitySlotGroup} that maps
-     * to each candidate slot, fire {@link StackAttributeModifiersEvent} with the grouped result, and (if any
-     * mod modified the modifiers) replace the original entries with slot-id-scoped versions of the new ones.
      */
     public static void stackAttrModifierCompat(CurioAttributeModifierEvent e) {
         List<CurioAttributeModifiers.Entry> modifiers = e.getImmutableModifiers();
-        if (modifiers.isEmpty()) return;
-
-        // Build a curio-slot-id → EntitySlotGroup map for every slot id covered by the defaults' predicates,
-        // and remember which entries we successfully mapped to a group. Entries whose predicates don't resolve
-        // to any known group are left alone for Curios to handle as-is.
         Map<String, EntitySlotGroup> groupBySlotId = new LinkedHashMap<>();
         Set<CurioAttributeModifiers.Entry> handled = new HashSet<>();
 
+        // Build a mapping from curio slot types to Apothic slot groups.
+        for (String curio : CuriosSlotTypes.getSlotTypes(EffectiveSide.get().isClient()).keySet()) {
+            Holder<EntityEquipmentSlot> curioSlot = getSlotForCurio(curio);
+            if (curioSlot != null) {
+                EntitySlotGroup group = BuiltInRegs.ENTITY_SLOT_GROUP.get(curioSlot.getKey().identifier()).map(Holder::value).orElse(null);
+                if (group != null) {
+                    groupBySlotId.put(curio, group);
+                }
+            }
+        }
+
+        // Go through the existing modifiers, mark ones that match an Apoth slot group, and record them in a StackAttributeModifiers builder.
+        var builder = StackAttributeModifiers.builder();
         for (CurioAttributeModifiers.Entry entry : modifiers) {
             for (String slotId : entry.slotType().id()) {
-                EntitySlotGroup group = groupBySlotId.computeIfAbsent(slotId, sid -> {
-                    Holder<EntityEquipmentSlot> slotHolder = getSlotForCurio(sid);
-                    if (slotHolder == null) return null;
-                    return BuiltInRegs.ENTITY_SLOT_GROUP.get(slotHolder.getKey().identifier())
-                        .map(Holder::value)
-                        .orElse(null);
-                });
+                EntitySlotGroup group = groupBySlotId.get(slotId);
                 if (group != null) {
                     handled.add(entry);
+                    builder.add(entry.attributeHolder(), entry.modifier(), group);
                 }
             }
         }
 
-        var builder = StackAttributeModifiers.builder();
-        if (!handled.isEmpty()) {
-            // Stage the handled entries into a StackAttributeModifiers, scoped to the first matching group per
-            // entry. Entries that match multiple groups are duplicated across them, mirroring how Curios would
-            // have applied the same modifier across multiple equipped slots.
-            for (CurioAttributeModifiers.Entry entry : modifiers) {
-                if (!handled.contains(entry)) continue;
-                for (String slotId : entry.slotType().id()) {
-                    EntitySlotGroup group = groupBySlotId.get(slotId);
-                    if (group != null) {
-                        builder.add(entry.attributeHolder(), entry.modifier(), group);
-                    }
-                }
-            }
-        }
-
+        // Fire our event, and bail if no consumers changed anything.
         var event = new StackAttributeModifiersEvent(e.getItemStack(), builder.build());
         NeoForge.EVENT_BUS.post(event);
         if (!event.hasChanges()) return;
 
-        // The other-mod listeners modified the modifiers; remove the original Curios entries we mapped, and
-        // emit the resulting StackAttributeModifiers entries back into the event scoped to whichever curio
-        // slot ids correspond to the entry's resolved EntityEquipmentSlot set.
+        // If consumers did change something, nuke everything we might handle and rebuild from our event.
         e.removeIf(handled::contains);
 
         StackAttributeModifiers newModifs = event.build();
