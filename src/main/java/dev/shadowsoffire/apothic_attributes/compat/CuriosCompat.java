@@ -49,6 +49,7 @@ public class CuriosCompat {
     public static void init() {
         ModifierSourceType.register(new ModifierSourceType<>(){
 
+            @SuppressWarnings("removal")
             @Override
             public void extract(LivingEntity entity, BiConsumer<AttributeModifier, ModifierSource<?>> map) {
                 CuriosApi.getCuriosInventory(entity).ifPresent(handler -> {

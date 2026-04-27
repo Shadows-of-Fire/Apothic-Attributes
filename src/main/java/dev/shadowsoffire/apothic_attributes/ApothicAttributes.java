@@ -9,16 +9,16 @@ import org.apache.logging.log4j.Logger;
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
 import dev.shadowsoffire.apothic_attributes.client.AttributesLibClient;
 import dev.shadowsoffire.apothic_attributes.compat.CuriosCompat;
+import dev.shadowsoffire.apothic_attributes.data.MixProvider;
 import dev.shadowsoffire.apothic_attributes.impl.AttributeEvents;
 import dev.shadowsoffire.apothic_attributes.payload.ConfigPayload;
 import dev.shadowsoffire.apothic_attributes.payload.CritParticlePayload;
-import dev.shadowsoffire.apothic_attributes.util.MiscDatagen;
+import dev.shadowsoffire.placebo.datagen.DataGenBuilder;
 import dev.shadowsoffire.placebo.network.PayloadHelper;
 import dev.shadowsoffire.placebo.registry.DeferredHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput.Target;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
@@ -137,8 +137,9 @@ public class ApothicAttributes {
 
     @SubscribeEvent
     public void data(GatherDataEvent.Client e) {
-        MiscDatagen gen = new MiscDatagen(e.getGenerator().getPackOutput().getOutputFolder(Target.DATA_PACK).resolve(MODID), e.getLookupProvider());
-        e.getGenerator().addProvider(true, gen);
+        DataGenBuilder.create(MODID)
+            .provider(MixProvider::new)
+            .build(e);
     }
 
     public static File getConfigFile(String path) {
