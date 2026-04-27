@@ -6,8 +6,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
-import net.minecraft.util.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 
@@ -24,6 +24,7 @@ public class EquipmentSlotCompat {
         map.put(EquipmentSlot.LEGS, ALObjects.EquipmentSlots.LEGS);
         map.put(EquipmentSlot.FEET, ALObjects.EquipmentSlots.FEET);
         map.put(EquipmentSlot.BODY, ALObjects.EquipmentSlots.BODY);
+        map.put(EquipmentSlot.SADDLE, ALObjects.EquipmentSlots.SADDLE);
     });
 
     private static final BiMap<EquipmentSlotGroup, EntitySlotGroup> GROUP_MAP = Util.make(HashBiMap.create(10), map -> {
@@ -37,6 +38,7 @@ public class EquipmentSlotCompat {
         map.put(EquipmentSlotGroup.FEET, ALObjects.EquipmentSlotGroups.FEET);
         map.put(EquipmentSlotGroup.ARMOR, ALObjects.EquipmentSlotGroups.ARMOR);
         map.put(EquipmentSlotGroup.BODY, ALObjects.EquipmentSlotGroups.BODY);
+        map.put(EquipmentSlotGroup.SADDLE, ALObjects.EquipmentSlotGroups.SADDLE);
     });
 
     /**

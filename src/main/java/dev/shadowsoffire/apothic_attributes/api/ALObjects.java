@@ -375,6 +375,7 @@ public class ALObjects {
         public static final Holder<EntityEquipmentSlot> LEGS = slot(EquipmentSlot.LEGS);
         public static final Holder<EntityEquipmentSlot> FEET = slot(EquipmentSlot.FEET);
         public static final Holder<EntityEquipmentSlot> BODY = slot(EquipmentSlot.BODY);
+        public static final Holder<EntityEquipmentSlot> SADDLE = slot(EquipmentSlot.SADDLE);
 
         private static Holder<EntityEquipmentSlot> slot(EquipmentSlot slot) {
             return R.customDH(slot.getSerializedName(), BuiltInRegs.ENTITY_EQUIPMENT_SLOT.key(), () -> new VanillaEquipmentSlot(slot));
@@ -406,6 +407,7 @@ public class ALObjects {
         public static final EntitySlotGroup FEET = group("feet", HolderSet.direct(EquipmentSlots.FEET));
         public static final EntitySlotGroup ARMOR = group("armor", HolderSet.direct(EquipmentSlots.HEAD, EquipmentSlots.CHEST, EquipmentSlots.LEGS, EquipmentSlots.FEET));
         public static final EntitySlotGroup BODY = group("body", HolderSet.direct(EquipmentSlots.BODY));
+        public static final EntitySlotGroup SADDLE = group("saddle", HolderSet.direct(EquipmentSlots.SADDLE));
 
         private static Identifier id(String path) {
             return ApothicAttributes.loc(path);
