@@ -172,6 +172,14 @@ public class ALObjects {
          */
         public static final Holder<Attribute> ELYTRA_FLIGHT = R.attribute("elytra_flight", () -> new BooleanAttribute("apothic_attributes:elytra_flight", false).setSyncable(true));
 
+        /**
+         * Multiplicative reduction to ability and effect cooldowns tracked through {@link AbilityCooldowns}.
+         * <p>
+         * Base value = (0.0) = no reduction. 0.25 = cooldowns last 75% as long. Capped at 0.95 (95% reduction); negative values lengthen cooldowns.
+         */
+        public static final Holder<Attribute> COOLDOWN_REDUCTION = R.attribute("cooldown_reduction",
+            () -> new PercentageAttribute("apothic_attributes:cooldown_reduction", 0.0D, -10.0D, 0.95D).setSyncable(true));
+
         private static void bootstrap() {}
     }
 
@@ -341,6 +349,14 @@ public class ALObjects {
          */
         public static final AttachmentType<AuxDmgTracker> AUX_DMG_TRACKER = R.attachment("aux_dmg_tracker", () -> new AuxDmgTracker(), b -> b
             .serialize(MapCodec.assumeMapUnsafe(AuxDmgTracker.CODEC)));
+
+        /**
+         * Per-entity map of cooldown timestamps for {@link AbilityCooldowns}. Survives death so consumed-on-trigger abilities don't reset on respawn.
+         */
+        public static final AttachmentType<CooldownTracker> COOLDOWNS = R.attachment("cooldowns", () -> new CooldownTracker(), b -> b
+            .serialize(CooldownTracker.CODEC)
+            .sync((tracker, player) -> true, CooldownTracker.STREAM_CODEC)
+            .copyOnDeath());
 
         private static void bootstrap() {}
     }
