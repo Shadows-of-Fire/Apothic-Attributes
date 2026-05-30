@@ -1,3 +1,8 @@
+## 3.0.0
+* Ported to Minecraft 26.1.2.
+* Removed the `mining_speed` attribute in favor of vanilla's.
+* Added a unified cooldown system and the `cooldown_reduction` attribute.
+
 ## 2.9.1
 * PrincessStellar: Updated Brazilian translation.
 * Wajt: Updated Ukranian translation.
