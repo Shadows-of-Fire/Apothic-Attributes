@@ -1,3 +1,6 @@
+## 3.0.1
+* Updated to handle a recent Neo BC (`getNewDamage` -> `getHealthDamage`).
+
 ## 3.0.0
 * Ported to Minecraft 26.1.2.
 * Removed the `mining_speed` attribute in favor of vanilla's.
