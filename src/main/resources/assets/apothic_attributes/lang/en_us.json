@@ -32,7 +32,7 @@
     "attribute.name.movement_speed.desc": "Movement speed while walking.",
 
     "attribute.name.entity_interaction_range.desc": "How far you can interact with entities, in blocks.",
-    "attribute.name.gravity.desc": "Acceleration towrds the ground, in blocks/s²",
+    "attribute.name.gravity.desc": "Acceleration towards the ground, in blocks/s²",
     "neoforge.name_tag_distance.desc": "How far away another player must be to see your name.",
     "attribute.name.block_interaction_range.desc": "How far you can interact with blocks, in blocks.",
     "attribute.name.step_height.desc": "How many blocks you may step up without jumping.",
