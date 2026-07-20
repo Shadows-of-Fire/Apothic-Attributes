@@ -1,3 +1,7 @@
+## 2.10.0
+* Added a unified cooldown system and the `cooldown_reduction` attribute.
+  * Backported from 3.0.0.
+
 ## 2.9.1
 * PrincessStellar: Updated Brazilian translation.
 * Wajt: Updated Ukranian translation.
