@@ -29,7 +29,7 @@ config="apothic_attributes.mixins.json"
 [[dependencies.apothic_attributes]]
     modId="neoforge"
     type="required"
-    versionRange="[21.1.187,)"
+    versionRange="[21.1.235,)"
     ordering="NONE"
     side="BOTH"
 

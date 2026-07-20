@@ -100,7 +100,7 @@ public class MiscDatagen implements DataProvider {
     @SuppressWarnings("unchecked")
     private <T extends CodecProvider<T>> void write(T object, String type, String path) {
         this.futures.add(this.regs.thenCompose(registries -> {
-            return DataProvider.saveStable(this.cachedOutput, registries, (Codec<T>) object.getCodec(), object, outputDir.resolve(type + "/" + path + ".json"));
+            return DataProvider.<T>saveStable(this.cachedOutput, registries, (Codec<T>) object.getCodec(), object, outputDir.resolve(type + "/" + path + ".json"));
         }));
     }
 

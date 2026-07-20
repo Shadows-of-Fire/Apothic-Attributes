@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
+import dev.shadowsoffire.apothic_attributes.api.CooldownTracker;
 import dev.shadowsoffire.apothic_attributes.client.AttributesLibClient;
 import dev.shadowsoffire.apothic_attributes.compat.CuriosCompat;
 import dev.shadowsoffire.apothic_attributes.impl.AttributeEvents;
@@ -45,6 +46,7 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 @Mod(ApothicAttributes.MODID)
 public class ApothicAttributes {
@@ -64,7 +66,8 @@ public class ApothicAttributes {
     public ApothicAttributes(IEventBus bus) {
         bus.register(this);
         NeoForge.EVENT_BUS.register(new AttributeEvents());
-        NeoForge.EVENT_BUS.addListener(ApothicAttributes::trackCooldown);
+        NeoForge.EVENT_BUS.addListener(ApothicAttributes::trackAttackStrength);
+        NeoForge.EVENT_BUS.addListener(ApothicAttributes::pruneCooldowns);
         if (FMLEnvironment.dist.isClient()) {
             NeoForge.EVENT_BUS.register(new AttributesLibClient());
             bus.register(AttributesLibClient.ModBusSub.class);
@@ -113,7 +116,8 @@ public class ApothicAttributes {
                 ALObjects.Attributes.PROT_PIERCE,
                 ALObjects.Attributes.PROT_SHRED,
                 ALObjects.Attributes.DODGE_CHANCE,
-                ALObjects.Attributes.ELYTRA_FLIGHT);
+                ALObjects.Attributes.ELYTRA_FLIGHT,
+                ALObjects.Attributes.COOLDOWN_REDUCTION);
         });
     }
 
@@ -197,8 +201,16 @@ public class ApothicAttributes {
         }
     }
 
-    private static void trackCooldown(AttackEntityEvent e) {
+    private static void trackAttackStrength(AttackEntityEvent e) {
         Player p = e.getEntity();
         ApothicAttributes.localAtkStrength = p.getAttackStrengthScale(0.5F);
+    }
+
+    private static void pruneCooldowns(PlayerEvent.PlayerLoggedInEvent e) {
+        Player p = e.getEntity();
+        CooldownTracker tracker = p.getData(ALObjects.Attachments.COOLDOWNS);
+        if (tracker.prune(p.level().getGameTime())) {
+            p.setData(ALObjects.Attachments.COOLDOWNS, tracker);
+        }
     }
 }
