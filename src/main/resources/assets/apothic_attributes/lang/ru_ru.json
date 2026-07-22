@@ -9,7 +9,7 @@
     "apothic_attributes.gui.add_multiplied_total": "Общий множитель: %s",
     "apothic_attributes.gui.press_shift": "Зажмите Shift для информации.",
     "apothic_attributes.gui.current": "Текущий: %s",
-    "apothic_attributes.gui.show_attributes": "Показать аттрибуты",
+    "apothic_attributes.gui.show_attributes": "Показать атрибуты",
     "apothic_attributes.gui.dynamic": "(динамический)",
     "apothic_attributes.gui.formula": "Формула модификатора",
     "apothic_attributes.gui.formula.base": "Основной",
