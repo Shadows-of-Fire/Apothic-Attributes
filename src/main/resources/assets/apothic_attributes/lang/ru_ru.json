@@ -199,10 +199,10 @@
     "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "Туманное зелье прилива здоровья",
     "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "Стрела прилива здоровья",
 
-    "item.minecraft.potion.effect.apothic_attributes.grievous": "Зелье сокращения исцеления",
-    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "Взрывное зелье сокращения исцеления",
-    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "Туманное зелье сокращения исцеления",
-    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "Стрела сокращения исцеления",
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "Зелье замедления исцеления",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "Взрывное зелье замедления исцеления",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "Туманное зелье замедления исцеления",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "Стрела замедления исцеления",
 
     "item.minecraft.potion.effect.apothic_attributes.flying": "Зелье полёта",
     "item.minecraft.splash_potion.effect.apothic_attributes.flying": "Взрывное зелье полёта",
