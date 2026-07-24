@@ -1,3 +1,6 @@
+## 2.10.1
+* Added JEI Exclusion Zones for the Attributes GUI.
+
 ## 2.10.0
 * Added a unified cooldown system and the `cooldown_reduction` attribute.
   * Backported from 3.0.0.
