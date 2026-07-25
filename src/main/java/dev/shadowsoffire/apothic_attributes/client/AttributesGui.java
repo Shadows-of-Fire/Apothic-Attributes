@@ -31,6 +31,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -60,6 +61,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
     public static final int ENTRY_HEIGHT = 22;
     public static final int MAX_ENTRIES = 6;
     public static final int WIDTH = 131;
+    public static final int HEIGHT = 166;
     private static final int TEX_W = 256;
     private static final int TEX_H = 256;
 
@@ -154,7 +156,20 @@ public class AttributesGui implements Renderable, GuiEventListener {
         if (this.hideUnchangedBtn.isMouseOver(pMouseX, pMouseY)) {
             return false; // 26.1 only permits one thing to be "active" at a time, so we have to lie here.
         }
-        return this.isHovering(0, 0, WIDTH, 166, pMouseX, pMouseY);
+        return this.isHovering(0, 0, WIDTH, HEIGHT, pMouseX, pMouseY);
+    }
+
+    /**
+     * Returns the screen areas occupied by this GUI which may fall outside the bounds of the parent screen.
+     * Used to register exclusion zones with recipe viewers (JEI/EMI/REI), so their overlays do not overlap this GUI.
+     */
+    public List<Rect2i> getExclusionAreas() {
+        List<Rect2i> areas = new ArrayList<>();
+        areas.add(new Rect2i(this.toggleBtn.getX(), this.toggleBtn.getY(), this.toggleBtn.getWidth(), this.toggleBtn.getHeight()));
+        if (this.open) {
+            areas.add(new Rect2i(this.leftPos, this.topPos, WIDTH, HEIGHT));
+        }
+        return areas;
     }
 
     @Override
@@ -171,7 +186,7 @@ public class AttributesGui implements Renderable, GuiEventListener {
 
         int left = this.leftPos;
         int top = this.topPos;
-        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, left, top, 0, 0, WIDTH, 166, TEX_W, TEX_H);
+        gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, left, top, 0, 0, WIDTH, HEIGHT, TEX_W, TEX_H);
         int scrollbarPos = (int) (117 * scrollOffset);
         gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, left + 111, top + 16 + scrollbarPos, 244, this.isScrollBarActive() ? 0 : 15, 12, 15, TEX_W, TEX_H);
         int idx = this.startIndex;
