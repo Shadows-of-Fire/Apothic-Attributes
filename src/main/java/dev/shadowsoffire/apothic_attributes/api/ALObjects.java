@@ -168,7 +168,7 @@ public class ALObjects {
         /**
          * Percentage protection reduction. Base value = (0.0) = 0% of protection points bypassed during damage calculations.
          */
-        public static final Holder<Attribute> PROT_SHRED = R.attribute("prot_shred", () -> new PercentageAttribute("apothic_attributes:prot_shred", 0.0D, 0.0D, 1.0D).setSyncable(true));
+        public static final Holder<Attribute> PROT_SHRED = R.attribute("prot_shred", () -> new PercentageAttribute("apothic_attributes:prot_shred", 0.0D, 0.0D, 0.90D).setSyncable(true));
 
         /**
          * Boolean attribute for if elytra flight is enabled. Default value = false.
