@@ -7,10 +7,15 @@ import javax.annotation.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import dev.shadowsoffire.apothic_attributes.api.ALCombatRules;
 import dev.shadowsoffire.apothic_attributes.api.ALObjects;
+import dev.shadowsoffire.apothic_attributes.util.AttributesUtil;
 import dev.shadowsoffire.apothic_attributes.util.LEInvoker;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.DamageTypeTags;
@@ -93,6 +98,40 @@ public abstract class LivingEntityMixin extends Entity implements LEInvoker {
     @Override
     public void apoth_setInternalAbsorption(float absorptionAmount) {
         this.internalSetAbsorptionAmount(absorptionAmount);
+    }
+
+    /**
+     * @author Shadows
+     * @reason Adds the absorption granted by {@link ALObjects.Attributes#OVERHEAL} to the effective max absorption, so that the clamps in
+     *         {@link LivingEntity#setAbsorptionAmount} and {@code LivingEntity#onAttributeUpdated} only strip non-Overheal absorption.
+     *         <p>
+     *         On the client, we never report a max below the current absorption. The client refreshes dirty attributes on its own, which
+     *         would otherwise trim the local player's (server-synced) absorption. The server is authoritative for the real value.
+     */
+    @ModifyReturnValue(method = "getMaxAbsorption()F", at = @At("RETURN"), require = 1)
+    private float apoth_overhealMaxAbsorption(float original) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (self.level().isClientSide) {
+            return Math.max(original, self.getAbsorptionAmount());
+        }
+        return original + AttributesUtil.getOverhealAbsorption(self);
+    }
+
+    /**
+     * @author Shadows
+     * @reason Keeps the tracked Overheal absorption from exceeding the real absorption after any clamped write (damage, effect expiry, max
+     *         absorption changes). Non-Overheal absorption is consumed first; the Overheal portion only shrinks once the total falls below it.
+     */
+    @Inject(method = "setAbsorptionAmount(F)V", at = @At("TAIL"), require = 1)
+    private void apoth_trimOverhealAbsorption(float amount, CallbackInfo ci) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (!self.level().isClientSide && self.hasData(ALObjects.Attachments.OVERHEAL_ABSORPTION)) {
+            float tracked = self.getData(ALObjects.Attachments.OVERHEAL_ABSORPTION);
+            float current = self.getAbsorptionAmount();
+            if (tracked > current) {
+                AttributesUtil.setOverhealAbsorption(self, current);
+            }
+        }
     }
 
 }

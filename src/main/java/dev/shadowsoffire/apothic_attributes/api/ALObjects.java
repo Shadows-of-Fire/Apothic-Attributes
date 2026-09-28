@@ -6,6 +6,8 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.ApiStatus;
 
+import com.mojang.serialization.Codec;
+
 import dev.shadowsoffire.apothic_attributes.ApothicAttributes;
 import dev.shadowsoffire.apothic_attributes.mob_effect.BleedingEffect;
 import dev.shadowsoffire.apothic_attributes.mob_effect.DetonationEffect;
@@ -359,6 +361,16 @@ public class ALObjects {
             .serialize(CooldownTracker.CODEC)
             .sync((tracker, player) -> true, CooldownTracker.STREAM_CODEC)
             .copyOnDeath());
+
+        /**
+         * The portion of an entity's current absorption that was granted by {@link Attributes#OVERHEAL}.
+         * <p>
+         * {@code LivingEntityMixin} adds this to {@link net.minecraft.world.entity.LivingEntity#getMaxAbsorption()} so that vanilla's absorption clamps
+         * (on damage, on Max Absorption changes, and when the Absorption effect starts) only remove non-Overheal absorption.
+         * <p>
+         * Never exceeds {@link net.minecraft.world.entity.LivingEntity#getAbsorptionAmount()}. Persisted because vanilla persists the raw absorption amount.
+         */
+        public static final AttachmentType<Float> OVERHEAL_ABSORPTION = R.attachment("overheal_absorption", () -> 0F, b -> b.serialize(Codec.FLOAT, v -> v > 0));
 
         private static void bootstrap() {}
     }
