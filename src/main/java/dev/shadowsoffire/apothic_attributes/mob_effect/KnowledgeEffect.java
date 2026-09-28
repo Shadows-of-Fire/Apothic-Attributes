@@ -11,7 +11,7 @@ public class KnowledgeEffect extends MobEffect {
 
     public KnowledgeEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xF4EE42);
-        this.addAttributeModifier(ALObjects.Attributes.EXPERIENCE_GAINED, ApothicAttributes.loc("ancient_knowledge"), Operation.ADD_MULTIPLIED_TOTAL, amp -> ALConfig.knowledgeMultiplier * (amp + 1));
+        this.addAttributeModifier(ALObjects.Attributes.EXPERIENCE_GAINED, ApothicAttributes.loc("ancient_knowledge"), Operation.ADD_MULTIPLIED_TOTAL, amp -> ALConfig.knowledgeMultiplier * (amp + 1) - 1);
     }
 
 }
