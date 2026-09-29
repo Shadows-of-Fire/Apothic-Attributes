@@ -100,6 +100,8 @@ public class AttributesLibClient {
         MobEffectInstance effectInst = e.getEffectInstance();
         Holder<MobEffect> effect = effectInst.getEffect();
 
+        if (tooltips.size() < 2) return; // Someone else is messing with the tooltip and our later logic will crash or not work, so just bail.
+
         MutableComponent name = (MutableComponent) tooltips.get(0);
         Component duration = tooltips.remove(1);
         duration = Component.translatable("(%s)", duration).withStyle(ChatFormatting.WHITE);
