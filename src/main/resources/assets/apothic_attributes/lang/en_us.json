@@ -29,8 +29,8 @@
     "attribute.name.generic.gravity.desc": "Acceleration towards the ground, in blocks/s²",
 
     "neoforge.name_tag_distance.desc": "How far away another player must be to see your name.",
-    "neoforge.block_reach.desc": "How far you can interact with blocks, in blocks.",
-    "neoforge.step_height.desc": "How many blocks you may step up without jumping.",
+    "attribute.name.player.block_interaction_range.desc": "How far you can interact with blocks, in blocks.",
+    "attribute.name.generic.step_height.desc": "How many blocks you may step up without jumping.",
     "neoforge.swim_speed.desc": "How fast you swim, relative to normal.",
 
     "button.apothic_attributes.hide_unchanged": "Hide Unchanged Attributes",
