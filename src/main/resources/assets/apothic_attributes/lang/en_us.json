@@ -25,9 +25,9 @@
     "attribute.name.generic.luck.desc": "Increases the likelihood of good things happening.",
     "attribute.name.generic.max_health.desc": "How many hit points you can have.",
     "attribute.name.generic.movement_speed.desc": "Movement speed while walking.",
+    "attribute.name.player.entity_interaction_range.desc": "How far you can interact with entities, in blocks.",
+    "attribute.name.generic.gravity.desc": "Acceleration towards the ground, in blocks/s²",
 
-    "neoforge.entity_reach.desc": "How far you can interact with entities, in blocks.",
-    "neoforge.entity_gravity.desc": "Acceleration towrds the ground, in blocks/s²",
     "neoforge.name_tag_distance.desc": "How far away another player must be to see your name.",
     "neoforge.block_reach.desc": "How far you can interact with blocks, in blocks.",
     "neoforge.step_height.desc": "How many blocks you may step up without jumping.",
