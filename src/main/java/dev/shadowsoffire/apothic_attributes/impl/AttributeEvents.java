@@ -402,8 +402,22 @@ public class AttributeEvents {
     public void affixModifiers(ItemAttributeModifierEvent e) {
         boolean hasBaseAD = AttributeHelper.getModifiers(e.getModifiers(), Attributes.ATTACK_DAMAGE).filter(entry -> entry.modifier().id().equals(AttributeUtil.BASE_ATTACK_DAMAGE_ID)).findAny().isPresent();
         if (hasBaseAD) {
-            boolean hasBaseAR = AttributeHelper.getModifiers(e.getModifiers(), Attributes.ENTITY_INTERACTION_RANGE).filter(entry -> entry.modifier().id().equals(AttributeUtil.BASE_ENTITY_REACH_ID)).findAny().isPresent();
-            if (!hasBaseAR) {
+            // For merging's sake, if an item has a base AD modifier, and a range modifier, but not a base range modifier, we add a fake one so the display is a bit more
+            // consistent.
+            boolean hasBaseAR = false;
+            boolean hasOtherAR = false;
+            for (ItemAttributeModifiers.Entry entry : e.getModifiers()) {
+                if (entry.attribute() == Attributes.ENTITY_INTERACTION_RANGE) {
+                    if (AttributeUtil.BASE_ENTITY_REACH_ID.equals(entry.modifier().id())) {
+                        hasBaseAR = true;
+                    }
+                    else {
+                        hasOtherAR = true;
+                    }
+                }
+            }
+
+            if (!hasBaseAR && hasOtherAR) {
                 e.addModifier(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(AttributeUtil.BASE_ENTITY_REACH_ID, 0, Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
             }
         }
