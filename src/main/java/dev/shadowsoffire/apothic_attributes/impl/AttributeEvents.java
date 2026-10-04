@@ -121,10 +121,16 @@ public class AttributeEvents {
                 attacker.heal(dmg * lifesteal);
             }
             float overheal = (float) attacker.getAttributeValue(ALObjects.Attributes.OVERHEAL);
-            float maxOverheal = attacker.getMaxHealth() * 0.5F;
-            if (overheal > 0 && attacker.getAbsorptionAmount() < maxOverheal) {
-                // Overheal needs to bypass the max absorption attribute, which is used for natural absorption regeneration, but also clamps the total number of abs hearts.
-                ((LEInvoker) attacker).apoth_setInternalAbsorption(Math.min(maxOverheal, attacker.getAbsorptionAmount() + dmg * overheal));
+            if (overheal > 0) {
+                float cap = AttributesUtil.getOverhealCap(attacker);
+                float current = attacker.getAbsorptionAmount();
+                if (current < cap) {
+                    float gain = Math.min(cap - current, dmg * overheal);
+                    // Record the granted amount first so that the effective max absorption (see LivingEntityMixin) covers the new total.
+                    // The write itself bypasses the max absorption clamp, since the total may exceed the vanilla max absorption attribute.
+                    AttributesUtil.setOverhealAbsorption(attacker, AttributesUtil.getOverhealAbsorption(attacker) + gain);
+                    ((LEInvoker) attacker).apoth_setInternalAbsorption(current + gain);
+                }
             }
         }
     }
