@@ -1,3 +1,18 @@
+## 3.1.0
+* Forward-ported many changes from 1.21.1.
+* Fixed absorption granted by Overheal being erased when taking damage, or when the Absorption effect is applied or expires.
+  * This required adding a separate auxiliary tracking mechanism so hopefully that doesn't get weird.
+* Reduced the max value of Protection Shred to 90% (was 100%).
+* Fixed Ancient Knowledge's multiplier being off-by-one (was 5x/9x/17x instead of 4x/8x/16x).
+* Fixed a crash when another mod messes with effect screen (potion) tooltips.
+* Disabled the Entity Interaction Range fake-modifier unless the item already has an interaction range modifier on it.
+* Added JEI Exclusion Zones for the Attributes GUI.
+* PODOB: Updated Korean translation.
+* mc-kaishixiaxue: Updated Chinese translation.
+* PrincessStellar: Updated Brazilian translation.
+* Quarkrus: Updated Russian translation.
+* Tenwoc: Updated Ukranian translation.
+
 ## 3.0.1
 * Updated to handle a recent Neo BC (`getNewDamage` -> `getHealthDamage`).
 
