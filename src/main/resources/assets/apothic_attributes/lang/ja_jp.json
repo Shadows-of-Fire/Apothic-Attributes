@@ -4,7 +4,7 @@
     "apothic_attributes.gui.min": "最小: %s",
     "apothic_attributes.gui.max": "最大: %s",
     "apothic_attributes.gui.modifiers": "変異因子",
-    "apothic_attributes.gui.add_value": "追加属性: %s",
+    "apothic_attributes.gui.add_value": "加算要素: %s",
     "apothic_attributes.gui.add_multiplied_base": "基本倍率: %s",
     "apothic_attributes.gui.add_multiplied_total": "合計倍率: %s",
     "apothic_attributes.gui.press_shift": "Shift押しっぱなしで詳細表示",
@@ -25,19 +25,19 @@
     "attribute.name.generic.luck.desc": "良いことが起きる確率を増加させる",
     "attribute.name.generic.max_health.desc": "保持できるHPの最大値",
     "attribute.name.generic.movement_speed.desc": "歩いているときの速度",
+    "attribute.name.player.entity_interaction_range.desc": "どれだけ遠くまでエンティティに作用できるか。単位はブロック。",
+    "attribute.name.generic.gravity.desc": "落下するときの加速度。単位はブロック/s²。",
 
-    "neoforge.entity_reach.desc": "どの程度離れたエンティティに働きかけられるか。単位はブロック。",
-    "neoforge.entity_gravity.desc": "落下/上昇の速度を制御する、地表に対する加速度。単位はブロック/秒²",
     "neoforge.name_tag_distance.desc": "他プレイヤーから自分のネームタグが見える限界距離",
-    "neoforge.block_reach.desc": "ブロックに手が届く範囲。単位はブロック",
-    "neoforge.step_height.desc": "ジャンプせずに自動的に上れる段差の高さ",
+    "attribute.name.player.block_interaction_range.desc": "どれだけ遠くまでエンティティに作用できるか。単位はブロック。",
+    "attribute.name.generic.step_height.desc": "ジャンプせずに上れる高さ。単位はブロック。",
     "neoforge.swim_speed.desc": "泳ぐ速度。通常状態に対する倍率で表される",
 
     "button.apothic_attributes.hide_unchanged": "変化なしの能力は表示しない",
     "text.apothic_attributes.hide_unchanged": "変化なしを非表示",
 
     "apothic_attributes:draw_speed": "射撃動作速度",
-    "apothic_attributes:draw_speed.desc": "弓やクロスボウ、トライデントなどの遠距離武器を撃ったり投げたりするときの動作の速度",
+    "apothic_attributes:draw_speed.desc": "弓やクロスボウ、トライデントなどの遠距離武器を撃ったり投げたりするときの攻撃準備が完了するまでの速さ",
 
     "apothic_attributes:crit_chance": "クリティカル率",
     "apothic_attributes:crit_chance.desc": "攻撃がクリティカルヒットになる確率。追加ダメージはクリティカルダメージの数値による",
@@ -52,13 +52,13 @@
     "apothic_attributes:fire_damage.desc": "近接攻撃に加算される魔法ダメージ。相手を炎上させる",
 
     "apothic_attributes:life_steal": "ライフスティール",
-    "apothic_attributes:life_steal.desc": "自分を回復させる耐性無視のダメージ比率",
+    "apothic_attributes:life_steal.desc": "与えた軽減後のダメージのうち、自分の回復量になる割合",
 
     "apothic_attributes:current_hp_damage": "HP割合ダメージ",
     "apothic_attributes:current_hp_damage.desc": "対象の現在HPに応じて近接攻撃に加算される物理ダメージ",
 
     "apothic_attributes:overheal": "オーバーヒール",
-    "apothic_attributes:overheal.desc": "衝撃吸収効果に変換される耐性無視のダメージ比率",
+    "apothic_attributes:overheal.desc": "与えた軽減後のダメージのうち、自分の衝撃吸収シールドに変換される割合",
 
     "apothic_attributes:ghost_health": "ゴーストヘルス",
     "apothic_attributes:ghost_health.desc": "現在のところ未実装",
@@ -67,16 +67,16 @@
     "apothic_attributes:mining_speed.desc": "ブロックを破壊する速度。通常状態に対する倍率で表される",
 
     "apothic_attributes:arrow_damage": "矢ダメージ倍率",
-    "apothic_attributes:arrow_damage.desc": "矢によるダメージの増加率。トライデントも矢に含まれる",
+    "apothic_attributes:arrow_damage.desc": "矢によるダメージの倍率。トライデントも矢に含まれる",
 
     "apothic_attributes:arrow_velocity": "矢の速度",
-    "apothic_attributes:arrow_velocity.desc": "矢が飛ぶ速さの増加率。矢によるダメージは速さにも依存する",
+    "apothic_attributes:arrow_velocity.desc": "矢が飛ぶ速さの倍率。矢によるダメージは速さにも依存する",
 
     "apothic_attributes:experience_gained": "経験値取得倍率",
-    "apothic_attributes:experience_gained.desc": "ブロック破壊時や敵を倒した時に得られる経験値の増加率",
+    "apothic_attributes:experience_gained.desc": "ブロック破壊時や敵を倒した時に得られる経験値の倍率",
 
     "apothic_attributes:healing_received": "回復効率",
-    "apothic_attributes:healing_received.desc": "自身が受ける回復量の増加率",
+    "apothic_attributes:healing_received.desc": "自身が受ける回復量の倍率",
 
     "apothic_attributes:armor_pierce": "アーマー貫通",
     "apothic_attributes:armor_pierce.desc": "対象の防御力を一律で減少させる",
@@ -85,7 +85,7 @@
     "apothic_attributes:armor_shred.desc": "対象の防御力を割合で減少させる",
 
     "apothic_attributes:projectile_damage": "飛び道具ダメージ倍率",
-    "apothic_attributes:projectile_damage.desc": "自身から発せられる全ての飛び道具によるダメージの増加率",
+    "apothic_attributes:projectile_damage.desc": "自身から発せられる全ての飛び道具によるダメージの倍率",
 
     "apothic_attributes:prot_pierce": "ダメージ軽減貫通",
     "apothic_attributes:prot_pierce.desc": "対象のダメージ軽減効果の合計値を一律で減少させる",
@@ -101,6 +101,9 @@
 
     "apothic_attributes:creative_flight": "クリエイティブ飛行",
     "apothic_attributes:creative_flight.desc": "クリエイティブモードと同じように飛び回れるかどうか",
+
+    "apothic_attributes:cooldown_reduction": "クールダウン短縮",
+    "apothic_attributes:cooldown_reduction.desc": "使った能力や効果のクールダウンを短縮する。クールダウンは ⌛ 記号で表される。",
 
     "comment_id": "MobFx - JEED対応のため、説明文が重複しています。",
 
@@ -193,15 +196,15 @@
     "item.minecraft.lingering_potion.effect.apothic_attributes.knowledge": "古の知識の残留ポーション",
     "item.minecraft.tipped_arrow.effect.apothic_attributes.knowledge": "古の知識の矢",
 
-    "item.minecraft.potion.effect.apothic_attributes.vitality": "回復増加のポーション",
-    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "回復増加のスプラッシュポーション",
-    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "回復増加の残留ポーション",
-    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "回復増加の矢",
+    "item.minecraft.potion.effect.apothic_attributes.vitality": "回復強化のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.vitality": "回復強化のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.vitality": "回復強化の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.vitality": "回復強化の矢",
 
-    "item.minecraft.potion.effect.apothic_attributes.grievous": "回復低下のポーション",
-    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "回復低下のスプラッシュポーション",
-    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "回復低下の残留ポーション",
-    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "回復低下の矢",
+    "item.minecraft.potion.effect.apothic_attributes.grievous": "回復弱化のポーション",
+    "item.minecraft.splash_potion.effect.apothic_attributes.grievous": "回復弱化のスプラッシュポーション",
+    "item.minecraft.lingering_potion.effect.apothic_attributes.grievous": "回復弱化の残留ポーション",
+    "item.minecraft.tipped_arrow.effect.apothic_attributes.grievous": "回復弱化の矢",
 
     "item.minecraft.potion.effect.apothic_attributes.flying": "飛翔のポーション",
     "item.minecraft.splash_potion.effect.apothic_attributes.flying": "飛翔のスプラッシュポーション",
