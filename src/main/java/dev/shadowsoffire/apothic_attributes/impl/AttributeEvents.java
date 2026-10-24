@@ -277,7 +277,8 @@ public class AttributeEvents {
         DamageSource src = e.getSource();
         if (src.getDirectEntity() instanceof Projectile && src.getEntity() instanceof LivingEntity projOwner) {
             double projDmgMult = projOwner.getAttributeValue(ALObjects.Attributes.PROJECTILE_DAMAGE);
-            e.setAmount(e.getAmount() * (float) projDmgMult);
+            float amt = e.getAmount() * (float) projDmgMult;
+            e.setAmount(Float.isNaN(amt) ? 0.0F : Math.max(0.0F, amt));
         }
     }
 
